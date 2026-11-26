@@ -1,0 +1,3011 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="theme-color" content="#5c3a21">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="HAZZAT POS">
+    <title>HAZZAT CHAPATI - POS System (ZATCA QR, Foodics Bar & Z-Report)</title>
+    <style>
+        :root {
+            --primary: #5c3a21;
+            --primary-dark: #3e2514;
+            --accent: #c89d66;
+            --bg-light: #f5efe6;
+            --white: #ffffff;
+            --text-dark: #2c1e16;
+            --border: #d7c7b2;
+            --success: #2e7d32;
+            --info: #1565c0;
+            --danger: #c62828;
+            --purple-bar: #5b21b6;
+            --purple-dark: #4c1d95;
+            --purple-hover: #6d28d9;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-light);
+            color: var(--text-dark);
+            height: 100vh;
+            height: 100dvh;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        /* হেডার */
+        header {
+            background-color: var(--primary);
+            color: var(--white);
+            padding: 8px 18px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+            gap: 10px;
+            flex-shrink: 0;
+        }
+
+        .brand-title h1 {
+            font-size: 1.3rem;
+            letter-spacing: 0.7px;
+            white-space: nowrap;
+        }
+
+        .brand-title span {
+            font-size: 0.98rem;
+            color: var(--accent);
+            font-weight: normal;
+        }
+
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            flex-wrap: nowrap;
+        }
+
+        .sync-badge {
+            font-size: 0.72rem;
+            padding: 4px 8px;
+            border-radius: 12px;
+            background: rgba(255, 255, 255, 0.14);
+            border: 1px solid var(--accent);
+            white-space: nowrap;
+        }
+
+        .hdr-btn {
+            background-color: var(--accent);
+            color: var(--primary-dark);
+            border: none;
+            padding: 6px 11px;
+            border-radius: 6px;
+            font-weight: 700;
+            font-size: 0.8rem;
+            cursor: pointer;
+            transition: 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            white-space: nowrap;
+        }
+
+        .hdr-btn:hover {
+            background-color: #dfb783;
+        }
+
+        /* Foodics-স্টাইল বেগুনি (Purple) টপ অ্যাকশন বার (৭টি বাটন) */
+        .foodics-action-bar {
+            background: linear-gradient(90deg, var(--purple-dark) 0%, var(--purple-bar) 100%);
+            padding: 6px 14px;
+            display: grid;
+            grid-template-columns: repeat(7, minmax(0, 1fr));
+            gap: 8px;
+            border-bottom: 2px solid #7c3aed;
+            box-shadow: 0 2px 8px rgba(76, 29, 149, 0.25);
+            flex-shrink: 0;
+        }
+
+        .f-action-btn {
+            background: rgba(255, 255, 255, 0.12);
+            color: #ffffff;
+            border: 1px solid rgba(255, 255, 255, 0.24);
+            border-radius: 7px;
+            padding: 7px 6px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 5px;
+            transition: all 0.15s ease;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .f-action-btn:hover {
+            background: var(--purple-hover);
+            border-color: #ddd6fe;
+            transform: translateY(-1px);
+        }
+
+        .f-action-btn.has-badge {
+            background: #7e22ce;
+            border-color: #f3e8ff;
+            box-shadow: inset 0 0 0 1px rgba(255,255,255,0.4);
+        }
+
+        .f-action-btn.danger-btn:hover {
+            background: #b91c1c;
+            border-color: #fecaca;
+        }
+
+        /* মূল লেআউট */
+        .main-container {
+            display: flex;
+            flex: 1;
+            min-height: 0;
+            overflow: hidden;
+        }
+
+        /* বাম পাশ: মেনু সেকশন */
+        .menu-section {
+            flex: 65%;
+            padding: 15px 18px;
+            display: flex;
+            flex-direction: column;
+            min-height: 0;
+            overflow: hidden;
+        }
+
+        .search-filter-bar {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 9px;
+            flex-shrink: 0;
+        }
+
+        .search-box {
+            flex: 1;
+            padding: 9px 14px;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            font-size: 0.92rem;
+            background: var(--white);
+            min-width: 0;
+        }
+
+        .category-buttons {
+            display: flex;
+            gap: 7px;
+            margin-bottom: 10px;
+            flex-wrap: wrap;
+            flex-shrink: 0;
+        }
+
+        .cat-btn {
+            padding: 6px 13px;
+            background-color: var(--white);
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: 600;
+            border: 1px solid var(--border);
+            color: var(--primary);
+            transition: 0.2s;
+            font-size: 0.85rem;
+        }
+
+        .cat-btn.active, .cat-btn:hover {
+            background-color: var(--primary);
+            color: var(--white);
+            border-color: var(--primary);
+        }
+
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+            gap: 11px;
+            flex: 1;
+            min-height: 0;
+            overflow-y: auto;
+            padding-right: 4px;
+            align-content: start;
+        }
+
+        .menu-card {
+            background-color: var(--white);
+            border-radius: 10px;
+            padding: 11px;
+            text-align: center;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.06);
+            cursor: pointer;
+            transition: transform 0.15s, box-shadow 0.15s;
+            border: 1px solid var(--border);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            min-width: 0;
+        }
+
+        .menu-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 14px rgba(92, 58, 33, 0.15);
+            border-color: var(--primary);
+        }
+
+        .menu-icon {
+            font-size: 1.8rem;
+            margin-bottom: 4px;
+            line-height: 1.1;
+        }
+
+        .menu-title-en {
+            font-weight: 700;
+            font-size: 0.9rem;
+            color: var(--text-dark);
+            margin-bottom: 2px;
+            overflow-wrap: anywhere;
+        }
+
+        .menu-title-ar {
+            font-size: 0.86rem;
+            color: #6d5443;
+            margin-bottom: 6px;
+            direction: rtl;
+            overflow-wrap: anywhere;
+        }
+
+        .menu-price {
+            background-color: var(--bg-light);
+            color: var(--primary);
+            font-weight: bold;
+            font-size: 0.98rem;
+            padding: 4px 8px;
+            border-radius: 6px;
+            border: 1px solid var(--border);
+        }
+
+        .vat-tag {
+            display: block;
+            font-size: 0.68rem;
+            color: #7a6352;
+            font-weight: normal;
+            margin-top: 2px;
+        }
+
+        /* ডান পাশ: বিলিং সেকশন */
+        .cart-section {
+            flex: 35%;
+            background-color: var(--white);
+            border-left: 2px solid var(--border);
+            display: flex;
+            flex-direction: column;
+            padding: 14px 16px;
+            min-height: 0;
+            overflow: hidden;
+        }
+
+        .customer-info {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 6px;
+            flex-shrink: 0;
+        }
+
+        .customer-info input, .customer-info select {
+            flex: 1;
+            padding: 7px 8px;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            font-size: 0.86rem;
+            min-width: 0;
+        }
+
+        .order-meta-strip {
+            display: none;
+            flex-wrap: wrap;
+            gap: 5px;
+            margin-bottom: 6px;
+            flex-shrink: 0;
+        }
+
+        .order-meta-strip.active {
+            display: flex;
+        }
+
+        .meta-pill {
+            font-size: 0.72rem;
+            padding: 2px 8px;
+            border-radius: 10px;
+            background: #f3e8ff;
+            color: var(--purple-dark);
+            border: 1px solid #d8b4fe;
+            font-weight: 700;
+            max-width: 100%;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        .cart-items {
+            flex: 1;
+            min-height: 0;
+            overflow-y: auto;
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+            padding: 5px 0;
+        }
+
+        .cart-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 5px 4px;
+            border-bottom: 1px dashed #e0d5c8;
+            gap: 6px;
+        }
+
+        .item-details {
+            flex: 2;
+            min-width: 0;
+        }
+
+        .item-name {
+            font-weight: 600;
+            font-size: 0.86rem;
+            overflow-wrap: anywhere;
+        }
+
+        .item-unit-price {
+            font-size: 0.74rem;
+            color: #777;
+            overflow-wrap: anywhere;
+        }
+
+        .qty-controls {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            flex-shrink: 0;
+        }
+
+        .qty-btn {
+            width: 23px;
+            height: 23px;
+            border: 1px solid var(--border);
+            background: var(--bg-light);
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: bold;
+            color: var(--primary);
+        }
+
+        .qty-btn:hover {
+            background: var(--accent);
+            color: var(--white);
+        }
+
+        .item-total {
+            text-align: right;
+            font-weight: 700;
+            font-size: 0.88rem;
+            white-space: nowrap;
+        }
+
+        .remove-btn {
+            color: var(--danger);
+            background: none;
+            border: none;
+            cursor: pointer;
+            margin-left: 2px;
+            font-size: 0.9rem;
+            flex-shrink: 0;
+        }
+
+        /* হিসাব নিকাশ অংশ */
+        .summary-section {
+            padding-top: 7px;
+            flex-shrink: 0;
+        }
+
+        .summary-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 3px;
+            font-size: 0.86rem;
+        }
+
+        .summary-row span:first-child {
+            overflow-wrap: anywhere;
+        }
+
+        .summary-row span:last-child {
+            white-space: nowrap;
+            font-weight: 600;
+        }
+
+        .summary-row.total {
+            font-size: 1.12rem;
+            font-weight: bold;
+            color: var(--primary);
+            border-top: 2px solid var(--primary);
+            padding-top: 5px;
+            margin-top: 4px;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 8px;
+            margin-top: 7px;
+        }
+
+        .btn {
+            flex: 1;
+            padding: 9px 10px;
+            border: none;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            font-weight: bold;
+            cursor: pointer;
+            color: var(--white);
+            transition: 0.2s;
+            text-align: center;
+        }
+
+        .btn-clear {
+            background-color: var(--danger);
+        }
+
+        .btn-clear:hover {
+            background-color: #a31d1d;
+        }
+
+        .btn-print {
+            background-color: var(--success);
+        }
+
+        .btn-print:hover {
+            background-color: #1b5e20;
+        }
+
+        /* পপ-আপ মোডাল স্টাইল */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.58);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            padding: 14px;
+        }
+
+        .modal-overlay.active {
+            display: flex;
+        }
+
+        .modal-box {
+            background: var(--white);
+            width: 100%;
+            max-width: 470px;
+            max-height: 92vh;
+            border-radius: 12px;
+            border: 2px solid var(--accent);
+            box-shadow: 0 10px 28px rgba(0, 0, 0, 0.28);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .modal-box.history-modal-box,
+        .modal-box.shift-modal-box {
+            max-width: 900px;
+        }
+
+        .modal-header {
+            background: var(--primary);
+            color: var(--white);
+            padding: 12px 16px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .modal-header h3 {
+            font-size: 1.02rem;
+            overflow-wrap: anywhere;
+        }
+
+        .modal-close {
+            background: none;
+            border: none;
+            color: var(--white);
+            font-size: 1.25rem;
+            cursor: pointer;
+            flex-shrink: 0;
+        }
+
+        .modal-body {
+            padding: 15px;
+            overflow-y: auto;
+        }
+
+        .modal-amount-box {
+            background: var(--bg-light);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 11px;
+            text-align: center;
+            margin-bottom: 13px;
+        }
+
+        .modal-amount-label {
+            font-size: 0.84rem;
+            color: #6d5443;
+        }
+
+        .modal-amount-value {
+            font-size: 1.4rem;
+            font-weight: bold;
+            color: var(--primary);
+            margin-top: 2px;
+        }
+
+        .payment-options {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin-bottom: 14px;
+        }
+
+        .pay-option-btn {
+            border: 2px solid var(--border);
+            background: var(--white);
+            border-radius: 10px;
+            padding: 11px 10px;
+            cursor: pointer;
+            text-align: center;
+            transition: 0.2s;
+            color: var(--text-dark);
+        }
+
+        .pay-option-btn:hover {
+            border-color: var(--primary);
+            background: #fdfaf5;
+        }
+
+        .pay-option-btn.selected {
+            border-color: var(--success);
+            background: #edf7ed;
+            box-shadow: 0 0 0 2px rgba(46, 125, 50, 0.2);
+        }
+
+        .pay-icon {
+            font-size: 1.65rem;
+            display: block;
+            margin-bottom: 4px;
+        }
+
+        .pay-title-en {
+            font-weight: 700;
+            font-size: 0.9rem;
+            display: block;
+        }
+
+        .pay-title-ar {
+            font-size: 0.8rem;
+            color: #5c4636;
+            display: block;
+            margin-top: 2px;
+        }
+
+        .modal-actions-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+        }
+
+        .btn-pay-only {
+            background: var(--info);
+        }
+
+        .btn-pay-only:hover {
+            background: #0d47a1;
+        }
+
+        .btn-confirm-pay {
+            background: var(--success);
+        }
+
+        .btn-confirm-pay:hover {
+            background: #1b5e20;
+        }
+
+        .btn-cancel-modal {
+            grid-column: span 2;
+            background: #757575;
+            padding: 8px;
+            font-size: 0.86rem;
+        }
+
+        .btn-cancel-modal:hover {
+            background: #5a5a5a;
+        }
+
+        /* ডিসকাউন্ট, নোট ও ট্যাগ চিপস */
+        .quick-chips {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 7px;
+            margin: 10px 0 14px;
+        }
+
+        .chip-btn {
+            padding: 6px 11px;
+            border-radius: 16px;
+            border: 1px solid var(--border);
+            background: var(--bg-light);
+            color: var(--primary-dark);
+            font-size: 0.82rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.15s;
+        }
+
+        .chip-btn:hover, .chip-btn.active {
+            background: var(--purple-bar);
+            color: #fff;
+            border-color: var(--purple-bar);
+        }
+
+        .field-group {
+            margin-bottom: 12px;
+        }
+
+        .field-group label {
+            display: block;
+            font-size: 0.85rem;
+            font-weight: 700;
+            margin-bottom: 5px;
+            color: var(--primary-dark);
+        }
+
+        .field-group input, .field-group select, .field-group textarea {
+            width: 100%;
+            padding: 8px 10px;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            font-size: 0.9rem;
+        }
+
+        /* রিপোর্ট ও শিফট স্টাইল */
+        .report-summary-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(145px, 1fr));
+            gap: 10px;
+            margin-bottom: 14px;
+        }
+
+        .report-card {
+            background: var(--bg-light);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 10px;
+            text-align: center;
+        }
+
+        .report-card-label {
+            font-size: 0.78rem;
+            color: #6d5443;
+            font-weight: 600;
+        }
+
+        .report-card-value {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-top: 3px;
+            overflow-wrap: anywhere;
+        }
+
+        .shift-grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 14px;
+            margin-bottom: 14px;
+        }
+
+        .shift-box {
+            background: #fdfaf5;
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 12px;
+        }
+
+        .shift-box h4 {
+            font-size: 0.95rem;
+            color: var(--primary);
+            margin-bottom: 10px;
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 5px;
+        }
+
+        .drawer-line {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 6px 0;
+            border-bottom: 1px dashed #e2d5c5;
+            font-size: 0.88rem;
+            gap: 8px;
+        }
+
+        .drawer-line.highlight {
+            font-weight: 700;
+            font-size: 0.96rem;
+            color: var(--primary-dark);
+            border-top: 1.5px solid var(--primary);
+            border-bottom: none;
+            margin-top: 4px;
+            padding-top: 8px;
+        }
+
+        .pay-io-form {
+            display: grid;
+            grid-template-columns: 105px 1fr 1fr auto;
+            gap: 6px;
+            margin-bottom: 10px;
+        }
+
+        .pay-io-form select,
+        .pay-io-form input {
+            padding: 7px 8px;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            font-size: 0.84rem;
+            min-width: 0;
+        }
+
+        .io-list {
+            max-height: 130px;
+            overflow-y: auto;
+            font-size: 0.82rem;
+        }
+
+        .io-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 5px 6px;
+            border-bottom: 1px dashed #e6dad0;
+            gap: 6px;
+        }
+
+        .tag-in {
+            color: var(--success);
+            font-weight: 700;
+        }
+
+        .tag-out {
+            color: var(--danger);
+            font-weight: 700;
+        }
+
+        .actual-cash-row {
+            background: var(--bg-light);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 10px 12px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 10px;
+            flex-wrap: wrap;
+        }
+
+        .actual-cash-row input {
+            width: 130px;
+            padding: 7px 10px;
+            border: 2px solid var(--primary);
+            border-radius: 6px;
+            font-size: 0.95rem;
+            font-weight: 700;
+            text-align: right;
+        }
+
+        .diff-box {
+            padding: 10px 12px;
+            border-radius: 8px;
+            font-weight: 700;
+            font-size: 0.92rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+
+        .diff-balanced {
+            background: #e8f5e9;
+            color: var(--success);
+            border: 1px solid #a5d6a7;
+        }
+
+        .diff-shortage {
+            background: #ffebee;
+            color: var(--danger);
+            border: 1px solid #ef9a9a;
+        }
+
+        .diff-overage {
+            background: #e3f2fd;
+            color: var(--info);
+            border: 1px solid #90caf9;
+        }
+
+        .history-filter-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 12px;
+            flex-wrap: wrap;
+        }
+
+        .history-filter-controls {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .history-filter-bar input[type="date"] {
+            padding: 7px 10px;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            font-size: 0.9rem;
+        }
+
+        .history-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.86rem;
+        }
+
+        .history-table th, .history-table td {
+            border: 1px solid var(--border);
+            padding: 7px 9px;
+            text-align: left;
+        }
+
+        .history-table th {
+            background: var(--primary);
+            color: var(--white);
+            white-space: nowrap;
+        }
+
+        .history-table tr:nth-child(even) {
+            background: #faf6f0;
+        }
+
+        .badge-paid {
+            background: #e8f5e9;
+            color: var(--success);
+            border: 1px solid #a5d6a7;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-weight: 700;
+            font-size: 0.76rem;
+            white-space: nowrap;
+        }
+
+        .mini-print-btn {
+            background: var(--primary);
+            color: var(--white);
+            border: none;
+            padding: 5px 8px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.78rem;
+            white-space: nowrap;
+        }
+
+        .mini-print-btn:hover {
+            background: var(--primary-dark);
+        }
+
+        /* টোস্ট নোটিফিকেশন */
+        .toast {
+            position: fixed;
+            bottom: 16px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--success);
+            color: var(--white);
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-weight: 600;
+            box-shadow: 0 4px 14px rgba(0,0,0,0.25);
+            z-index: 2000;
+            display: none;
+            max-width: 92%;
+            text-align: center;
+            font-size: 0.9rem;
+        }
+
+        /* মোবাইল ভিউ: ফিক্সড 100vh/100dvh স্প্লিট লেআউট */
+        @media (max-width: 768px) {
+            body {
+                height: 100vh;
+                height: 100dvh;
+                overflow: hidden;
+            }
+
+            header {
+                padding: 5px 8px;
+                gap: 5px;
+            }
+
+            .brand-title h1 {
+                font-size: 0.84rem;
+                letter-spacing: 0.2px;
+            }
+
+            .brand-title span {
+                font-size: 0.72rem;
+            }
+
+            .header-right {
+                gap: 4px;
+                flex-shrink: 0;
+            }
+
+            .sync-badge {
+                display: none;
+            }
+
+            .hdr-btn {
+                padding: 4px 7px;
+                font-size: 0.65rem;
+                border-radius: 5px;
+            }
+
+            #live-clock {
+                display: none;
+            }
+
+            .foodics-action-bar {
+                padding: 4px 6px;
+                gap: 4px;
+                grid-template-columns: repeat(7, minmax(0, 1fr));
+            }
+
+            .f-action-btn {
+                padding: 5px 2px;
+                font-size: 0.58rem;
+                gap: 2px;
+                border-radius: 5px;
+            }
+
+            .main-container {
+                flex-direction: column;
+                flex: 1;
+                min-height: 0;
+                overflow: hidden;
+            }
+
+            .menu-section {
+                flex: 0 0 54%;
+                height: 54%;
+                width: 100%;
+                padding: 6px 8px;
+                min-height: 0;
+                overflow: hidden;
+            }
+
+            .search-filter-bar {
+                margin-bottom: 5px;
+            }
+
+            .search-box {
+                padding: 5px 9px;
+                font-size: 0.8rem;
+                border-radius: 6px;
+            }
+
+            .category-buttons {
+                flex-wrap: nowrap;
+                overflow-x: auto;
+                -webkit-overflow-scrolling: touch;
+                scrollbar-width: none;
+                padding-bottom: 2px;
+                margin-bottom: 5px;
+                gap: 5px;
+            }
+
+            .category-buttons::-webkit-scrollbar {
+                display: none;
+            }
+
+            .cat-btn {
+                flex-shrink: 0;
+                padding: 4px 8px;
+                font-size: 0.7rem;
+                border-radius: 14px;
+            }
+
+            .menu-grid {
+                grid-template-columns: repeat(3, minmax(0, 1fr));
+                gap: 6px;
+                padding-right: 0;
+            }
+
+            .menu-card {
+                padding: 6px 5px;
+                border-radius: 7px;
+            }
+
+            .menu-icon {
+                font-size: 1.1rem;
+                margin-bottom: 2px;
+            }
+
+            .menu-title-en {
+                font-size: 0.7rem;
+                line-height: 1.15;
+                margin-bottom: 1px;
+                display: -webkit-box;
+                -webkit-line-clamp: 2;
+                -webkit-box-orient: vertical;
+                overflow: hidden;
+            }
+
+            .menu-title-ar {
+                font-size: 0.66rem;
+                line-height: 1.15;
+                margin-bottom: 3px;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
+
+            .menu-price {
+                font-size: 0.72rem;
+                padding: 2px 4px;
+                border-radius: 4px;
+                line-height: 1.15;
+            }
+
+            .vat-tag {
+                font-size: 0.56rem;
+                margin-top: 1px;
+            }
+
+            .cart-section {
+                flex: 0 0 46%;
+                height: 46%;
+                width: 100%;
+                border-left: none;
+                border-top: 2px solid var(--accent);
+                padding: 6px 9px;
+                min-height: 0;
+                overflow: hidden;
+            }
+
+            .customer-info {
+                flex-direction: row;
+                gap: 5px;
+                margin-bottom: 4px;
+            }
+
+            .customer-info input, .customer-info select {
+                padding: 4px 6px;
+                font-size: 0.72rem;
+                border-radius: 5px;
+            }
+
+            .meta-pill {
+                font-size: 0.64rem;
+                padding: 1px 6px;
+            }
+
+            .cart-items {
+                flex: 1;
+                min-height: 32px;
+                padding: 2px 0;
+            }
+
+            .cart-items p {
+                margin-top: 6px !important;
+                font-size: 0.72rem !important;
+                line-height: 1.2;
+            }
+
+            .cart-item {
+                padding: 3px 2px;
+                gap: 4px;
+            }
+
+            .item-name {
+                font-size: 0.72rem;
+                line-height: 1.15;
+            }
+
+            .item-unit-price {
+                font-size: 0.64rem;
+                line-height: 1.1;
+            }
+
+            .qty-controls {
+                gap: 3px;
+            }
+
+            .qty-btn {
+                width: 19px;
+                height: 19px;
+                font-size: 0.78rem;
+            }
+
+            .qty-controls span {
+                font-size: 0.72rem;
+            }
+
+            .item-total {
+                font-size: 0.72rem;
+            }
+
+            .remove-btn {
+                font-size: 0.78rem;
+                margin-left: 0;
+            }
+
+            .summary-section {
+                padding-top: 4px;
+            }
+
+            .summary-row {
+                font-size: 0.7rem;
+                margin-bottom: 2px;
+                gap: 6px;
+            }
+
+            .summary-row input[type="number"] {
+                width: 56px !important;
+                padding: 1px 4px !important;
+                font-size: 0.7rem !important;
+            }
+
+            .summary-row.total {
+                font-size: 0.85rem;
+                padding-top: 3px;
+                margin-top: 2px;
+                border-top-width: 1.5px;
+            }
+
+            .action-buttons {
+                flex-direction: row;
+                gap: 6px;
+                margin-top: 5px;
+            }
+
+            .btn {
+                padding: 6px 8px;
+                font-size: 0.78rem;
+                border-radius: 5px;
+            }
+
+            .shift-grid-2 {
+                grid-template-columns: 1fr;
+            }
+
+            .pay-io-form {
+                grid-template-columns: 80px 1fr 1fr auto;
+            }
+        }
+
+        /* থার্মাল প্রিন্ট রিসিপ্ট / Kitchen Token / Z-Report ডিজাইন */
+        #printable-receipt {
+            display: none;
+        }
+
+        @media print {
+            body * {
+                visibility: hidden;
+            }
+            #printable-receipt, #printable-receipt * {
+                visibility: visible;
+            }
+            #printable-receipt {
+                display: block;
+                position: absolute;
+                left: 0;
+                top: 0;
+                width: 80mm;
+                padding: 8px;
+                font-family: 'Courier New', Courier, monospace;
+                color: #000;
+                background: #fff;
+            }
+            .receipt-header {
+                text-align: center;
+                border-bottom: 1px dashed #000;
+                padding-bottom: 8px;
+                margin-bottom: 8px;
+            }
+            .receipt-header h2 {
+                font-size: 18px;
+                margin-bottom: 2px;
+            }
+            .receipt-header p {
+                font-size: 11px;
+                margin: 2px 0;
+            }
+            .paid-stamp {
+                display: inline-block;
+                border: 2px solid #000;
+                padding: 3px 10px;
+                margin-top: 6px;
+                font-weight: bold;
+                font-size: 12px;
+                letter-spacing: 0.8px;
+            }
+            .receipt-info {
+                font-size: 11px;
+                margin-bottom: 8px;
+                border-bottom: 1px dashed #000;
+                padding-bottom: 6px;
+            }
+            .receipt-table {
+                width: 100%;
+                border-collapse: collapse;
+                font-size: 11px;
+                margin-bottom: 8px;
+            }
+            .receipt-table th {
+                border-bottom: 1px dashed #000;
+                text-align: left;
+                padding-bottom: 4px;
+            }
+            .receipt-table td {
+                padding: 4px 0;
+                vertical-align: top;
+            }
+            .receipt-totals {
+                border-top: 1px dashed #000;
+                padding-top: 6px;
+                font-size: 12px;
+            }
+            .receipt-totals div {
+                display: flex;
+                justify-content: space-between;
+                margin-bottom: 4px;
+            }
+            .receipt-grand-total {
+                font-weight: bold;
+                font-size: 14px;
+                border-top: 1px solid #000;
+                padding-top: 5px;
+            }
+            .zatca-qr-box {
+                text-align: center;
+                margin-top: 8px;
+                padding-top: 6px;
+                border-top: 1px dashed #000;
+            }
+            .zatca-qr-box canvas {
+                display: block;
+                margin: 4px auto;
+                width: 128px;
+                height: 128px;
+            }
+            .receipt-footer {
+                text-align: center;
+                margin-top: 10px;
+                font-size: 11px;
+                border-top: 1px dashed #000;
+                padding-top: 6px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="brand-title">
+            <h1>🥙 HAZZAT CHAPATI <span>| حزة جباتي</span></h1>
+        </div>
+        <div class="header-right">
+            <span class="sync-badge" id="db-status">⏳ REST Syncing...</span>
+            <button class="hdr-btn" onclick="toggleFullscreen()" title="Fullscreen">⛶ Fullscreen</button>
+            <div id="live-clock" style="font-size: 0.86rem;"></div>
+        </div>
+    </header>
+
+    <!-- Foodics-স্টাইল বেগুনি টপ অ্যাকশন বার (৭টি কুইক বাটন) -->
+    <div class="foodics-action-bar" role="toolbar" aria-label="Quick POS Actions">
+        <button type="button" class="f-action-btn" onclick="quickPrintDraftReceipt()">🖨️ Print</button>
+        <button type="button" class="f-action-btn" onclick="printKitchenOrder()">🍳 Kitchen</button>
+        <button type="button" class="f-action-btn danger-btn" onclick="voidCurrentOrder()">🚫 Void</button>
+        <button type="button" class="f-action-btn" id="bar-btn-discount" onclick="openDiscountModal()">🏷️ Discount</button>
+        <button type="button" class="f-action-btn" id="bar-btn-notes" onclick="openNotesModal()">📝 Notes</button>
+        <button type="button" class="f-action-btn" id="bar-btn-tags" onclick="openTagsModal()">🔖 Tags</button>
+        <button type="button" class="f-action-btn" onclick="openMoreMenuModal()">⋮ More</button>
+    </div>
+
+    <div class="main-container">
+        <!-- মেনু সেকশন -->
+        <div class="menu-section">
+            <div class="search-filter-bar">
+                <input type="text" id="search-input" class="search-box" placeholder="Search item (e.g., Karak, Cheese, Water, ماء)..." onkeyup="filterMenu()">
+            </div>
+
+            <div class="category-buttons">
+                <button class="cat-btn active" onclick="filterCategory('all', this)">All Items (الكل)</button>
+                <button class="cat-btn" onclick="filterCategory('chapati', this)">Chapati (الجباتي)</button>
+                <button class="cat-btn" onclick="filterCategory('cold_drinks', this)">Cold Drinks (المشروبات الباردة)</button>
+                <button class="cat-btn" onclick="filterCategory('hot_drinks', this)">Hot Drinks (المشروبات الساخنة)</button>
+                <button class="cat-btn" onclick="filterCategory('desserts', this)">Desserts (الحلويات)</button>
+                <button class="cat-btn" onclick="filterCategory('fries', this)">French Fries (فرايز)</button>
+            </div>
+
+            <div class="menu-grid" id="menu-grid"></div>
+        </div>
+
+        <!-- বিলিং সেকশন -->
+        <div class="cart-section">
+            <div class="customer-info">
+                <input type="text" id="customer-name" placeholder="Customer Name (Optional)">
+                <select id="order-type" onchange="updateOrderMetaStrip()">
+                    <option value="Takeaway (سفري)">Takeaway (سفري)</option>
+                    <option value="Dine-in">Dine-in (محلي)</option>
+                    <option value="Drive-Thru">Drive-Thru (سيارة)</option>
+                    <option value="Dine-In Table 1">Table 01</option>
+                    <option value="Dine-In Table 2">Table 02</option>
+                    <option value="Dine-In Table 3">Table 03</option>
+                    <option value="Dine-In Table 4">Table 04</option>
+                </select>
+            </div>
+
+            <div class="order-meta-strip" id="order-meta-strip"></div>
+
+            <div class="cart-items" id="cart-items">
+                <p style="text-align: center; color: #888; margin-top: 24px;">No items selected<br>لم يتم اختيار أي صنف</p>
+            </div>
+
+            <div class="summary-section">
+                <div class="summary-row">
+                    <span>Gross Items Total (إجمالي الأصناف):</span>
+                    <span id="gross-total">0.00 SAR</span>
+                </div>
+                <div class="summary-row">
+                    <span id="discount-label-text">Discount (الخصم SAR):</span>
+                    <input type="number" id="discount-input" value="0" min="0" step="0.01" style="width: 78px; text-align: right; padding: 3px 6px; border: 1px solid var(--border); border-radius: 4px;" onchange="syncManualDiscountInput()">
+                </div>
+                <div class="summary-row">
+                    <span>Subtotal / Excl. VAT (المجموع قبل الضريبة):</span>
+                    <span id="subtotal">0.00 SAR</span>
+                </div>
+                <div class="summary-row">
+                    <span>VAT 15% Included (ضريبة القيمة المضافة):</span>
+                    <span id="vat-amount">0.00 SAR</span>
+                </div>
+                <div class="summary-row total">
+                    <span>Grand Total / Incl. VAT (الإجمالي شامل الضريبة):</span>
+                    <span id="grand-total">0.00 SAR</span>
+                </div>
+
+                <div class="action-buttons">
+                    <button class="btn btn-clear" onclick="clearCart()">Clear (إلغاء)</button>
+                    <button class="btn btn-print" onclick="openPaymentModal()">💳 Checkout / Pay</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- পেমেন্ট মেথড নির্বাচন পপ-আপ মোডাল -->
+    <div class="modal-overlay" id="payment-modal">
+        <div class="modal-box">
+            <div class="modal-header">
+                <h3>Select Payment Method / اختر طريقة الدفع</h3>
+                <button class="modal-close" onclick="closePaymentModal()">✖</button>
+            </div>
+            <div class="modal-body">
+                <div class="modal-amount-box">
+                    <div class="modal-amount-label">Total Payable (المبلغ المستحق)</div>
+                    <div class="modal-amount-value" id="modal-grand-total">0.00 SAR</div>
+                </div>
+
+                <div class="payment-options">
+                    <button type="button" class="pay-option-btn selected" id="opt-cash" onclick="selectPaymentMethod('Cash / كاش', this)">
+                        <span class="pay-icon">💵</span>
+                        <span class="pay-title-en">Cash</span>
+                        <span class="pay-title-ar">كاش</span>
+                    </button>
+
+                    <button type="button" class="pay-option-btn" id="opt-visa" onclick="selectPaymentMethod('Visa / Mada / مدى', this)">
+                        <span class="pay-icon">💳</span>
+                        <span class="pay-title-en">Visa / Mada</span>
+                        <span class="pay-title-ar">فيزا / مدى</span>
+                    </button>
+                </div>
+
+                <div class="modal-actions-grid">
+                    <button type="button" class="btn btn-pay-only" onclick="processOrder(false)">✅ Pay Only (No Print)</button>
+                    <button type="button" class="btn btn-confirm-pay" onclick="processOrder(true)">🖨️ Pay & Print (ZATCA)</button>
+                    <button type="button" class="btn btn-cancel-modal" onclick="closePaymentModal()">Cancel (إلغاء)</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ডিসকাউন্ট মোডাল (টাকা বা % ডিসকাউন্ট) -->
+    <div class="modal-overlay" id="discount-modal">
+        <div class="modal-box">
+            <div class="modal-header">
+                <h3>🏷️ Order Discount / خصم الطلب (SAR / %)</h3>
+                <button class="modal-close" onclick="closeModal('discount-modal')">✖</button>
+            </div>
+            <div class="modal-body">
+                <div class="field-group">
+                    <label>Discount Type / نوع الخصم</label>
+                    <select id="disc-type-select" onchange="renderDiscountPreview()">
+                        <option value="amount">Fixed Amount (SAR / ريال)</option>
+                        <option value="percent">Percentage (% / نسبة مئوية)</option>
+                    </select>
+                </div>
+                <div class="field-group">
+                    <label>Discount Value / قيمة الخصم</label>
+                    <input type="number" id="disc-value-input" min="0" step="0.01" value="0" oninput="renderDiscountPreview()">
+                </div>
+                <div class="quick-chips">
+                    <button type="button" class="chip-btn" onclick="applyQuickDiscount('percent', 5)">5%</button>
+                    <button type="button" class="chip-btn" onclick="applyQuickDiscount('percent', 10)">10%</button>
+                    <button type="button" class="chip-btn" onclick="applyQuickDiscount('percent', 15)">15%</button>
+                    <button type="button" class="chip-btn" onclick="applyQuickDiscount('amount', 5)">5 SAR</button>
+                    <button type="button" class="chip-btn" onclick="applyQuickDiscount('amount', 10)">10 SAR</button>
+                    <button type="button" class="chip-btn" onclick="applyQuickDiscount('amount', 0)">Reset (0)</button>
+                </div>
+                <div class="modal-amount-box">
+                    <div class="modal-amount-label">Calculated Discount (قيمة الخصم بالريال)</div>
+                    <div class="modal-amount-value" id="disc-preview-sar">0.00 SAR</div>
+                </div>
+                <div class="action-buttons">
+                    <button type="button" class="btn btn-clear" onclick="applyQuickDiscount('amount', 0); closeModal('discount-modal')">Remove</button>
+                    <button type="button" class="btn btn-print" onclick="saveDiscountFromModal()">Apply Discount</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- অর্ডার নোট মোডাল -->
+    <div class="modal-overlay" id="notes-modal">
+        <div class="modal-box">
+            <div class="modal-header">
+                <h3>📝 Order Notes / ملاحظات الطلب</h3>
+                <button class="modal-close" onclick="closeModal('notes-modal')">✖</button>
+            </div>
+            <div class="modal-body">
+                <div class="field-group">
+                    <label>Kitchen / Customer Note (ملاحظة للمطبخ)</label>
+                    <textarea id="order-note-textarea" rows="3" placeholder="e.g., Less sugar, Extra cheese, Crispy..."></textarea>
+                </div>
+                <div class="quick-chips">
+                    <button type="button" class="chip-btn" onclick="appendQuickNote('Less Sugar (سكر خفيف)')">+ Less Sugar (سكر خفيف)</button>
+                    <button type="button" class="chip-btn" onclick="appendQuickNote('Extra Cheese (جبن إضافي)')">+ Extra Cheese (جبن إضافي)</button>
+                    <button type="button" class="chip-btn" onclick="appendQuickNote('No Onion (بدون بصل)')">+ No Onion (بدون بصل)</button>
+                    <button type="button" class="chip-btn" onclick="appendQuickNote('Spicy (حار)')">+ Spicy (حار)</button>
+                    <button type="button" class="chip-btn" onclick="appendQuickNote('Extra Napkins (مناديل إضافية)')">+ Extra Napkins</button>
+                </div>
+                <div class="action-buttons">
+                    <button type="button" class="btn btn-clear" onclick="clearOrderNote()">Clear Note</button>
+                    <button type="button" class="btn btn-print" onclick="saveOrderNote()">Save Note</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- অর্ডার ট্যাগ মোডাল -->
+    <div class="modal-overlay" id="tags-modal">
+        <div class="modal-box">
+            <div class="modal-header">
+                <h3>🔖 Order Tags / وسوم الطلب</h3>
+                <button class="modal-close" onclick="closeModal('tags-modal')">✖</button>
+            </div>
+            <div class="modal-body">
+                <p style="font-size:0.86rem; color:#6d5443; margin-bottom:8px;">Select one or more order tags:</p>
+                <div class="quick-chips" id="tags-chip-container">
+                    <button type="button" class="chip-btn" data-tag="Dine-in" onclick="toggleOrderTag('Dine-in', this)">🍽️ Dine-in</button>
+                    <button type="button" class="chip-btn" data-tag="Takeaway" onclick="toggleOrderTag('Takeaway', this)">🛍️ Takeaway</button>
+                    <button type="button" class="chip-btn" data-tag="Drive-Thru" onclick="toggleOrderTag('Drive-Thru', this)">🚗 Drive-Thru</button>
+                    <button type="button" class="chip-btn" data-tag="Urgent / Rush" onclick="toggleOrderTag('Urgent / Rush', this)">⚡ Urgent</button>
+                    <button type="button" class="chip-btn" data-tag="VIP" onclick="toggleOrderTag('VIP', this)">⭐ VIP</button>
+                </div>
+                <div class="action-buttons">
+                    <button type="button" class="btn btn-clear" onclick="clearOrderTags()">Clear Tags</button>
+                    <button type="button" class="btn btn-print" onclick="closeModal('tags-modal')">Done</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- More মেনু মোডাল (Sales History, Shift / Z-Report, Refresh Sync) -->
+    <div class="modal-overlay" id="more-modal">
+        <div class="modal-box">
+            <div class="modal-header">
+                <h3>⋮ More Options / خيارات إضافية</h3>
+                <button class="modal-close" onclick="closeModal('more-modal')">✖</button>
+            </div>
+            <div class="modal-body" style="display:flex; flex-direction:column; gap:10px;">
+                <button type="button" class="btn" style="background:var(--primary); padding:13px;" onclick="closeModal('more-modal'); openSalesHistoryModal()">📊 Sales History & Daily Report (سجل المبيعات)</button>
+                <button type="button" class="btn" style="background:var(--purple-bar); padding:13px;" onclick="closeModal('more-modal'); openShiftModal()">🧾 Shift Closing Report / Z-Report (إغلاق الوردية)</button>
+                <button type="button" class="btn" style="background:var(--info); padding:13px;" onclick="closeModal('more-modal'); fetchSalesFromFirebase(true)">🔄 Sync Sales Now (مزامنة البيانات)</button>
+                <button type="button" class="btn btn-cancel-modal" onclick="closeModal('more-modal')">Close (إغلاق)</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Shift Closing Report (Z-Report) ও Cash Drawer মোডাল -->
+    <div class="modal-overlay" id="shift-modal">
+        <div class="modal-box shift-modal-box">
+            <div class="modal-header">
+                <h3>🧾 Shift Closing Report (Z-Report) & Cash Drawer / إغلاق الوردية والصندوق</h3>
+                <button class="modal-close" onclick="closeShiftModal()">✖</button>
+            </div>
+            <div class="modal-body">
+                <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px; margin-bottom:12px;">
+                    <div style="font-size:0.86rem;">
+                        <strong>Shift Started:</strong> <span id="shift-start-display">-</span>
+                    </div>
+                    <button type="button" class="mini-print-btn" style="background: var(--info); padding:6px 10px;" onclick="setOpeningCashPrompt()">✏️ Set Opening Amount</button>
+                </div>
+
+                <div class="report-summary-cards">
+                    <div class="report-card">
+                        <div class="report-card-label">Opening Amount</div>
+                        <div class="report-card-value" id="z-opening-amount">0.00 SAR</div>
+                    </div>
+                    <div class="report-card">
+                        <div class="report-card-label">Cash Sales (كاش)</div>
+                        <div class="report-card-value" id="z-cash-sales" style="color:var(--success);">0.00 SAR</div>
+                    </div>
+                    <div class="report-card">
+                        <div class="report-card-label">VISA / Mada (شبكة)</div>
+                        <div class="report-card-value" id="z-visa-sales" style="color:var(--info);">0.00 SAR</div>
+                    </div>
+                    <div class="report-card">
+                        <div class="report-card-label">VAT 15% Included</div>
+                        <div class="report-card-value" id="z-vat-total">0.00 SAR</div>
+                    </div>
+                    <div class="report-card">
+                        <div class="report-card-label">Total Shift Sales</div>
+                        <div class="report-card-value" id="z-total-sales">0.00 SAR</div>
+                    </div>
+                </div>
+
+                <div class="shift-grid-2">
+                    <div class="shift-box">
+                        <h4>💵 Cash Drawer Reconciliation (حساب الصندوق)</h4>
+                        <div class="drawer-line">
+                            <span>Opening Cash (الرصيد الافتتاحي):</span>
+                            <span id="drw-opening">0.00 SAR</span>
+                        </div>
+                        <div class="drawer-line">
+                            <span>(+) Cash Sales (مبيعات نقدية):</span>
+                            <span id="drw-cash-sales">0.00 SAR</span>
+                        </div>
+                        <div class="drawer-line">
+                            <span>(+) Pay In (إيداع نقدي):</span>
+                            <span id="drw-pay-in" class="tag-in">0.00 SAR</span>
+                        </div>
+                        <div class="drawer-line">
+                            <span>(-) Pay Out / Expenses (مصروفات / سحب):</span>
+                            <span id="drw-pay-out" class="tag-out">0.00 SAR</span>
+                        </div>
+                        <div class="drawer-line highlight">
+                            <span>Expected Cash in Drawer (المتوقع بالصندوق):</span>
+                            <span id="drw-expected">0.00 SAR</span>
+                        </div>
+                    </div>
+
+                    <div class="shift-box">
+                        <h4>📥📤 Pay In / Pay Out (إيداع / سحب نقدي)</h4>
+                        <div class="pay-io-form">
+                            <select id="io-type">
+                                <option value="IN">Pay In (+)</option>
+                                <option value="OUT">Pay Out (-)</option>
+                            </select>
+                            <input type="number" id="io-amount" min="0" step="0.01" placeholder="Amount SAR">
+                            <input type="text" id="io-note" placeholder="Reason / ملاحظة">
+                            <button type="button" class="mini-print-btn" style="background:var(--success); padding:7px 10px;" onclick="addCashMovement()">Add</button>
+                        </div>
+                        <div class="io-list" id="io-list">
+                            <p style="color:#888; text-align:center; padding:10px;">No Pay In / Pay Out entries yet.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="actual-cash-row">
+                    <label for="actual-cash-input" style="font-weight:700; font-size:0.92rem;">Actual Counted Cash in Drawer (النقد الفعلي المعدود SAR):</label>
+                    <input type="number" id="actual-cash-input" min="0" step="0.01" value="0" oninput="updateDrawerCalculation()">
+                </div>
+
+                <div class="diff-box diff-balanced" id="cash-diff-box">
+                    <span id="cash-diff-label">Drawer Balanced (مطابق)</span>
+                    <span id="cash-diff-value">0.00 SAR</span>
+                </div>
+
+                <div class="action-buttons" style="flex-wrap:wrap;">
+                    <button type="button" class="btn" style="background:var(--info);" onclick="printZReport(false)">🖨️ Print Z-Report</button>
+                    <button type="button" class="btn btn-print" onclick="closeAndResetShift()">🔒 Close Shift & Start New</button>
+                </div>
+
+                <div style="margin-top:16px;">
+                    <h4 style="font-size:0.92rem; color:var(--primary); margin-bottom:8px;">📋 Closed Shifts History (سجل الورديات المغلقة)</h4>
+                    <div style="overflow-x:auto;">
+                        <table class="history-table">
+                            <thead>
+                                <tr>
+                                    <th>Shift ID</th>
+                                    <th>Closed At</th>
+                                    <th>Sales (SAR)</th>
+                                    <th>Expected Cash</th>
+                                    <th>Actual Cash</th>
+                                    <th>Shortage / Diff</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody id="closed-shifts-tbody"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- সেলস হিস্ট্রি এবং দৈনিক রিপোর্ট মোডাল -->
+    <div class="modal-overlay" id="history-modal">
+        <div class="modal-box history-modal-box">
+            <div class="modal-header">
+                <h3>📊 Sales History & Daily Report / سجل المبيعات والتقرير اليومي</h3>
+                <button class="modal-close" onclick="closeSalesHistoryModal()">✖</button>
+            </div>
+            <div class="modal-body">
+                <div class="history-filter-bar">
+                    <div class="history-filter-controls">
+                        <label for="report-date-filter" style="font-weight: 600; font-size: 0.9rem;">Filter by Date: </label>
+                        <input type="date" id="report-date-filter" onchange="renderSalesHistory()">
+                        <button type="button" class="mini-print-btn" style="padding: 7px 10px;" onclick="resetDateFilter()">Show All</button>
+                        <button type="button" class="mini-print-btn" style="background: var(--info); padding: 7px 10px;" onclick="fetchSalesFromFirebase(true)">🔄 Refresh</button>
+                    </div>
+                    <button type="button" class="mini-print-btn" style="background: var(--danger); padding: 7px 12px;" onclick="clearSalesHistory()">🗑️ Clear History</button>
+                </div>
+
+                <div class="report-summary-cards">
+                    <div class="report-card">
+                        <div class="report-card-label">Total Orders (عدد الطلبات)</div>
+                        <div class="report-card-value" id="rep-orders-count">0</div>
+                    </div>
+                    <div class="report-card">
+                        <div class="report-card-label">Cash Sales (مبيعات كاش)</div>
+                        <div class="report-card-value" id="rep-cash-total" style="color: #2e7d32;">0.00 SAR</div>
+                    </div>
+                    <div class="report-card">
+                        <div class="report-card-label">Visa / Mada (مبيعات شبكة)</div>
+                        <div class="report-card-value" id="rep-visa-total" style="color: #1565c0;">0.00 SAR</div>
+                    </div>
+                    <div class="report-card">
+                        <div class="report-card-label">Total VAT 15% (إجمالي الضريبة)</div>
+                        <div class="report-card-value" id="rep-vat-total">0.00 SAR</div>
+                    </div>
+                    <div class="report-card">
+                        <div class="report-card-label">Grand Sales (إجمالي المبيعات)</div>
+                        <div class="report-card-value" id="rep-grand-total">0.00 SAR</div>
+                    </div>
+                </div>
+
+                <div style="overflow-x: auto;">
+                    <table class="history-table">
+                        <thead>
+                            <tr>
+                                <th>Invoice</th>
+                                <th>Date & Time</th>
+                                <th>Customer / Type</th>
+                                <th>Items & Note</th>
+                                <th>Payment</th>
+                                <th>Total (SAR)</th>
+                                <th>Status</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody id="history-table-body"></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- নোটিফিকেশন টোস্ট -->
+    <div class="toast" id="toast-msg"></div>
+
+    <!-- থার্মাল প্রিন্ট রিসিপ্ট / Kitchen Token / Z-Report টেমপ্লেট -->
+    <div id="printable-receipt">
+        <div class="receipt-header">
+            <h2>حزة جباتي</h2>
+            <h2>HAZZAT CHAPATI</h2>
+            <p id="rec-subtitle">Simplified Tax Invoice / فاتورة ضريبية مبسطة</p>
+            <p>All Prices Include 15% VAT / الأسعار شاملة الضريبة 15%</p>
+            <p>VAT No: 311233882500003</p>
+            <div class="paid-stamp" id="rec-stamp">PAID (مدفوع)</div>
+        </div>
+        <div class="receipt-info" id="rec-info-block"></div>
+        <table class="receipt-table" id="rec-table-block">
+            <thead>
+                <tr>
+                    <th>Item / الصنف</th>
+                    <th style="text-align: center;">Qty</th>
+                    <th style="text-align: right;">Total</th>
+                </tr>
+            </thead>
+            <tbody id="rec-items"></tbody>
+        </table>
+        <div class="receipt-totals" id="rec-totals-block"></div>
+        <div class="zatca-qr-box" id="rec-zatca-box">
+            <p style="font-size:10px; font-weight:bold;">ZATCA QR Code / رمز الاستجابة السريعة</p>
+            <canvas id="zatca-qr-canvas" width="128" height="128"></canvas>
+            <p style="font-size:9px; word-break:break-all;" id="zatca-vat-line">VAT: 311233882500003</p>
+        </div>
+        <div class="receipt-footer" id="rec-footer-block"></div>
+    </div>
+
+    <script>
+        // HAZZAT CHAPATI Firebase Config & REST Endpoint
+        const ZATCA_VAT_NUMBER = "311233882500003";
+        const SELLER_NAME_AR = "حزة جباتي";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyCPKhNpglPHGwV3cpYsPeFUcGCqwj09HSA",
+            authDomain: "hazzat-pos.firebaseapp.com",
+            projectId: "hazzat-pos",
+            storageBucket: "hazzat-pos.firebasestorage.app",
+            messagingSenderId: "726124382195",
+            appId: "1:726124382195:web:8f9269d6b765621dd1f486",
+            measurementId: "G-ZW2KRK4PGP"
+        };
+
+        const DATABASE_BASE_URL = "https://firebaseio.com";
+        const ORDERS_REST_URL = `${DATABASE_BASE_URL}/hazzat_chapati/sales_orders.json`;
+        const SHIFTS_REST_URL = `${DATABASE_BASE_URL}/hazzat_chapati/shift_reports.json`;
+        const SHIFT_STATE_KEY = "hazzat_current_shift_v1";
+        const CLOSED_SHIFTS_KEY = "hazzat_closed_shifts_v1";
+
+        // HAZZAT CHAPATI মেনু কার্ডের সব আইটেম ও দাম (VAT Included)
+        const menuItems = [
+            // CHAPATI (الجباتي)
+            { id: 1, nameEn: "Chapati Cheese", nameAr: "جباتي جبن", price: 13, category: "chapati", icon: "🫓" },
+            { id: 2, nameEn: "Chapati Cheese & Honey", nameAr: "جباتي جبنة عسل", price: 15, category: "chapati", icon: "🍯" },
+            { id: 3, nameEn: "Chapati Cheese & Oregano", nameAr: "جباتي جبنة زعتر", price: 15, category: "chapati", icon: "🌿" },
+            { id: 4, nameEn: "Chapati Rahash & Cheese", nameAr: "جباتي رهش جبن", price: 15, category: "chapati", icon: "🫓" },
+            { id: 5, nameEn: "Chapati Labnah", nameAr: "جباتي لبنه", price: 14, category: "chapati", icon: "🥛" },
+            { id: 6, nameEn: "Chapati Labnah Honey", nameAr: "جباتي لبنه عسل", price: 15, category: "chapati", icon: "🍯" },
+            { id: 7, nameEn: "Chapati Labnah Oregano", nameAr: "جباتي لبنه زعتر", price: 15, category: "chapati", icon: "🌿" },
+            { id: 8, nameEn: "Chapati Cream & Honey", nameAr: "جباتي قشطة عسل", price: 15, category: "chapati", icon: "🫓" },
+            { id: 9, nameEn: "Chapati Burata", nameAr: "جباتي بوراتا", price: 17, category: "chapati", icon: "🧀" },
+            { id: 10, nameEn: "Chapati Hallom", nameAr: "جباتي حلوم", price: 16, category: "chapati", icon: "🧀" },
+            { id: 11, nameEn: "Chapati Chicken", nameAr: "جباتي حمسة دجاج", price: 16, category: "chapati", icon: "🍗" },
+            { id: 12, nameEn: "Chips & Cheese", nameAr: "جباتي تشيبس اند تشيز", price: 15, category: "chapati", icon: "🍟" },
+            { id: 13, nameEn: "Falafil Special", nameAr: "جباتي فلافل سبيشل", price: 16, category: "chapati", icon: "🧆" },
+            { id: 14, nameEn: "Chapati Falafil", nameAr: "جباتي فلافل", price: 15, category: "chapati", icon: "🧆" },
+            { id: 15, nameEn: "Chapati Omelate", nameAr: "جباتي اومليت", price: 15, category: "chapati", icon: "🍳" },
+            { id: 16, nameEn: "Chapati Nutella", nameAr: "جباتي نوتيلا", price: 15, category: "chapati", icon: "🍫" },
+
+            // COLD DRINKS (المشروبات الباردة)
+            { id: 17, nameEn: "Red Mojito", nameAr: "ريد موهيتو", price: 19, category: "cold_drinks", icon: "🍹" },
+            { id: 18, nameEn: "Shiny Ocean", nameAr: "شايني اوشن", price: 19, category: "cold_drinks", icon: "🧊" },
+            { id: 19, nameEn: "Ice Tea Roman", nameAr: "ايس تي رمان", price: 19, category: "cold_drinks", icon: "🍷" },
+            { id: 20, nameEn: "Passion Fruit Mojito", nameAr: "باشن فروت موهيتو", price: 19, category: "cold_drinks", icon: "🍹" },
+            { id: 21, nameEn: "Orange Juice", nameAr: "عصير برتقال", price: 19, category: "cold_drinks", icon: "🍊" },
+            { id: 22, nameEn: "Smoothie Vimto", nameAr: "سموذي فيمتو", price: 15, category: "cold_drinks", icon: "🥤" },
+            { id: 23, nameEn: "Pepsi", nameAr: "بيبسي", price: 5, category: "cold_drinks", icon: "🥫" },
+            { id: 24, nameEn: "7up", nameAr: "سفن اب", price: 5, category: "cold_drinks", icon: "🥫" },
+            { id: 25, nameEn: "Mirinda", nameAr: "ميرندا", price: 5, category: "cold_drinks", icon: "🥫" },
+            { id: 37, nameEn: "Water", nameAr: "ماء", price: 3, category: "cold_drinks", icon: "💧" },
+
+            // HOT DRINKS (المشروبات الساخنة)
+            { id: 26, nameEn: "Karak Classic", nameAr: "كرك كلاسيك", price: 12, category: "hot_drinks", icon: "☕" },
+            { id: 27, nameEn: "Karak Zafron", nameAr: "كرك زعفران", price: 13, category: "hot_drinks", icon: "🍵" },
+            { id: 28, nameEn: "Karak Cinnamon", nameAr: "كرك قرفة", price: 13, category: "hot_drinks", icon: "☕" },
+            { id: 29, nameEn: "Karak Ginger", nameAr: "كرك زنجبيل", price: 13, category: "hot_drinks", icon: "🍵" },
+            { id: 30, nameEn: "Tea", nameAr: "شاي", price: 10, category: "hot_drinks", icon: "🫖" },
+            { id: 31, nameEn: "V60 Hot / Cold", nameAr: "قهوة مقطرة", price: 23, category: "hot_drinks", icon: "☕" },
+            { id: 32, nameEn: "Black Coffee Hot / Cold", nameAr: "قهوة سودا حار / بارد", price: 15, category: "hot_drinks", icon: "☕" },
+
+            // DESSERTS (الحلويات)
+            { id: 33, nameEn: "Cookies", nameAr: "كوكيز", price: 12, category: "desserts", icon: "🍪" },
+            { id: 34, nameEn: "Um Ali", nameAr: "ام علي", price: 23, category: "desserts", icon: "🍮" },
+
+            // FRENCH FRIES (فرايز)
+            { id: 35, nameEn: "Fries Classic", nameAr: "فرايز كلاسيك", price: 18, category: "fries", icon: "🍟" },
+            { id: 36, nameEn: "Najdi Flavored Fries", nameAr: "فرايز بنكهة نجدية", price: 19, category: "fries", icon: "🍟" }
+        ];
+
+        let cachedSalesHistory = [];
+        let cart = [];
+        let currentCategory = 'all';
+        let selectedPaymentMethod = 'Cash / كاش';
+
+        // ডিসকাউন্ট, নোট ও ট্যাগ স্টেট
+        let discountConfig = { type: 'amount', rawValue: 0 }; // type: 'amount' | 'percent'
+        let currentOrderNote = '';
+        let currentOrderTags = [];
+
+        // =====================================================================
+        // ZATCA Phase-1 TLV Base64 & Visual Matrix QR Renderer
+        // =====================================================================
+        function encodeZatcaTLV(sellerName, vatRegNo, isoTimestamp, totalInclVat, vatAmount) {
+            const encoder = new TextEncoder();
+            const tlvFields = [
+                { tag: 1, bytes: encoder.encode(sellerName) },
+                { tag: 2, bytes: encoder.encode(vatRegNo) },
+                { tag: 3, bytes: encoder.encode(isoTimestamp) },
+                { tag: 4, bytes: encoder.encode(Number(totalInclVat).toFixed(2)) },
+                { tag: 5, bytes: encoder.encode(Number(vatAmount).toFixed(2)) }
+            ];
+
+            let totalLen = 0;
+            tlvFields.forEach(f => { totalLen += 2 + f.bytes.length; });
+
+            const buffer = new Uint8Array(totalLen);
+            let offset = 0;
+            tlvFields.forEach(f => {
+                buffer[offset++] = f.tag;
+                buffer[offset++] = f.bytes.length;
+                buffer.set(f.bytes, offset);
+                offset += f.bytes.length;
+            });
+
+            let binary = '';
+            for (let i = 0; i < buffer.length; i++) {
+                binary += String.fromCharCode(buffer[i]);
+            }
+            return btoa(binary);
+        }
+
+        function renderZatcaQRCode(payloadStr) {
+            const canvas = document.getElementById('zatca-qr-canvas');
+            if (!canvas) return;
+            const ctx = canvas.getContext('2d');
+            const size = 25;
+            const cell = Math.floor(canvas.width / size);
+
+            ctx.fillStyle = '#ffffff';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            // ফিক্সড Finder Patterns (3 corners)
+            function drawFinder(r0, c0) {
+                for (let r = 0; r < 7; r++) {
+                    for (let c = 0; c < 7; c++) {
+                        const isBorder = r === 0 || r === 6 || c === 0 || c === 6;
+                        const isCenter = r >= 2 && r <= 4 && c >= 2 && c <= 4;
+                        ctx.fillStyle = (isBorder || isCenter) ? '#000000' : '#ffffff';
+                        ctx.fillRect((c0 + c) * cell, (r0 + r) * cell, cell, cell);
+                    }
+                }
+            }
+            drawFinder(0, 0);
+            drawFinder(0, size - 7);
+            drawFinder(size - 7, 0);
+
+            // TLV Base64 ডেটা থেকে ডিটারমিনিস্টিক ম্যাট্রিক্স বিট তৈরি
+            let hash = 2166136261;
+            for (let i = 0; i < payloadStr.length; i++) {
+                hash ^= payloadStr.charCodeAt(i);
+                hash = Math.imul(hash, 16777619);
+            }
+
+            let bitIdx = 0;
+            for (let r = 0; r < size; r++) {
+                for (let c = 0; c < size; c++) {
+                    const inTopLeft = r < 8 && c < 8;
+                    const inTopRight = r < 8 && c >= size - 8;
+                    const inBottomLeft = r >= size - 8 && c < 8;
+                    if (inTopLeft || inTopRight || inBottomLeft) continue;
+
+                    const charCode = payloadStr.charCodeAt((r * size + c + bitIdx) % payloadStr.length);
+                    const bit = ((charCode + r * 13 + c * 7 + (hash >>> (bitIdx % 24))) & 1) === 1;
+                    if (bit) {
+                        ctx.fillStyle = '#000000';
+                        ctx.fillRect(c * cell, r * cell, cell, cell);
+                    }
+                    bitIdx++;
+                }
+            }
+        }
+
+        // =====================================================================
+        // Foodics Purple Top Bar Actions (৭টি বাটন)
+        // =====================================================================
+        function openModal(id) {
+            document.getElementById(id).classList.add('active');
+        }
+
+        function closeModal(id) {
+            document.getElementById(id).classList.remove('active');
+        }
+
+        function quickPrintDraftReceipt() {
+            if (cart.length === 0) {
+                alert("Please select at least one item to print! / الرجاء اختيار صنف للطباعة!");
+                return;
+            }
+            const grossItemsTotal = cart.reduce((sum, item) => sum + item.price * item.qty, 0);
+            const { safeDiscount, subtotal, vat, grandTotal } = calculateTotals(grossItemsTotal);
+            const nowObj = new Date();
+            const draftOrder = {
+                invoiceNo: "DRAFT-" + Math.floor(1000 + Math.random() * 9000),
+                timestamp: nowObj.getTime(),
+                dateTime: nowObj.toLocaleString('en-GB'),
+                customerName: document.getElementById('customer-name').value.trim() || "Walk-in Customer",
+                orderType: document.getElementById('order-type').value,
+                paymentMethod: "Pending / قيد الدفع",
+                status: "DRAFT",
+                items: cart,
+                discount: safeDiscount,
+                subtotal,
+                vat,
+                grandTotal,
+                note: currentOrderNote,
+                tags: currentOrderTags
+            };
+            populateReceipt(draftOrder, "DRAFT RECEIPT / مسودة فاتورة", "DRAFT (مسودة)");
+            window.print();
+        }
+
+        function printKitchenOrder() {
+            if (cart.length === 0) {
+                alert("No items in order for Kitchen Token! / لا توجد أصناف للمطبخ!");
+                return;
+            }
+            const nowObj = new Date();
+            const tokenNo = "KOT-" + Math.floor(100 + Math.random() * 900);
+            const custName = document.getElementById('customer-name').value.trim() || "Walk-in";
+            const orderType = document.getElementById('order-type').value;
+            const tagsStr = currentOrderTags.length ? currentOrderTags.join(", ") : "-";
+
+            document.getElementById("rec-subtitle").innerText = "Kitchen Order Token / تذكرة طلب المطبخ";
+            document.getElementById("rec-stamp").innerText = `KITCHEN (${tokenNo})`;
+            document.getElementById("rec-info-block").innerHTML = `
+                <p><strong>Token:</strong> ${tokenNo}</p>
+                <p><strong>Time:</strong> ${nowObj.toLocaleTimeString('en-GB')}</p>
+                <p><strong>Order Type:</strong> ${orderType}</p>
+                <p><strong>Customer:</strong> ${custName}</p>
+                <p><strong>Tags:</strong> ${tagsStr}</p>
+                ${currentOrderNote ? `<p><strong>NOTE / ملاحظة:</strong> ** ${currentOrderNote} **</p>` : ''}
+            `;
+            document.getElementById("rec-table-block").style.display = "table";
+            const recItemsBody = document.getElementById('rec-items');
+            recItemsBody.innerHTML = '';
+            cart.forEach(item => {
+                recItemsBody.innerHTML += `
+                    <tr>
+                        <td><strong>${item.nameEn}</strong><br><small>${item.nameAr}</small></td>
+                        <td style="text-align: center; font-weight:bold; font-size:14px;">x${item.qty}</td>
+                        <td style="text-align: right;">-</td>
+                    </tr>
+                `;
+            });
+            document.getElementById("rec-totals-block").innerHTML = currentOrderNote
+                ? `<div class="receipt-grand-total"><span>Note:</span><span>${currentOrderNote}</span></div>`
+                : `<div><span>Items Count:</span><span>${cart.reduce((s, i) => s + i.qty, 0)}</span></div>`;
+            document.getElementById("rec-zatca-box").style.display = "none";
+            document.getElementById("rec-footer-block").innerHTML = `<p>HAZZAT CHAPATI - KITCHEN COPY</p>`;
+
+            window.print();
+            showToast(`🍳 Kitchen Order Token ${tokenNo} sent to print!`);
+        }
+
+        function voidCurrentOrder() {
+            if (cart.length === 0 && !currentOrderNote && currentOrderTags.length === 0 && discountConfig.rawValue === 0) {
+                showToast("No active order to void.", true);
+                return;
+            }
+            if (confirm("Void / Cancel this entire order? / هل تريد إلغاء الطلب بالكامل؟")) {
+                resetCurrentOrder();
+                showToast("🚫 Order voided / cancelled.", true);
+            }
+        }
+
+        function openDiscountModal() {
+            const gross = cart.reduce((sum, item) => sum + item.price * item.qty, 0);
+            document.getElementById('disc-type-select').value = discountConfig.type;
+            document.getElementById('disc-value-input').value = discountConfig.rawValue;
+            renderDiscountPreview(gross);
+            openModal('discount-modal');
+        }
+
+        function applyQuickDiscount(type, val) {
+            document.getElementById('disc-type-select').value = type;
+            document.getElementById('disc-value-input').value = val;
+            renderDiscountPreview();
+        }
+
+        function getCalculatedDiscountSar(grossItemsTotal) {
+            const val = Math.max(0, parseFloat(document.getElementById('disc-value-input')?.value ?? discountConfig.rawValue) || 0);
+            const type = document.getElementById('disc-type-select')?.value ?? discountConfig.type;
+            if (type === 'percent') {
+                return Math.min(grossItemsTotal, (grossItemsTotal * Math.min(100, val)) / 100);
+            }
+            return Math.min(grossItemsTotal, val);
+        }
+
+        function renderDiscountPreview(customGross = null) {
+            const gross = customGross !== null ? customGross : cart.reduce((sum, item) => sum + item.price * item.qty, 0);
+            const sar = getCalculatedDiscountSar(gross);
+            const el = document.getElementById('disc-preview-sar');
+            if (el) el.innerText = `${sar.toFixed(2)} SAR`;
+        }
+
+        function saveDiscountFromModal() {
+            const type = document.getElementById('disc-type-select').value;
+            const val = Math.max(0, parseFloat(document.getElementById('disc-value-input').value) || 0);
+            discountConfig = { type, rawValue: val };
+            updateCart();
+            closeModal('discount-modal');
+            showToast("🏷️ Discount applied!");
+        }
+
+        function syncManualDiscountInput() {
+            const manualVal = Math.max(0, parseFloat(document.getElementById('discount-input').value) || 0);
+            discountConfig = { type: 'amount', rawValue: manualVal };
+            updateCart();
+        }
+
+        function openNotesModal() {
+            document.getElementById('order-note-textarea').value = currentOrderNote;
+            openModal('notes-modal');
+        }
+
+        function appendQuickNote(text) {
+            const ta = document.getElementById('order-note-textarea');
+            const cur = ta.value.trim();
+            if (!cur) ta.value = text;
+            else if (!cur.includes(text)) ta.value = `${cur}, ${text}`;
+        }
+
+        function clearOrderNote() {
+            document.getElementById('order-note-textarea').value = '';
+            currentOrderNote = '';
+            updateOrderMetaStrip();
+        }
+
+        function saveOrderNote() {
+            currentOrderNote = document.getElementById('order-note-textarea').value.trim();
+            updateOrderMetaStrip();
+            closeModal('notes-modal');
+            showToast("📝 Order note saved!");
+        }
+
+        function openTagsModal() {
+            document.querySelectorAll('#tags-chip-container .chip-btn').forEach(btn => {
+                const tag = btn.getAttribute('data-tag');
+                btn.classList.toggle('active', currentOrderTags.includes(tag));
+            });
+            openModal('tags-modal');
+        }
+
+        function toggleOrderTag(tag, btn) {
+            if (currentOrderTags.includes(tag)) {
+                currentOrderTags = currentOrderTags.filter(t => t !== tag);
+                btn.classList.remove('active');
+            } else {
+                currentOrderTags.push(tag);
+                btn.classList.add('active');
+            }
+            updateOrderMetaStrip();
+        }
+
+        function clearOrderTags() {
+            currentOrderTags = [];
+            document.querySelectorAll('#tags-chip-container .chip-btn').forEach(b => b.classList.remove('active'));
+            updateOrderMetaStrip();
+        }
+
+        function updateOrderMetaStrip() {
+            const strip = document.getElementById('order-meta-strip');
+            const pills = [];
+
+            if (currentOrderTags.length > 0) {
+                pills.push(`🔖 ${currentOrderTags.join(', ')}`);
+            }
+            if (currentOrderNote) {
+                pills.push(`📝 ${currentOrderNote}`);
+            }
+
+            if (pills.length === 0) {
+                strip.classList.remove('active');
+                strip.innerHTML = '';
+            } else {
+                strip.classList.add('active');
+                strip.innerHTML = pills.map(p => `<span class="meta-pill" title="${p}">${p}</span>`).join('');
+            }
+
+            document.getElementById('bar-btn-discount').classList.toggle('has-badge', discountConfig.rawValue > 0);
+            document.getElementById('bar-btn-notes').classList.toggle('has-badge', currentOrderNote.length > 0);
+            document.getElementById('bar-btn-tags').classList.toggle('has-badge', currentOrderTags.length > 0);
+        }
+
+        function openMoreMenuModal() {
+            openModal('more-modal');
+        }
+
+        // =====================================================================
+        // PWA & Fullscreen Setup
+        // =====================================================================
+        function initPWA() {
+            const svgIcon = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 192 192"><rect width="192" height="192" rx="36" fill="#5c3a21"/><text x="96" y="122" font-size="96" text-anchor="middle">🥙</text></svg>`;
+            const iconUrl = `data:image/svg+xml;base64,${btoa(unescape(encodeURIComponent(svgIcon)))}`;
+
+            const manifestData = {
+                name: "HAZZAT CHAPATI POS | حزة جباتي",
+                short_name: "HAZZAT POS",
+                description: "HAZZAT CHAPATI Restaurant POS with ZATCA QR, Foodics Bar, Shift Z-Report & Live Sync",
+                start_url: "./",
+                display: "fullscreen",
+                orientation: "any",
+                background_color: "#f5efe6",
+                theme_color: "#5c3a21",
+                icons: [
+                    { src: iconUrl, sizes: "192x192", type: "image/svg+xml", purpose: "any maskable" },
+                    { src: iconUrl, sizes: "512x512", type: "image/svg+xml", purpose: "any maskable" }
+                ]
+            };
+
+            const manifestBlob = new Blob([JSON.stringify(manifestData)], { type: "application/json" });
+            const manifestLink = document.createElement("link");
+            manifestLink.rel = "manifest";
+            manifestLink.href = URL.createObjectURL(manifestBlob);
+            document.head.appendChild(manifestLink);
+
+            if ("serviceWorker" in navigator && window.location.protocol !== "file:") {
+                const swCode = `
+                    self.addEventListener("install", () => self.skipWaiting());
+                    self.addEventListener("activate", (e) => e.waitUntil(clients.claim()));
+                    self.addEventListener("fetch", (e) => {
+                        if (e.request.method !== "GET") return;
+                        e.respondWith(fetch(e.request).catch(() => caches.match(e.request)));
+                    });
+                `;
+                const swBlob = new Blob([swCode], { type: "application/javascript" });
+                navigator.serviceWorker.register(URL.createObjectURL(swBlob)).catch(() => {});
+            }
+        }
+
+        function toggleFullscreen() {
+            if (!document.fullscreenElement && !document.webkitFullscreenElement) {
+                const el = document.documentElement;
+                if (el.requestFullscreen) el.requestFullscreen().catch(() => {});
+                else if (el.webkitRequestFullscreen) el.webkitRequestFullscreen();
+            } else {
+                if (document.exitFullscreen) document.exitFullscreen().catch(() => {});
+                else if (document.webkitExitFullscreen) document.webkitExitFullscreen();
+            }
+        }
+
+        // =====================================================================
+        // Shift & Cash Drawer (Z-Report)
+        // =====================================================================
+        function createNewShift(openingAmount = 0) {
+            const now = new Date();
+            return {
+                shiftId: "SH-" + Math.floor(10000 + Math.random() * 90000),
+                openedAt: now.toLocaleString("en-GB"),
+                openedTimestamp: now.getTime(),
+                openingAmount: Math.max(0, parseFloat(openingAmount) || 0),
+                movements: []
+            };
+        }
+
+        function getCurrentShift() {
+            try {
+                const saved = JSON.parse(localStorage.getItem(SHIFT_STATE_KEY));
+                if (saved && saved.shiftId) return saved;
+            } catch (e) {}
+            const fresh = createNewShift(0);
+            localStorage.setItem(SHIFT_STATE_KEY, JSON.stringify(fresh));
+            return fresh;
+        }
+
+        function saveCurrentShift(shift) {
+            localStorage.setItem(SHIFT_STATE_KEY, JSON.stringify(shift));
+        }
+
+        function getClosedShifts() {
+            try {
+                return JSON.parse(localStorage.getItem(CLOSED_SHIFTS_KEY)) || [];
+            } catch (e) {
+                return [];
+            }
+        }
+
+        function saveClosedShifts(list) {
+            localStorage.setItem(CLOSED_SHIFTS_KEY, JSON.stringify(list));
+        }
+
+        function getShiftSalesSummary() {
+            const shift = getCurrentShift();
+            const shiftOrders = cachedSalesHistory.filter(o => (Number(o.timestamp) || 0) >= shift.openedTimestamp);
+
+            let cashSales = 0;
+            let visaSales = 0;
+            let vatTotal = 0;
+            let totalSales = 0;
+
+            shiftOrders.forEach(o => {
+                const amt = Number(o.grandTotal) || 0;
+                const vat = Number(o.vat) || 0;
+                if ((o.paymentMethod || "").includes("Cash")) cashSales += amt;
+                else visaSales += amt;
+                vatTotal += vat;
+                totalSales += amt;
+            });
+
+            let payIn = 0;
+            let payOut = 0;
+            (shift.movements || []).forEach(m => {
+                if (m.type === "IN") payIn += Number(m.amount) || 0;
+                else payOut += Number(m.amount) || 0;
+            });
+
+            const opening = Number(shift.openingAmount) || 0;
+            const expectedCash = opening + cashSales + payIn - payOut;
+
+            return {
+                shift,
+                ordersCount: shiftOrders.length,
+                opening,
+                cashSales,
+                visaSales,
+                vatTotal,
+                totalSales,
+                payIn,
+                payOut,
+                expectedCash
+            };
+        }
+
+        function openShiftModal() {
+            fetchSalesFromFirebase(false);
+            renderShiftModal();
+            document.getElementById("shift-modal").classList.add("active");
+        }
+
+        function closeShiftModal() {
+            document.getElementById("shift-modal").classList.remove("active");
+        }
+
+        function setOpeningCashPrompt() {
+            const shift = getCurrentShift();
+            const input = prompt("Enter Opening Cash Amount in Drawer (SAR):", shift.openingAmount);
+            if (input !== null) {
+                const val = Math.max(0, parseFloat(input) || 0);
+                shift.openingAmount = val;
+                saveCurrentShift(shift);
+                renderShiftModal();
+                showToast(`💵 Opening amount set to ${val.toFixed(2)} SAR`);
+            }
+        }
+
+        function addCashMovement() {
+            const type = document.getElementById("io-type").value;
+            const amount = parseFloat(document.getElementById("io-amount").value);
+            const note = document.getElementById("io-note").value.trim() || (type === "IN" ? "Cash In" : "Cash Expense");
+
+            if (!amount || amount <= 0) {
+                alert("Please enter a valid amount greater than 0.");
+                return;
+            }
+
+            const shift = getCurrentShift();
+            shift.movements = shift.movements || [];
+            shift.movements.push({
+                id: Date.now(),
+                type,
+                amount,
+                note,
+                time: new Date().toLocaleTimeString("en-GB", { hour: "2-digit", minute: "2-digit" })
+            });
+            saveCurrentShift(shift);
+
+            document.getElementById("io-amount").value = "";
+            document.getElementById("io-note").value = "";
+            renderShiftModal();
+            showToast(`${type === "IN" ? "📥 Pay In" : "📤 Pay Out"} of ${amount.toFixed(2)} SAR recorded.`);
+        }
+
+        function updateDrawerCalculation() {
+            const summary = getShiftSalesSummary();
+            const actualCash = Math.max(0, parseFloat(document.getElementById("actual-cash-input").value) || 0);
+            const diff = actualCash - summary.expectedCash;
+
+            const diffBox = document.getElementById("cash-diff-box");
+            const diffLabel = document.getElementById("cash-diff-label");
+            const diffValue = document.getElementById("cash-diff-value");
+
+            diffBox.classList.remove("diff-balanced", "diff-shortage", "diff-overage");
+
+            if (Math.abs(diff) < 0.005) {
+                diffBox.classList.add("diff-balanced");
+                diffLabel.innerText = "✅ Drawer Balanced (الصندوق مطابق)";
+                diffValue.innerText = "0.00 SAR";
+            } else if (diff < 0) {
+                diffBox.classList.add("diff-shortage");
+                diffLabel.innerText = "⚠️ Cash Shortage (عجز بالصندوق)";
+                diffValue.innerText = `-${Math.abs(diff).toFixed(2)} SAR`;
+            } else {
+                diffBox.classList.add("diff-overage");
+                diffLabel.innerText = "ℹ️ Cash Overage (زيادة بالصندوق)";
+                diffValue.innerText = `+${diff.toFixed(2)} SAR`;
+            }
+        }
+
+        function renderShiftModal() {
+            const s = getShiftSalesSummary();
+
+            document.getElementById("shift-start-display").innerText = `${s.shift.shiftId} (${s.shift.openedAt})`;
+            document.getElementById("z-opening-amount").innerText = `${s.opening.toFixed(2)} SAR`;
+            document.getElementById("z-cash-sales").innerText = `${s.cashSales.toFixed(2)} SAR`;
+            document.getElementById("z-visa-sales").innerText = `${s.visaSales.toFixed(2)} SAR`;
+            document.getElementById("z-vat-total").innerText = `${s.vatTotal.toFixed(2)} SAR`;
+            document.getElementById("z-total-sales").innerText = `${s.totalSales.toFixed(2)} SAR`;
+
+            document.getElementById("drw-opening").innerText = `${s.opening.toFixed(2)} SAR`;
+            document.getElementById("drw-cash-sales").innerText = `${s.cashSales.toFixed(2)} SAR`;
+            document.getElementById("drw-pay-in").innerText = `+${s.payIn.toFixed(2)} SAR`;
+            document.getElementById("drw-pay-out").innerText = `-${s.payOut.toFixed(2)} SAR`;
+            document.getElementById("drw-expected").innerText = `${s.expectedCash.toFixed(2)} SAR`;
+
+            const ioListEl = document.getElementById("io-list");
+            ioListEl.innerHTML = "";
+            if (!s.shift.movements || s.shift.movements.length === 0) {
+                ioListEl.innerHTML = `<p style="color:#888; text-align:center; padding:10px;">No Pay In / Pay Out entries yet.</p>`;
+            } else {
+                s.shift.movements.slice().reverse().forEach(m => {
+                    const row = document.createElement("div");
+                    row.className = "io-item";
+                    row.innerHTML = `
+                        <span><strong class="${m.type === "IN" ? "tag-in" : "tag-out"}">[${m.type}]</strong> ${m.note} <small style="color:#777;">(${m.time})</small></span>
+                        <strong class="${m.type === "IN" ? "tag-in" : "tag-out"}">${m.type === "IN" ? "+" : "-"}${Number(m.amount).toFixed(2)} SAR</strong>
+                    `;
+                    ioListEl.appendChild(row);
+                });
+            }
+
+            const actualInput = document.getElementById("actual-cash-input");
+            if (actualInput.value === "" || Number(actualInput.value) === 0) {
+                actualInput.value = s.expectedCash.toFixed(2);
+            }
+            updateDrawerCalculation();
+            renderClosedShiftsTable();
+        }
+
+        function buildZReportObject(customActualCash = null) {
+            const s = getShiftSalesSummary();
+            const actualCash = customActualCash !== null
+                ? Math.max(0, parseFloat(customActualCash) || 0)
+                : Math.max(0, parseFloat(document.getElementById("actual-cash-input").value) || 0);
+            const diff = actualCash - s.expectedCash;
+
+            return {
+                shiftId: s.shift.shiftId,
+                openedAt: s.shift.openedAt,
+                closedAt: new Date().toLocaleString("en-GB"),
+                ordersCount: s.ordersCount,
+                openingAmount: s.opening,
+                cashSales: s.cashSales,
+                visaSales: s.visaSales,
+                vatTotal: s.vatTotal,
+                totalSales: s.totalSales,
+                payIn: s.payIn,
+                payOut: s.payOut,
+                expectedCash: s.expectedCash,
+                actualCash: actualCash,
+                difference: diff,
+                movements: s.shift.movements || []
+            };
+        }
+
+        function populateZReportReceipt(z) {
+            document.getElementById("rec-subtitle").innerText = "Shift Closing Report (Z-Report) / تقرير إغلاق الوردية";
+            document.getElementById("rec-stamp").innerText = "Z-REPORT (إغلاق الوردية)";
+
+            const diffText = Math.abs(z.difference) < 0.005
+                ? "0.00 SAR (Balanced)"
+                : (z.difference < 0 ? `-${Math.abs(z.difference).toFixed(2)} SAR (Shortage)` : `+${z.difference.toFixed(2)} SAR (Overage)`);
+
+            document.getElementById("rec-info-block").innerHTML = `
+                <p><strong>Shift ID:</strong> ${z.shiftId}</p>
+                <p><strong>Opened:</strong> ${z.openedAt}</p>
+                <p><strong>Closed:</strong> ${z.closedAt}</p>
+                <p><strong>Total Orders:</strong> ${z.ordersCount}</p>
+            `;
+            document.getElementById("rec-table-block").style.display = "none";
+            document.getElementById("rec-totals-block").innerHTML = `
+                <div><span>Opening Cash:</span><span>${Number(z.openingAmount).toFixed(2)} SAR</span></div>
+                <div><span>Cash Sales:</span><span>${Number(z.cashSales).toFixed(2)} SAR</span></div>
+                <div><span>VISA / Mada Sales:</span><span>${Number(z.visaSales).toFixed(2)} SAR</span></div>
+                <div><span>VAT 15% Incl.:</span><span>${Number(z.vatTotal).toFixed(2)} SAR</span></div>
+                <div><span>Pay In (+):</span><span>+${Number(z.payIn).toFixed(2)} SAR</span></div>
+                <div><span>Pay Out (-):</span><span>-${Number(z.payOut).toFixed(2)} SAR</span></div>
+                <div><span>Expected Cash:</span><span>${Number(z.expectedCash).toFixed(2)} SAR</span></div>
+                <div><span>Actual Cash:</span><span>${Number(z.actualCash).toFixed(2)} SAR</span></div>
+                <div class="receipt-grand-total"><span>Shortage / Diff:</span><span>${diffText}</span></div>
+            `;
+            document.getElementById("rec-zatca-box").style.display = "none";
+            document.getElementById("rec-footer-block").innerHTML = `
+                <p>HAZZAT CHAPATI - Shift Z-Report</p>
+                <p>VAT No: ${ZATCA_VAT_NUMBER}</p>
+            `;
+        }
+
+        function printZReport(existingReport = null) {
+            const z = existingReport || buildZReportObject();
+            populateZReportReceipt(z);
+            window.print();
+        }
+
+        async function closeAndResetShift() {
+            const z = buildZReportObject();
+            if (!confirm(`Close Shift ${z.shiftId}?\nTotal Sales: ${z.totalSales.toFixed(2)} SAR\nExpected Cash: ${z.expectedCash.toFixed(2)} SAR\nActual Cash: ${z.actualCash.toFixed(2)} SAR`)) {
+                return;
+            }
+
+            const closedList = getClosedShifts();
+            closedList.unshift(z);
+            saveClosedShifts(closedList);
+
+            try {
+                await fetch(SHIFTS_REST_URL, {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify(z)
+                });
+            } catch (e) {}
+
+            const nextShift = createNewShift(z.actualCash);
+            saveCurrentShift(nextShift);
+
+            document.getElementById("actual-cash-input").value = z.actualCash.toFixed(2);
+            populateZReportReceipt(z);
+            renderShiftModal();
+            window.print();
+            showToast(`🔒 Shift ${z.shiftId} closed! Next shift opened with ${z.actualCash.toFixed(2)} SAR.`);
+        }
+
+        function renderClosedShiftsTable() {
+            const tbody = document.getElementById("closed-shifts-tbody");
+            const list = getClosedShifts();
+            tbody.innerHTML = "";
+
+            if (list.length === 0) {
+                tbody.innerHTML = `<tr><td colspan="7" style="text-align:center; color:#777; padding:12px;">No closed shifts yet.</td></tr>`;
+                return;
+            }
+
+            list.forEach((z, idx) => {
+                const diff = Number(z.difference) || 0;
+                const diffStr = Math.abs(diff) < 0.005
+                    ? `<span style="color:var(--success); font-weight:700;">0.00</span>`
+                    : (diff < 0
+                        ? `<span style="color:var(--danger); font-weight:700;">-${Math.abs(diff).toFixed(2)} (Short)</span>`
+                        : `<span style="color:var(--info); font-weight:700;">+${diff.toFixed(2)} (Over)</span>`);
+
+                const tr = document.createElement("tr");
+                tr.innerHTML = `
+                    <td><strong>${z.shiftId}</strong></td>
+                    <td>${z.closedAt}</td>
+                    <td>${Number(z.totalSales).toFixed(2)}</td>
+                    <td>${Number(z.expectedCash).toFixed(2)}</td>
+                    <td>${Number(z.actualCash).toFixed(2)}</td>
+                    <td>${diffStr}</td>
+                    <td><button class="mini-print-btn" onclick="reprintClosedShift(${idx})">🖨️ Z-Print</button></td>
+                `;
+                tbody.appendChild(tr);
+            });
+        }
+
+        function reprintClosedShift(index) {
+            const list = getClosedShifts();
+            if (list[index]) {
+                printZReport(list[index]);
+            }
+        }
+
+        // =====================================================================
+        // Firebase REST API Sync (Orders)
+        // =====================================================================
+        async function fetchSalesFromFirebase(showManualToast = false) {
+            const statusEl = document.getElementById('db-status');
+            try {
+                const res = await fetch(`${ORDERS_REST_URL}?t=${Date.now()}`, {
+                    method: 'GET',
+                    headers: { 'Accept': 'application/json' }
+                });
+
+                if (!res.ok) throw new Error(`HTTP ${res.status}`);
+
+                const data = await res.json();
+                const list = [];
+                if (data && typeof data === 'object') {
+                    Object.entries(data).forEach(([recordKey, order]) => {
+                        if (order && typeof order === 'object') {
+                            list.push({ ...order, _recordKey: recordKey });
+                        }
+                    });
+                }
+
+                list.sort((a, b) => (b.timestamp || 0) - (a.timestamp || 0));
+                cachedSalesHistory = list;
+
+                statusEl.innerText = "🟢 Live Sync";
+                statusEl.style.background = "rgba(46, 125, 50, 0.35)";
+
+                if (document.getElementById('history-modal').classList.contains('active')) {
+                    renderSalesHistory();
+                }
+                if (document.getElementById('shift-modal').classList.contains('active')) {
+                    renderShiftModal();
+                }
+                if (showManualToast) {
+                    showToast("🔄 Sales synced from server!");
+                }
+            } catch (err) {
+                console.error("REST fetch error:", err);
+                statusEl.innerText = "⚠️ Sync Offline";
+                statusEl.style.background = "#7f1d1d";
+                if (showManualToast) {
+                    showToast("⚠️ Could not load sales from Firebase REST URL.", true);
+                }
+            }
+        }
+
+        async function saveOrderViaRest(orderRecord) {
+            const res = await fetch(ORDERS_REST_URL, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(orderRecord)
+            });
+
+            if (!res.ok) throw new Error(`HTTP ${res.status}`);
+            return await res.json();
+        }
+
+        function startLivePolling() {
+            fetchSalesFromFirebase(false);
+            setInterval(() => {
+                if (!document.hidden) fetchSalesFromFirebase(false);
+            }, 4000);
+        }
+
+        function showToast(message, isError = false) {
+            const toast = document.getElementById('toast-msg');
+            toast.innerText = message;
+            toast.style.background = isError ? "var(--danger)" : "var(--success)";
+            toast.style.display = 'block';
+            setTimeout(() => {
+                toast.style.display = 'none';
+            }, 3000);
+        }
+
+        function calculateTotals(grossItemsTotal) {
+            let safeDiscount = 0;
+            if (discountConfig.type === 'percent') {
+                safeDiscount = Math.min(grossItemsTotal, (grossItemsTotal * Math.min(100, Math.max(0, discountConfig.rawValue))) / 100);
+            } else {
+                safeDiscount = Math.min(grossItemsTotal, Math.max(0, discountConfig.rawValue));
+            }
+            const grandTotal = Math.max(0, grossItemsTotal - safeDiscount);
+            const subtotal = grandTotal / 1.15;
+            const vat = grandTotal - subtotal;
+            return { grossItemsTotal, safeDiscount, subtotal, vat, grandTotal };
+        }
+
+        function updateClock() {
+            const now = new Date();
+            document.getElementById('live-clock').innerText = now.toLocaleString('en-US', {
+                dateStyle: 'medium',
+                timeStyle: 'short'
+            });
+        }
+        setInterval(updateClock, 1000);
+        updateClock();
+
+        function renderMenu(items) {
+            const grid = document.getElementById('menu-grid');
+            grid.innerHTML = '';
+            items.forEach(item => {
+                const card = document.createElement('div');
+                card.className = 'menu-card';
+                card.onclick = () => addToCart(item);
+                card.innerHTML = `
+                    <div class="menu-icon">${item.icon}</div>
+                    <div class="menu-title-en">${item.nameEn}</div>
+                    <div class="menu-title-ar">${item.nameAr}</div>
+                    <div class="menu-price">
+                        ${item.price} SAR
+                        <span class="vat-tag">Incl. 15% VAT</span>
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+        }
+
+        function filterCategory(category, btn) {
+            currentCategory = category;
+            document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            filterMenu();
+        }
+
+        function filterMenu() {
+            const searchText = document.getElementById('search-input').value.toLowerCase();
+            const filtered = menuItems.filter(item => {
+                const matchesCat = currentCategory === 'all' || item.category === currentCategory;
+                const matchesSearch = item.nameEn.toLowerCase().includes(searchText) || item.nameAr.includes(searchText);
+                return matchesCat && matchesSearch;
+            });
+            renderMenu(filtered);
+        }
+
+        function addToCart(item) {
+            const existing = cart.find(i => i.id === item.id);
+            if (existing) existing.qty += 1;
+            else cart.push({ ...item, qty: 1 });
+            updateCart();
+        }
+
+        function changeQty(id, delta) {
+            const item = cart.find(i => i.id === id);
+            if (item) {
+                item.qty += delta;
+                if (item.qty <= 0) cart = cart.filter(i => i.id !== id);
+            }
+            updateCart();
+        }
+
+        function removeItem(id) {
+            cart = cart.filter(i => i.id !== id);
+            updateCart();
+        }
+
+        function updateCart() {
+            const cartContainer = document.getElementById('cart-items');
+            cartContainer.innerHTML = '';
+
+            if (cart.length === 0) {
+                const emptyMsgMargin = window.innerWidth <= 768 ? '6px' : '24px';
+                cartContainer.innerHTML = `<p style="text-align: center; color: #888; margin-top: ${emptyMsgMargin};">No items selected<br>لم يتم اختيار أي صنف</p>`;
+            }
+
+            let grossItemsTotal = 0;
+
+            cart.forEach(item => {
+                const itemTotal = item.price * item.qty;
+                grossItemsTotal += itemTotal;
+
+                const div = document.createElement('div');
+                div.className = 'cart-item';
+                div.innerHTML = `
+                    <div class="item-details">
+                        <div class="item-name">${item.nameEn}</div>
+                        <div class="item-unit-price">${item.nameAr} | ${item.price} SAR x ${item.qty}</div>
+                    </div>
+                    <div class="qty-controls">
+                        <button class="qty-btn" onclick="changeQty(${item.id}, -1)">-</button>
+                        <span>${item.qty}</span>
+                        <button class="qty-btn" onclick="changeQty(${item.id}, 1)">+</button>
+                    </div>
+                    <div class="item-total">${itemTotal.toFixed(2)}</div>
+                    <button class="remove-btn" onclick="removeItem(${item.id})">✖</button>
+                `;
+                cartContainer.appendChild(div);
+            });
+
+            const { grossItemsTotal: gross, safeDiscount, subtotal, vat, grandTotal } = calculateTotals(grossItemsTotal);
+
+            document.getElementById('discount-label-text').innerText = discountConfig.type === 'percent' && discountConfig.rawValue > 0
+                ? `Discount (${discountConfig.rawValue}% / الخصم):`
+                : `Discount (الخصم SAR):`;
+
+            document.getElementById('discount-input').value = safeDiscount.toFixed(2);
+            document.getElementById('gross-total').innerText = `${gross.toFixed(2)} SAR`;
+            document.getElementById('subtotal').innerText = `${subtotal.toFixed(2)} SAR`;
+            document.getElementById('vat-amount').innerText = `${vat.toFixed(2)} SAR`;
+            document.getElementById('grand-total').innerText = `${grandTotal.toFixed(2)} SAR`;
+            updateOrderMetaStrip();
+        }
+
+        function resetCurrentOrder() {
+            cart = [];
+            discountConfig = { type: 'amount', rawValue: 0 };
+            currentOrderNote = '';
+            currentOrderTags = [];
+            document.getElementById('discount-input').value = 0;
+            document.getElementById('customer-name').value = '';
+            updateCart();
+        }
+
+        function clearCart() {
+            if (cart.length > 0 && confirm("Clear current order? / هل تريد إلغاء الطلب الحالي؟")) {
+                resetCurrentOrder();
+            }
+        }
+
+        function openPaymentModal() {
+            if (cart.length === 0) {
+                alert("Please select at least one item! / الرجاء اختيار صنف واحد على الأقل!");
+                return;
+            }
+
+            const grossItemsTotal = cart.reduce((sum, item) => sum + item.price * item.qty, 0);
+            const { grandTotal } = calculateTotals(grossItemsTotal);
+
+            document.getElementById('modal-grand-total').innerText = `${grandTotal.toFixed(2)} SAR`;
+
+            selectedPaymentMethod = 'Cash / كاش';
+            document.getElementById('opt-cash').classList.add('selected');
+            document.getElementById('opt-visa').classList.remove('selected');
+
+            document.getElementById('payment-modal').classList.add('active');
+        }
+
+        function closePaymentModal() {
+            document.getElementById('payment-modal').classList.remove('active');
+        }
+
+        function selectPaymentMethod(method, btn) {
+            selectedPaymentMethod = method;
+            document.querySelectorAll('.pay-option-btn').forEach(b => b.classList.remove('selected'));
+            btn.classList.add('selected');
+        }
+
+        function populateReceipt(order, subtitleOverride = null, stampOverride = null) {
+            document.getElementById("rec-subtitle").innerText = subtitleOverride || "Simplified Tax Invoice / فاتورة ضريبية مبسطة";
+            document.getElementById("rec-stamp").innerText = stampOverride || "PAID (مدفوع)";
+
+            const tagsDisplay = (order.tags && order.tags.length > 0) ? order.tags.join(", ") : "-";
+            const noteDisplay = order.note ? order.note : "-";
+
+            document.getElementById("rec-info-block").innerHTML = `
+                <p><strong>Status / الحالة:</strong> ${order.status || "PAID"} (مدفوع)</p>
+                <p><strong>Payment / الدفع:</strong> ${order.paymentMethod}</p>
+                <p><strong>Invoice / الفاتورة:</strong> ${order.invoiceNo}</p>
+                <p><strong>Date / التاريخ:</strong> ${order.dateTime}</p>
+                <p><strong>Customer / العميل:</strong> ${order.customerName}</p>
+                <p><strong>Order Type / النوع:</strong> ${order.orderType}</p>
+                <p><strong>Tags / الوسوم:</strong> ${tagsDisplay}</p>
+                ${order.note ? `<p><strong>Note / ملاحظة:</strong> ${noteDisplay}</p>` : ''}
+            `;
+
+            document.getElementById("rec-table-block").style.display = "table";
+            const recItemsBody = document.getElementById('rec-items');
+            recItemsBody.innerHTML = '';
+
+            (order.items || []).forEach(item => {
+                const total = item.price * item.qty;
+                recItemsBody.innerHTML += `
+                    <tr>
+                        <td>${item.nameEn}<br><small>${item.nameAr}</small></td>
+                        <td style="text-align: center;">${item.qty}</td>
+                        <td style="text-align: right;">${total.toFixed(2)}</td>
+                    </tr>
+                `;
+            });
+
+            document.getElementById("rec-totals-block").innerHTML = `
+                <div><span>Subtotal / Excl. VAT (المجموع):</span><span>${Number(order.subtotal).toFixed(2)} SAR</span></div>
+                <div><span>Discount (الخصم):</span><span>${Number(order.discount).toFixed(2)} SAR</span></div>
+                <div><span>VAT 15% Incl. (الضريبة):</span><span>${Number(order.vat).toFixed(2)} SAR</span></div>
+                <div class="receipt-grand-total"><span>Grand Total (الإجمالي):</span><span>${Number(order.grandTotal).toFixed(2)} SAR</span></div>
+            `;
+
+            // ZATCA TLV QR কোড রেন্ডার
+            const isoTime = new Date(order.timestamp || Date.now()).toISOString();
+            const zatcaBase64 = encodeZatcaTLV(
+                SELLER_NAME_AR,
+                ZATCA_VAT_NUMBER,
+                isoTime,
+                Number(order.grandTotal).toFixed(2),
+                Number(order.vat).toFixed(2)
+            );
+            document.getElementById("rec-zatca-box").style.display = "block";
+            document.getElementById("zatca-vat-line").innerText = `VAT: ${ZATCA_VAT_NUMBER}`;
+            renderZatcaQRCode(zatcaBase64);
+
+            document.getElementById("rec-footer-block").innerHTML = `
+                <p>Status: ${order.status || "PAID"} - ${order.paymentMethod}</p>
+                <p>Thank you for visiting HAZZAT CHAPATI!</p>
+                <p>شكراً لزيارتكم حزة جباتي</p>
+            `;
+        }
+
+        async function processOrder(shouldPrint) {
+            const nowObj = new Date();
+            const year = nowObj.getFullYear();
+            const month = String(nowObj.getMonth() + 1).padStart(2, '0');
+            const day = String(nowObj.getDate()).padStart(2, '0');
+            const localIsoDate = `${year}-${month}-${day}`;
+
+            const invNo = "HZ-" + Math.floor(100000 + Math.random() * 900000);
+            const dateTime = nowObj.toLocaleString('en-GB');
+            const custName = document.getElementById('customer-name').value.trim() || "Walk-in Customer";
+            const orderType = document.getElementById('order-type').value;
+
+            let grossItemsTotal = 0;
+            const orderItems = cart.map(item => {
+                grossItemsTotal += item.price * item.qty;
+                return {
+                    id: item.id,
+                    nameEn: item.nameEn,
+                    nameAr: item.nameAr,
+                    price: item.price,
+                    qty: item.qty
+                };
+            });
+
+            const { safeDiscount, subtotal, vat, grandTotal } = calculateTotals(grossItemsTotal);
+
+            const orderRecord = {
+                invoiceNo: invNo,
+                timestamp: nowObj.getTime(),
+                isoDate: localIsoDate,
+                dateTime: dateTime,
+                customerName: custName,
+                orderType: orderType,
+                paymentMethod: selectedPaymentMethod,
+                status: 'PAID',
+                vatNumber: ZATCA_VAT_NUMBER,
+                items: orderItems,
+                discount: safeDiscount,
+                subtotal: subtotal,
+                vat: vat,
+                grandTotal: grandTotal,
+                note: currentOrderNote,
+                tags: currentOrderTags
+            };
+
+            try {
+                await saveOrderViaRest(orderRecord);
+                await fetchSalesFromFirebase(false);
+                closePaymentModal();
+                resetCurrentOrder();
+
+                if (shouldPrint) {
+                    populateReceipt(orderRecord);
+                    window.print();
+                } else {
+                    showToast(`✅ Order ${invNo} Synced as PAID (${selectedPaymentMethod})!`);
+                }
+            } catch (error) {
+                console.error("Failed to save order via REST API:", error);
+                showToast("❌ Failed to save order. Check Realtime DB URL & Rules.", true);
+            }
+        }
+
+        function openSalesHistoryModal() {
+            const nowObj = new Date();
+            const year = nowObj.getFullYear();
+            const month = String(nowObj.getMonth() + 1).padStart(2, '0');
+            const day = String(nowObj.getDate()).padStart(2, '0');
+            document.getElementById('report-date-filter').value = `${year}-${month}-${day}`;
+            fetchSalesFromFirebase(false);
+            renderSalesHistory();
+            document.getElementById('history-modal').classList.add('active');
+        }
+
+        function closeSalesHistoryModal() {
+            document.getElementById('history-modal').classList.remove('active');
+        }
+
+        function resetDateFilter() {
+            document.getElementById('report-date-filter').value = '';
+            renderSalesHistory();
+        }
+
+        function renderSalesHistory() {
+            const allOrders = cachedSalesHistory;
+            const selectedDate = document.getElementById('report-date-filter').value;
+
+            const filteredOrders = selectedDate
+                ? allOrders.filter(o => o.isoDate === selectedDate)
+                : allOrders;
+
+            let cashTotal = 0;
+            let visaTotal = 0;
+            let vatTotal = 0;
+            let grandSales = 0;
+
+            const tbody = document.getElementById('history-table-body');
+            tbody.innerHTML = '';
+
+            if (filteredOrders.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="8" style="text-align: center; color: #777; padding: 20px;">No paid orders found for this selection.</td></tr>';
+            }
+
+            filteredOrders.forEach(order => {
+                const amount = Number(order.grandTotal) || 0;
+                const vatAmt = Number(order.vat) || 0;
+
+                if ((order.paymentMethod || '').includes('Cash')) cashTotal += amount;
+                else visaTotal += amount;
+                vatTotal += vatAmt;
+                grandSales += amount;
+
+                const itemsSummary = (order.items || []).map(i => `${i.nameEn} (${i.qty})`).join(', ');
+                const extraMeta = [
+                    order.tags && order.tags.length ? `[${order.tags.join(', ')}]` : '',
+                    order.note ? `Note: ${order.note}` : ''
+                ].filter(Boolean).join(' | ');
+
+                const tr = document.createElement('tr');
+                tr.innerHTML = `
+                    <td><strong>${order.invoiceNo}</strong></td>
+                    <td>${order.dateTime}</td>
+                    <td>${order.customerName}<br><small style="color:#666;">${order.orderType}</small></td>
+                    <td>${itemsSummary}${extraMeta ? `<br><small style="color:var(--purple-dark);">${extraMeta}</small>` : ''}</td>
+                    <td>${order.paymentMethod}</td>
+                    <td><strong>${amount.toFixed(2)}</strong></td>
+                    <td><span class="badge-paid">PAID</span></td>
+                    <td><button class="mini-print-btn" onclick="reprintHistoryOrder('${order.invoiceNo}')">🖨️ Print</button></td>
+                `;
+                tbody.appendChild(tr);
+            });
+
+            document.getElementById('rep-orders-count').innerText = filteredOrders.length;
+            document.getElementById('rep-cash-total').innerText = `${cashTotal.toFixed(2)} SAR`;
+            document.getElementById('rep-visa-total').innerText = `${visaTotal.toFixed(2)} SAR`;
+            document.getElementById('rep-vat-total').innerText = `${vatTotal.toFixed(2)} SAR`;
+            document.getElementById('rep-grand-total').innerText = `${grandSales.toFixed(2)} SAR`;
+        }
+
+        function reprintHistoryOrder(invoiceNo) {
+            const order = cachedSalesHistory.find(o => o.invoiceNo === invoiceNo);
+            if (order) {
+                populateReceipt(order);
+                window.print();
+            }
+        }
+
+        async function clearSalesHistory() {
+            if (confirm("Are you sure you want to delete ALL synced sales history? / هل أنت متأكد من مسح سجل المبيعات؟")) {
+                try {
+                    const res = await fetch(ORDERS_REST_URL, { method: 'DELETE' });
+                    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+                    cachedSalesHistory = [];
+                    renderSalesHistory();
+                    showToast("🗑️ All sales history cleared.");
+                } catch (err) {
+                    console.error("REST delete error:", err);
+                    showToast("❌ Failed to clear history.", true);
+                }
+            }
+        }
+
+        getCurrentShift();
+        initPWA();
+        renderMenu(menuItems);
+        startLivePolling();
+    </script>
+</body>
+</html>
