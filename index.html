@@ -7,7 +7,7 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="apple-mobile-web-app-title" content="HAZZAT POS">
-    <title>HAZZAT CHAPATI - POS System (ZATCA QR, Foodics Bar & Z-Report)</title>
+    <title>HAZZAT CHAPATI - POS System</title>
     <style>
         :root {
             --primary: #5c3a21;
@@ -42,7 +42,6 @@
             overflow: hidden;
         }
 
-        /* হেডার */
         header {
             background-color: var(--primary);
             color: var(--white);
@@ -81,6 +80,7 @@
             background: rgba(255, 255, 255, 0.14);
             border: 1px solid var(--accent);
             white-space: nowrap;
+            cursor: pointer;
         }
 
         .hdr-btn {
@@ -103,7 +103,6 @@
             background-color: #dfb783;
         }
 
-        /* Foodics-স্টাইল বেগুনি (Purple) টপ অ্যাকশন বার (৭টি বাটন) */
         .foodics-action-bar {
             background: linear-gradient(90deg, var(--purple-dark) 0%, var(--purple-bar) 100%);
             padding: 6px 14px;
@@ -151,7 +150,6 @@
             border-color: #fecaca;
         }
 
-        /* মূল লেআউট */
         .main-container {
             display: flex;
             flex: 1;
@@ -159,7 +157,6 @@
             overflow: hidden;
         }
 
-        /* বাম পাশ: মেনু সেকশন */
         .menu-section {
             flex: 65%;
             padding: 15px 18px;
@@ -284,7 +281,6 @@
             margin-top: 2px;
         }
 
-        /* ডান পাশ: বিলিং সেকশন */
         .cart-section {
             flex: 35%;
             background-color: var(--white);
@@ -413,7 +409,6 @@
             flex-shrink: 0;
         }
 
-        /* হিসাব নিকাশ অংশ */
         .summary-section {
             padding-top: 7px;
             flex-shrink: 0;
@@ -481,7 +476,6 @@
             background-color: #1b5e20;
         }
 
-        /* পপ-আপ মোডাল স্টাইল */
         .modal-overlay {
             display: none;
             position: fixed;
@@ -646,7 +640,6 @@
             background: #5a5a5a;
         }
 
-        /* ডিসকাউন্ট, নোট ও ট্যাগ চিপস */
         .quick-chips {
             display: flex;
             flex-wrap: wrap;
@@ -692,7 +685,6 @@
             font-size: 0.9rem;
         }
 
-        /* রিপোর্ট ও শিফট স্টাইল */
         .report-summary-cards {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(145px, 1fr));
@@ -927,7 +919,6 @@
             background: var(--primary-dark);
         }
 
-        /* টোস্ট নোটিফিকেশন */
         .toast {
             position: fixed;
             bottom: 16px;
@@ -946,7 +937,6 @@
             font-size: 0.9rem;
         }
 
-        /* মোবাইল ভিউ: ফিক্সড 100vh/100dvh স্প্লিট লেআউট */
         @media (max-width: 768px) {
             body {
                 height: 100vh;
@@ -974,7 +964,9 @@
             }
 
             .sync-badge {
-                display: none;
+                display: inline-block;
+                font-size: 0.62rem;
+                padding: 2px 6px;
             }
 
             .hdr-btn {
@@ -1216,7 +1208,6 @@
             }
         }
 
-        /* থার্মাল প্রিন্ট রিসিপ্ট / Kitchen Token / Z-Report ডিজাইন */
         #printable-receipt {
             display: none;
         }
@@ -1328,13 +1319,12 @@
             <h1>🥙 HAZZAT CHAPATI <span>| حزة جباتي</span></h1>
         </div>
         <div class="header-right">
-            <span class="sync-badge" id="db-status">⏳ REST Syncing...</span>
+            <span class="sync-badge" id="db-status" onclick="fetchSalesFromFirebase(true)" title="Click to retry sync">⏳ REST Syncing...</span>
             <button class="hdr-btn" onclick="toggleFullscreen()" title="Fullscreen">⛶ Fullscreen</button>
             <div id="live-clock" style="font-size: 0.86rem;"></div>
         </div>
     </header>
 
-    <!-- Foodics-স্টাইল বেগুনি টপ অ্যাকশন বার (৭টি কুইক বাটন) -->
     <div class="foodics-action-bar" role="toolbar" aria-label="Quick POS Actions">
         <button type="button" class="f-action-btn" onclick="quickPrintDraftReceipt()">🖨️ Print</button>
         <button type="button" class="f-action-btn" onclick="printKitchenOrder()">🍳 Kitchen</button>
@@ -1346,7 +1336,6 @@
     </div>
 
     <div class="main-container">
-        <!-- মেনু সেকশন -->
         <div class="menu-section">
             <div class="search-filter-bar">
                 <input type="text" id="search-input" class="search-box" placeholder="Search item (e.g., Karak, Cheese, Water, ماء)..." onkeyup="filterMenu()">
@@ -1364,7 +1353,6 @@
             <div class="menu-grid" id="menu-grid"></div>
         </div>
 
-        <!-- বিলিং সেকশন -->
         <div class="cart-section">
             <div class="customer-info">
                 <input type="text" id="customer-name" placeholder="Customer Name (Optional)">
@@ -1415,7 +1403,6 @@
         </div>
     </div>
 
-    <!-- পেমেন্ট মেথড নির্বাচন পপ-আপ মোডাল -->
     <div class="modal-overlay" id="payment-modal">
         <div class="modal-box">
             <div class="modal-header">
@@ -1451,7 +1438,6 @@
         </div>
     </div>
 
-    <!-- ডিসকাউন্ট মোডাল (টাকা বা % ডিসকাউন্ট) -->
     <div class="modal-overlay" id="discount-modal">
         <div class="modal-box">
             <div class="modal-header">
@@ -1490,7 +1476,6 @@
         </div>
     </div>
 
-    <!-- অর্ডার নোট মোডাল -->
     <div class="modal-overlay" id="notes-modal">
         <div class="modal-box">
             <div class="modal-header">
@@ -1517,7 +1502,6 @@
         </div>
     </div>
 
-    <!-- অর্ডার ট্যাগ মোডাল -->
     <div class="modal-overlay" id="tags-modal">
         <div class="modal-box">
             <div class="modal-header">
@@ -1541,7 +1525,6 @@
         </div>
     </div>
 
-    <!-- More মেনু মোডাল (Sales History, Shift / Z-Report, Refresh Sync) -->
     <div class="modal-overlay" id="more-modal">
         <div class="modal-box">
             <div class="modal-header">
@@ -1557,7 +1540,6 @@
         </div>
     </div>
 
-    <!-- Shift Closing Report (Z-Report) ও Cash Drawer মোডাল -->
     <div class="modal-overlay" id="shift-modal">
         <div class="modal-box shift-modal-box">
             <div class="modal-header">
@@ -1675,7 +1657,6 @@
         </div>
     </div>
 
-    <!-- সেলস হিস্ট্রি এবং দৈনিক রিপোর্ট মোডাল -->
     <div class="modal-overlay" id="history-modal">
         <div class="modal-box history-modal-box">
             <div class="modal-header">
@@ -1737,10 +1718,8 @@
         </div>
     </div>
 
-    <!-- নোটিফিকেশন টোস্ট -->
     <div class="toast" id="toast-msg"></div>
 
-    <!-- থার্মাল প্রিন্ট রিসিপ্ট / Kitchen Token / Z-Report টেমপ্লেট -->
     <div id="printable-receipt">
         <div class="receipt-header">
             <h2>حزة جباتي</h2>
@@ -1771,7 +1750,6 @@
     </div>
 
     <script>
-        // HAZZAT CHAPATI Firebase Config & REST Endpoint
         const ZATCA_VAT_NUMBER = "311233882500003";
         const SELLER_NAME_AR = "حزة جباتي";
 
@@ -1785,15 +1763,13 @@
             measurementId: "G-ZW2KRK4PGP"
         };
 
-        const DATABASE_BASE_URL = "https://hazzat-pos-default-rtdb.firebaseio.com
+        const DATABASE_BASE_URL = "https://hazzat-pos-default-rtdb.firebaseio.com";
         const ORDERS_REST_URL = `${DATABASE_BASE_URL}/hazzat_chapati/sales_orders.json`;
         const SHIFTS_REST_URL = `${DATABASE_BASE_URL}/hazzat_chapati/shift_reports.json`;
         const SHIFT_STATE_KEY = "hazzat_current_shift_v1";
         const CLOSED_SHIFTS_KEY = "hazzat_closed_shifts_v1";
 
-        // HAZZAT CHAPATI মেনু কার্ডের সব আইটেম ও দাম (VAT Included)
         const menuItems = [
-            // CHAPATI (الجباتي)
             { id: 1, nameEn: "Chapati Cheese", nameAr: "جباتي جبن", price: 13, category: "chapati", icon: "🫓" },
             { id: 2, nameEn: "Chapati Cheese & Honey", nameAr: "جباتي جبنة عسل", price: 15, category: "chapati", icon: "🍯" },
             { id: 3, nameEn: "Chapati Cheese & Oregano", nameAr: "جباتي جبنة زعتر", price: 15, category: "chapati", icon: "🌿" },
@@ -1811,7 +1787,6 @@
             { id: 15, nameEn: "Chapati Omelate", nameAr: "جباتي اومليت", price: 15, category: "chapati", icon: "🍳" },
             { id: 16, nameEn: "Chapati Nutella", nameAr: "جباتي نوتيلا", price: 15, category: "chapati", icon: "🍫" },
 
-            // COLD DRINKS (المشروبات الباردة)
             { id: 17, nameEn: "Red Mojito", nameAr: "ريد موهيتو", price: 19, category: "cold_drinks", icon: "🍹" },
             { id: 18, nameEn: "Shiny Ocean", nameAr: "شايني اوشن", price: 19, category: "cold_drinks", icon: "🧊" },
             { id: 19, nameEn: "Ice Tea Roman", nameAr: "ايس تي رمان", price: 19, category: "cold_drinks", icon: "🍷" },
@@ -1823,7 +1798,6 @@
             { id: 25, nameEn: "Mirinda", nameAr: "ميرندا", price: 5, category: "cold_drinks", icon: "🥫" },
             { id: 37, nameEn: "Water", nameAr: "ماء", price: 3, category: "cold_drinks", icon: "💧" },
 
-            // HOT DRINKS (المشروبات الساخنة)
             { id: 26, nameEn: "Karak Classic", nameAr: "كرك كلاسيك", price: 12, category: "hot_drinks", icon: "☕" },
             { id: 27, nameEn: "Karak Zafron", nameAr: "كرك زعفران", price: 13, category: "hot_drinks", icon: "🍵" },
             { id: 28, nameEn: "Karak Cinnamon", nameAr: "كرك قرفة", price: 13, category: "hot_drinks", icon: "☕" },
@@ -1832,11 +1806,9 @@
             { id: 31, nameEn: "V60 Hot / Cold", nameAr: "قهوة مقطرة", price: 23, category: "hot_drinks", icon: "☕" },
             { id: 32, nameEn: "Black Coffee Hot / Cold", nameAr: "قهوة سودا حار / بارد", price: 15, category: "hot_drinks", icon: "☕" },
 
-            // DESSERTS (الحلويات)
             { id: 33, nameEn: "Cookies", nameAr: "كوكيز", price: 12, category: "desserts", icon: "🍪" },
             { id: 34, nameEn: "Um Ali", nameAr: "ام علي", price: 23, category: "desserts", icon: "🍮" },
 
-            // FRENCH FRIES (فرايز)
             { id: 35, nameEn: "Fries Classic", nameAr: "فرايز كلاسيك", price: 18, category: "fries", icon: "🍟" },
             { id: 36, nameEn: "Najdi Flavored Fries", nameAr: "فرايز بنكهة نجدية", price: 19, category: "fries", icon: "🍟" }
         ];
@@ -1845,15 +1817,10 @@
         let cart = [];
         let currentCategory = 'all';
         let selectedPaymentMethod = 'Cash / كاش';
-
-        // ডিসকাউন্ট, নোট ও ট্যাগ স্টেট
-        let discountConfig = { type: 'amount', rawValue: 0 }; // type: 'amount' | 'percent'
+        let discountConfig = { type: 'amount', rawValue: 0 };
         let currentOrderNote = '';
         let currentOrderTags = [];
 
-        // =====================================================================
-        // ZATCA Phase-1 TLV Base64 & Visual Matrix QR Renderer
-        // =====================================================================
         function encodeZatcaTLV(sellerName, vatRegNo, isoTimestamp, totalInclVat, vatAmount) {
             const encoder = new TextEncoder();
             const tlvFields = [
@@ -1893,7 +1860,6 @@
             ctx.fillStyle = '#ffffff';
             ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-            // ফিক্সড Finder Patterns (3 corners)
             function drawFinder(r0, c0) {
                 for (let r = 0; r < 7; r++) {
                     for (let c = 0; c < 7; c++) {
@@ -1908,7 +1874,6 @@
             drawFinder(0, size - 7);
             drawFinder(size - 7, 0);
 
-            // TLV Base64 ডেটা থেকে ডিটারমিনিস্টিক ম্যাট্রিক্স বিট তৈরি
             let hash = 2166136261;
             for (let i = 0; i < payloadStr.length; i++) {
                 hash ^= payloadStr.charCodeAt(i);
@@ -1934,9 +1899,6 @@
             }
         }
 
-        // =====================================================================
-        // Foodics Purple Top Bar Actions (৭টি বাটন)
-        // =====================================================================
         function openModal(id) {
             document.getElementById(id).classList.add('active');
         }
@@ -2126,12 +2088,8 @@
             const strip = document.getElementById('order-meta-strip');
             const pills = [];
 
-            if (currentOrderTags.length > 0) {
-                pills.push(`🔖 ${currentOrderTags.join(', ')}`);
-            }
-            if (currentOrderNote) {
-                pills.push(`📝 ${currentOrderNote}`);
-            }
+            if (currentOrderTags.length > 0) pills.push(`🔖 ${currentOrderTags.join(', ')}`);
+            if (currentOrderNote) pills.push(`📝 ${currentOrderNote}`);
 
             if (pills.length === 0) {
                 strip.classList.remove('active');
@@ -2150,46 +2108,45 @@
             openModal('more-modal');
         }
 
-        // =====================================================================
-        // PWA & Fullscreen Setup
-        // =====================================================================
         function initPWA() {
-            const svgIcon = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 192 192"><rect width="192" height="192" rx="36" fill="#5c3a21"/><text x="96" y="122" font-size="96" text-anchor="middle">🥙</text></svg>`;
-            const iconUrl = `data:image/svg+xml;base64,${btoa(unescape(encodeURIComponent(svgIcon)))}`;
+            try {
+                const svgIcon = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 192 192"><rect width="192" height="192" rx="36" fill="#5c3a21"/><text x="96" y="122" font-size="96" text-anchor="middle">🥙</text></svg>`;
+                const iconUrl = `data:image/svg+xml;base64,${btoa(unescape(encodeURIComponent(svgIcon)))}`;
 
-            const manifestData = {
-                name: "HAZZAT CHAPATI POS | حزة جباتي",
-                short_name: "HAZZAT POS",
-                description: "HAZZAT CHAPATI Restaurant POS with ZATCA QR, Foodics Bar, Shift Z-Report & Live Sync",
-                start_url: "./",
-                display: "fullscreen",
-                orientation: "any",
-                background_color: "#f5efe6",
-                theme_color: "#5c3a21",
-                icons: [
-                    { src: iconUrl, sizes: "192x192", type: "image/svg+xml", purpose: "any maskable" },
-                    { src: iconUrl, sizes: "512x512", type: "image/svg+xml", purpose: "any maskable" }
-                ]
-            };
+                const manifestData = {
+                    name: "HAZZAT CHAPATI POS | حزة جباتي",
+                    short_name: "HAZZAT POS",
+                    description: "HAZZAT CHAPATI Restaurant POS",
+                    start_url: "./",
+                    display: "fullscreen",
+                    orientation: "any",
+                    background_color: "#f5efe6",
+                    theme_color: "#5c3a21",
+                    icons: [
+                        { src: iconUrl, sizes: "192x192", type: "image/svg+xml", purpose: "any maskable" },
+                        { src: iconUrl, sizes: "512x512", type: "image/svg+xml", purpose: "any maskable" }
+                    ]
+                };
 
-            const manifestBlob = new Blob([JSON.stringify(manifestData)], { type: "application/json" });
-            const manifestLink = document.createElement("link");
-            manifestLink.rel = "manifest";
-            manifestLink.href = URL.createObjectURL(manifestBlob);
-            document.head.appendChild(manifestLink);
+                const manifestBlob = new Blob([JSON.stringify(manifestData)], { type: "application/json" });
+                const manifestLink = document.createElement("link");
+                manifestLink.rel = "manifest";
+                manifestLink.href = URL.createObjectURL(manifestBlob);
+                document.head.appendChild(manifestLink);
 
-            if ("serviceWorker" in navigator && window.location.protocol !== "file:") {
-                const swCode = `
-                    self.addEventListener("install", () => self.skipWaiting());
-                    self.addEventListener("activate", (e) => e.waitUntil(clients.claim()));
-                    self.addEventListener("fetch", (e) => {
-                        if (e.request.method !== "GET") return;
-                        e.respondWith(fetch(e.request).catch(() => caches.match(e.request)));
-                    });
-                `;
-                const swBlob = new Blob([swCode], { type: "application/javascript" });
-                navigator.serviceWorker.register(URL.createObjectURL(swBlob)).catch(() => {});
-            }
+                if ("serviceWorker" in navigator && window.location.protocol !== "file:") {
+                    const swCode = `
+                        self.addEventListener("install", () => self.skipWaiting());
+                        self.addEventListener("activate", (e) => e.waitUntil(clients.claim()));
+                        self.addEventListener("fetch", (e) => {
+                            if (e.request.method !== "GET") return;
+                            e.respondWith(fetch(e.request).catch(() => caches.match(e.request)));
+                        });
+                    `;
+                    const swBlob = new Blob([swCode], { type: "application/javascript" });
+                    navigator.serviceWorker.register(URL.createObjectURL(swBlob)).catch(() => {});
+                }
+            } catch (e) {}
         }
 
         function toggleFullscreen() {
@@ -2203,9 +2160,6 @@
             }
         }
 
-        // =====================================================================
-        // Shift & Cash Drawer (Z-Report)
-        // =====================================================================
         function createNewShift(openingAmount = 0) {
             const now = new Date();
             return {
@@ -2223,12 +2177,12 @@
                 if (saved && saved.shiftId) return saved;
             } catch (e) {}
             const fresh = createNewShift(0);
-            localStorage.setItem(SHIFT_STATE_KEY, JSON.stringify(fresh));
+            try { localStorage.setItem(SHIFT_STATE_KEY, JSON.stringify(fresh)); } catch (e) {}
             return fresh;
         }
 
         function saveCurrentShift(shift) {
-            localStorage.setItem(SHIFT_STATE_KEY, JSON.stringify(shift));
+            try { localStorage.setItem(SHIFT_STATE_KEY, JSON.stringify(shift)); } catch (e) {}
         }
 
         function getClosedShifts() {
@@ -2240,7 +2194,7 @@
         }
 
         function saveClosedShifts(list) {
-            localStorage.setItem(CLOSED_SHIFTS_KEY, JSON.stringify(list));
+            try { localStorage.setItem(CLOSED_SHIFTS_KEY, JSON.stringify(list)); } catch (e) {}
         }
 
         function getShiftSalesSummary() {
@@ -2527,14 +2481,9 @@
 
         function reprintClosedShift(index) {
             const list = getClosedShifts();
-            if (list[index]) {
-                printZReport(list[index]);
-            }
+            if (list[index]) printZReport(list[index]);
         }
 
-        // =====================================================================
-        // Firebase REST API Sync (Orders)
-        // =====================================================================
         async function fetchSalesFromFirebase(showManualToast = false) {
             const statusEl = document.getElementById('db-status');
             try {
@@ -2572,10 +2521,10 @@
                 }
             } catch (err) {
                 console.error("REST fetch error:", err);
-                statusEl.innerText = "⚠️ Sync Offline";
+                statusEl.innerText = "⚠️ Sync Check";
                 statusEl.style.background = "#7f1d1d";
                 if (showManualToast) {
-                    showToast("⚠️ Could not load sales from Firebase REST URL.", true);
+                    showToast("⚠️ Firebase Realtime DB Rules বা URL চেক করুন।", true);
                 }
             }
         }
@@ -2595,7 +2544,7 @@
             fetchSalesFromFirebase(false);
             setInterval(() => {
                 if (!document.hidden) fetchSalesFromFirebase(false);
-            }, 4000);
+            }, 5000);
         }
 
         function showToast(message, isError = false) {
@@ -2623,16 +2572,20 @@
 
         function updateClock() {
             const now = new Date();
-            document.getElementById('live-clock').innerText = now.toLocaleString('en-US', {
-                dateStyle: 'medium',
-                timeStyle: 'short'
-            });
+            const clockEl = document.getElementById('live-clock');
+            if (clockEl) {
+                clockEl.innerText = now.toLocaleString('en-US', {
+                    dateStyle: 'medium',
+                    timeStyle: 'short'
+                });
+            }
         }
         setInterval(updateClock, 1000);
         updateClock();
 
         function renderMenu(items) {
             const grid = document.getElementById('menu-grid');
+            if (!grid) return;
             grid.innerHTML = '';
             items.forEach(item => {
                 const card = document.createElement('div');
@@ -2654,12 +2607,12 @@
         function filterCategory(category, btn) {
             currentCategory = category;
             document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active'));
-            btn.classList.add('active');
+            if (btn) btn.classList.add('active');
             filterMenu();
         }
 
         function filterMenu() {
-            const searchText = document.getElementById('search-input').value.toLowerCase();
+            const searchText = (document.getElementById('search-input')?.value || '').toLowerCase();
             const filtered = menuItems.filter(item => {
                 const matchesCat = currentCategory === 'all' || item.category === currentCategory;
                 const matchesSearch = item.nameEn.toLowerCase().includes(searchText) || item.nameAr.includes(searchText);
@@ -2820,7 +2773,6 @@
                 <div class="receipt-grand-total"><span>Grand Total (الإجمالي):</span><span>${Number(order.grandTotal).toFixed(2)} SAR</span></div>
             `;
 
-            // ZATCA TLV QR কোড রেন্ডার
             const isoTime = new Date(order.timestamp || Date.now()).toISOString();
             const zatcaBase64 = encodeZatcaTLV(
                 SELLER_NAME_AR,
@@ -3002,9 +2954,10 @@
             }
         }
 
+        // মেনু কার্ড আগে রেন্ডার করা যাতে কোনো স্টোরেজ/নেটওয়ার্ক সমস্যা হলেও মেনু সবসময় দেখা যায়
+        renderMenu(menuItems);
         getCurrentShift();
         initPWA();
-        renderMenu(menuItems);
         startLivePolling();
     </script>
 </body>
