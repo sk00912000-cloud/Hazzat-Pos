@@ -9,21 +9,21 @@
     <meta name="apple-mobile-web-app-title" content="HAZZAT POS">
     <title>HAZZAT CHAPATI - POS System</title>
     <style>
-        :root {
-            --primary: #5c3a21;
-            --primary-dark: #3e2514;
-            --accent: #c89d66;
-            --bg-light: #f5efe6;
-            --white: #ffffff;
-            --text-dark: #2c1e16;
-            --border: #d7c7b2;
-            --success: #2e7d32;
-            --info: #1565c0;
-            --danger: #c62828;
-            --purple-bar: #5b21b6;
-            --purple-dark: #4c1d95;
-            --purple-hover: #6d28d9;
-        }
+       :root {
+      --primary: #1e3a8a;
+      --primary-dark: #172554;
+      --accent: #f59e0b;
+      --bg-light: #f1f5f9;
+      --white: #ffffff;
+      --text-dark: #0f172a;
+      --border: #cbd5e1;
+      --success: #16a34a;
+      --info: #0284c7;
+      --danger: #dc2626;
+      --purple-bar: #2563eb;
+      --purple-dark: #1d4ed8;
+      --purple-hover: #3b82f6;
+    }
 
         * {
             box-sizing: border-box;
@@ -1664,25 +1664,25 @@
 
     const menuItems = [
       { id: 1, nameEn: 'Water', nameAr: 'ماء', price: 3.00, category: 'Cold Drinks', icon: '💧' },
-      { id: 2, nameEn: 'Chapati Cheese', nameAr: 'جباتي جبن', price: 13.00, category: 'Chapati', icon: '🫓' },
-      { id: 3, nameEn: 'Chapati Cheese & Honey', nameAr: 'جباتي جبنة عسل', price: 15.00, category: 'Chapati', icon: '🍯' },
-      { id: 4, nameEn: 'Chapati Cheese & Oregano', nameAr: 'جباتي جبنة زعتر', price: 15.00, category: 'Chapati', icon: '🌿' },
-      { id: 5, nameEn: 'Chapati Rahash & Cheese', nameAr: 'جباتي رهش جبن', price: 15.00, category: 'Chapati', icon: '🫓' },
-      { id: 6, nameEn: 'Chapati Labnah', nameAr: 'جباتي لبنه', price: 14.00, category: 'Chapati', icon: '🫓' },
-      { id: 7, nameEn: 'Chapati Labnah Honey', nameAr: 'جباتي لبنه عسل', price: 15.00, category: 'Chapati', icon: '🍯' },
-      { id: 8, nameEn: 'Chapati Labnah Oregano', nameAr: 'جباتي لبنه زعتر', price: 15.00, category: 'Chapati', icon: '🌿' },
-      { id: 9, nameEn: 'Chapati Cream & Honey', nameAr: 'جباتي قشطة عسل', price: 15.00, category: 'Chapati', icon: '🍯' },
-      { id: 10, nameEn: 'Chapati Burata', nameAr: 'جباتي بوراتا', price: 17.00, category: 'Chapati', icon: '🧀' },
-      { id: 11, nameEn: 'Chapati Hallom', nameAr: 'جباتي حلوم', price: 16.00, category: 'Chapati', icon: '🧀' },
-      { id: 12, nameEn: 'Chapati Chicken', nameAr: 'جباتي حمسة دجاج', price: 16.00, category: 'Chapati', icon: '🍗' },
+      { id: 2, nameEn: 'Cheese Chapati', nameAr: 'جباتي جبن', price: 13.00, category: 'Chapati', icon: '🫓' },
+      { id: 3, nameEn: 'Cheese & Honey', nameAr: 'جباتي جبنة عسل', price: 15.00, category: 'Chapati', icon: '🍯' },
+      { id: 4, nameEn: 'Cheese & Oregano', nameAr: 'جباتي جبنة زعتر', price: 15.00, category: 'Chapati', icon: '🌿' },
+      { id: 5, nameEn: 'Rahash & Cheese', nameAr: 'جباتي رهش جبن', price: 15.00, category: 'Chapati', icon: '🫓' },
+      { id: 6, nameEn: 'Labnah Chapati', nameAr: 'جباتي لبنه', price: 14.00, category: 'Chapati', icon: '🫓' },
+      { id: 7, nameEn: 'Labnah Honey', nameAr: 'جباتي لبنه عسل', price: 15.00, category: 'Chapati', icon: '🍯' },
+      { id: 8, nameEn: 'Labnah Oregano', nameAr: 'جباتي لبنه زعتر', price: 15.00, category: 'Chapati', icon: '🌿' },
+      { id: 9, nameEn: 'Cream & Honey', nameAr: 'جباتي قشطة عسل', price: 15.00, category: 'Chapati', icon: '🍯' },
+      { id: 10, nameEn: 'Burata Chapati', nameAr: 'جباتي بوراتا', price: 17.00, category: 'Chapati', icon: '🧀' },
+      { id: 11, nameEn: 'Hallom Chapati', nameAr: 'جباتي حلوم', price: 16.00, category: 'Chapati', icon: '🧀' },
+      { id: 12, nameEn: 'Chicken Chapati', nameAr: 'جباتي حمسة دجاج', price: 16.00, category: 'Chapati', icon: '🍗' },
       { id: 13, nameEn: 'Chips & Cheese', nameAr: 'جباتي تشيبس اند تشيز', price: 15.00, category: 'Chapati', icon: '🍟' },
       { id: 14, nameEn: 'Falafil Special', nameAr: 'جباتي فلافل سبيشل', price: 16.00, category: 'Chapati', icon: '🧆' },
-      { id: 15, nameEn: 'Chapati Falafil', nameAr: 'جباتي فلافل', price: 15.00, category: 'Chapati', icon: '🧆' },
-      { id: 16, nameEn: 'Chapati Omelate', nameAr: 'جباتي اومليت', price: 15.00, category: 'Chapati', icon: '🍳' },
-      { id: 17, nameEn: 'Chapati Nutella', nameAr: 'جباتي نوتيلا', price: 15.00, category: 'Chapati', icon: '🍫' },
+      { id: 15, nameEn: 'Falafil Chapati', nameAr: 'جباتي فلافل', price: 15.00, category: 'Chapati', icon: '🧆' },
+      { id: 16, nameEn: 'Omelate Chapati', nameAr: 'جباتي اومليت', price: 15.00, category: 'Chapati', icon: '🍳' },
+      { id: 17, nameEn: 'Nutella Chapati', nameAr: 'جباتي نوتيلا', price: 15.00, category: 'Chapati', icon: '🍫' },
       { id: 18, nameEn: 'Red Mojito', nameAr: 'ريد موهيتو', price: 19.00, category: 'Cold Drinks', icon: '🍹' },
       { id: 19, nameEn: 'Shiny Ocean', nameAr: 'شايني اوشن', price: 19.00, category: 'Cold Drinks', icon: '🥤' },
-      { id: 20, nameEn: 'Ise Tea Roman', nameAr: 'ايس تي رمان', price: 19.00, category: 'Cold Drinks', icon: '🧊' },
+      { id: 20, nameEn: 'Ice Tea Roman', nameAr: 'ايس تي رمان', price: 19.00, category: 'Cold Drinks', icon: '🧊' },
       { id: 21, nameEn: 'Passion Fruit Mojito', nameAr: 'باشن فروت موهيتو', price: 19.00, category: 'Cold Drinks', icon: '🍹' },
       { id: 22, nameEn: 'Orange Juice', nameAr: 'عصير برتقال', price: 19.00, category: 'Cold Drinks', icon: '🍊' },
       { id: 23, nameEn: 'Smoothie Vimto', nameAr: 'سموذي فيمتو', price: 15.00, category: 'Cold Drinks', icon: '🥤' },
@@ -1692,7 +1692,7 @@
       { id: 27, nameEn: 'Karak Classic', nameAr: 'كرك كلاسيك', price: 12.00, category: 'Hot Drinks', icon: '☕' },
       { id: 28, nameEn: 'Karak Zafron', nameAr: 'كرك زعفران', price: 13.00, category: 'Hot Drinks', icon: '☕' },
       { id: 29, nameEn: 'Karak Cinnamon', nameAr: 'كرك قرفة', price: 13.00, category: 'Hot Drinks', icon: '☕' },
-      { id: 30, nameEn: 'Karak Ganger', nameAr: 'كرك زنجبيل', price: 13.00, category: 'Hot Drinks', icon: '☕' },
+      { id: 30, nameEn: 'Karak Ginger', nameAr: 'كرك زنجبيل', price: 13.00, category: 'Hot Drinks', icon: '☕' },
       { id: 31, nameEn: 'Tea', nameAr: 'شاي', price: 10.00, category: 'Hot Drinks', icon: '🍵' },
       { id: 32, nameEn: 'V60 Hot / Cold', nameAr: 'قهوة مقطرة', price: 23.00, category: 'Hot Drinks', icon: '☕' },
       { id: 33, nameEn: 'Black Coffee Hot / Cold', nameAr: 'قهوة سودا حار / بارد', price: 15.00, category: 'Hot Drinks', icon: '☕' },
