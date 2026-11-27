@@ -1912,24 +1912,62 @@
                 return;
             }
 
-            filtered.forEach(item => {
-                const card = document.createElement('div');
-                card.className = 'menu-card';
-                card.onclick = () => addToCart(item.id);
-                card.innerHTML = `
-                    <div>
-                        <div class="menu-icon">${item.icon}</div>
-                        <div class="menu-title-en">${escapeHtml(item.nameEn)}</div>
-                        <div class="menu-title-ar">${escapeHtml(item.nameAr)}</div>
-                    </div>
-                    <div class="menu-price">
-                        ${formatSAR(item.price)}
-                        <span class="vat-tag">Incl. 15% VAT</span>
-                    </div>
-                `;
-                grid.appendChild(card);
-            });
-        }
+            const savedImages = JSON.parse(localStorage.getItem('hazzat_item_images') || '{}');
+
+      filtered.forEach(item => {
+        const card = document.createElement('div');
+        card.className = 'menu-card';
+        card.style.position = 'relative';
+        card.onclick = () => addToCart(item.id);
+        
+        const imgHtml = savedImages[item.id] 
+          ? `<img src="${savedImages[item.id]}" style="width:65px; height:65px; object-fit:cover; border-radius:10px; margin:0 auto 6px; display:block;">`
+          : `<div class="menu-icon">${item.icon}</div>`;
+
+        card.innerHTML = `
+          <button type="button" onclick="event.stopPropagation(); uploadItemImage(${item.id})" title="ছবি পরিবর্তন করুন" style="position:absolute; top:6px; right:6px; background:rgba(0,0,0,0.65); color:#fff; border:none; border-radius:6px; padding:3px 6px; font-size:12px; cursor:pointer; z-index:5;">📷</button>
+          <div>
+            ${imgHtml}
+            <div class="menu-title-en">${escapeHtml(item.nameEn)}</div>
+            <div class="menu-title-ar">${escapeHtml(item.nameAr)}</div>
+          </div>
+          <div class="menu-price">
+            ${formatSAR(item.price)}
+            <span class="vat-tag">Incl. 15% VAT</span>
+          </div>
+        `;
+        grid.appendChild(card);
+      });
+    }
+
+    function uploadItemImage(itemId) {
+      const input = document.createElement('input');
+      input.type = 'file';
+      input.accept = 'image/*';
+      input.onchange = (e) => {
+        const file = e.target.files[0];
+        if (!file) return;
+        const reader = new FileReader();
+        reader.onload = (ev) => {
+          const img = new Image();
+          img.onload = () => {
+            const canvas = document.createElement('canvas');
+            const size = 150;
+            canvas.width = size;
+            canvas.height = size;
+            const ctx = canvas.getContext('2d');
+            ctx.drawImage(img, 0, 0, size, size);
+            const compressedDataUrl = canvas.toDataURL('image/jpeg', 0.8);
+            const savedImages = JSON.parse(localStorage.getItem('hazzat_item_images') || '{}');
+            savedImages[itemId] = compressedDataUrl;
+            localStorage.setItem('hazzat_item_images', JSON.stringify(savedImages));
+            renderMenu();
+          };
+          img.src = ev.target.result;
+        };
+        reader.readAsDataURL(file);
+      };
+      input.click();
 
         function addToCart(itemId) {
             const product = menuItems.find(m => m.id === itemId);
