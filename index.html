@@ -1662,11 +1662,8 @@
         const DEFAULT_FIREBASE_URL = 'https://firebaseio.com';
         const BRANCHES = ['BOLIFARD_1', 'BOLIFARD_2'];
 
-      const menuItems = [
-      // WATER (একদম শুরুতে)
+    const menuItems = [
       { id: 1, nameEn: 'Water', nameAr: 'ماء', price: 3.00, category: 'Cold Drinks', icon: '💧' },
-
-      // CHAPATI (الجباتي)
       { id: 2, nameEn: 'Chapati Cheese', nameAr: 'جباتي جبن', price: 13.00, category: 'Chapati', icon: '🫓' },
       { id: 3, nameEn: 'Chapati Cheese & Honey', nameAr: 'جباتي جبنة عسل', price: 15.00, category: 'Chapati', icon: '🍯' },
       { id: 4, nameEn: 'Chapati Cheese & Oregano', nameAr: 'جباتي جبنة زعتر', price: 15.00, category: 'Chapati', icon: '🌿' },
@@ -1683,8 +1680,6 @@
       { id: 15, nameEn: 'Chapati Falafil', nameAr: 'جباتي فلافل', price: 15.00, category: 'Chapati', icon: '🧆' },
       { id: 16, nameEn: 'Chapati Omelate', nameAr: 'جباتي اومليت', price: 15.00, category: 'Chapati', icon: '🍳' },
       { id: 17, nameEn: 'Chapati Nutella', nameAr: 'جباتي نوتيلا', price: 15.00, category: 'Chapati', icon: '🍫' },
-
-      // COLD DRINKS (المشروبات الباردة)
       { id: 18, nameEn: 'Red Mojito', nameAr: 'ريد موهيتو', price: 19.00, category: 'Cold Drinks', icon: '🍹' },
       { id: 19, nameEn: 'Shiny Ocean', nameAr: 'شايني اوشن', price: 19.00, category: 'Cold Drinks', icon: '🥤' },
       { id: 20, nameEn: 'Ise Tea Roman', nameAr: 'ايس تي رمان', price: 19.00, category: 'Cold Drinks', icon: '🧊' },
@@ -1694,26 +1689,21 @@
       { id: 24, nameEn: 'Pepsi', nameAr: 'بيبسي', price: 5.00, category: 'Cold Drinks', icon: '🥤' },
       { id: 25, nameEn: '7up', nameAr: 'سفن اب', price: 5.00, category: 'Cold Drinks', icon: '🥤' },
       { id: 26, nameEn: 'Marinda', nameAr: 'ميراند', price: 5.00, category: 'Cold Drinks', icon: '🥤' },
-
-      // HOT DRINKS (المشروبات الساخنة)
       { id: 27, nameEn: 'Karak Classic', nameAr: 'كرك كلاسيك', price: 12.00, category: 'Hot Drinks', icon: '☕' },
-      { id: 28, nameEn: 'Karak Zafron', ar: 'كرك زعفران', nameAr: 'كرك زعفران', price: 13.00, category: 'Hot Drinks', icon: '☕' },
+      { id: 28, nameEn: 'Karak Zafron', nameAr: 'كرك زعفران', price: 13.00, category: 'Hot Drinks', icon: '☕' },
       { id: 29, nameEn: 'Karak Cinnamon', nameAr: 'كرك قرفة', price: 13.00, category: 'Hot Drinks', icon: '☕' },
       { id: 30, nameEn: 'Karak Ganger', nameAr: 'كرك زنجبيل', price: 13.00, category: 'Hot Drinks', icon: '☕' },
       { id: 31, nameEn: 'Tea', nameAr: 'شاي', price: 10.00, category: 'Hot Drinks', icon: '🍵' },
       { id: 32, nameEn: 'V60 Hot / Cold', nameAr: 'قهوة مقطرة', price: 23.00, category: 'Hot Drinks', icon: '☕' },
       { id: 33, nameEn: 'Black Coffee Hot / Cold', nameAr: 'قهوة سودا حار / بارد', price: 15.00, category: 'Hot Drinks', icon: '☕' },
-
-      // DESSERTS (الحلويات)
       { id: 34, nameEn: 'Cookies', nameAr: 'كوكيز', price: 12.00, category: 'Desserts', icon: '🍪' },
       { id: 35, nameEn: 'Um Ali', nameAr: 'ام علي', price: 23.00, category: 'Desserts', icon: '🍮' },
-
-      // FRENCH FRIES (فرايز)
       { id: 36, nameEn: 'Fries Classic', nameAr: 'فرايز كلاسيك', price: 18.00, category: 'French Fries', icon: '🍟' },
       { id: 37, nameEn: 'Najdi Flavored Fries', nameAr: 'فرايز بنكهة نجدية', price: 19.00, category: 'French Fries', icon: '🍟' }
     ];
-        const categories = ['Chapati', 'Cold Drinks',  'Hot Drinks', 'French Fries' 'Desserts'];
-        let selectedCategory = 'Water';
+
+    const categories = ['Chapati', 'Cold Drinks', 'Hot Drinks', 'French Fries', 'Desserts'];
+    let selectedCategory = 'All';
         let currentBranch = localStorage.getItem('hazzat_current_branch') || 'BOLIFARD_1';
         let firebaseDbUrl = localStorage.getItem('hazzat_firebase_url') || DEFAULT_FIREBASE_URL;
         let selectedPaymentMethod = 'VISA';
