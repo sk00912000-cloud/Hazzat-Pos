@@ -1662,25 +1662,56 @@
         const DEFAULT_FIREBASE_URL = 'https://firebaseio.com';
         const BRANCHES = ['BOLIFARD_1', 'BOLIFARD_2'];
 
-        const menuItems = [
-            { id: 1, nameEn: 'Plain Chapati', nameAr: 'شباتي سادة', price: 2.00, category: 'Chapati', icon: '🫓' },
-            { id: 2, nameEn: 'Egg Chapati', nameAr: 'شباتي بيض', price: 4.00, category: 'Chapati', icon: '🍳' },
-            { id: 3, nameEn: 'Cheese Chapati', nameAr: 'شباتي جبن', price: 5.00, category: 'Chapati', icon: '🧀' },
-            { id: 4, nameEn: 'Egg & Cheese Chapati', nameAr: 'شباتي بيض وجبن', price: 6.00, category: 'Chapati', icon: '🥪' },
-            { id: 5, nameEn: 'Nutella Chapati', nameAr: 'شباتي نوتيلا', price: 7.00, category: 'Chapati', icon: '🍫' },
-            { id: 6, nameEn: 'Honey & Cream Chapati', nameAr: 'شباتي عسل وقشطة', price: 7.00, category: 'Chapati', icon: '🍯' },
-            { id: 7, nameEn: 'Karak Tea', nameAr: 'شاي كرك', price: 3.00, category: 'Karak & Tea', icon: '🍵' },
-            { id: 8, nameEn: 'Saffron Karak', nameAr: 'كرك زعفران', price: 4.00, category: 'Karak & Tea', icon: '🫖' },
-            { id: 9, nameEn: 'Adani Tea', nameAr: 'شاي عدني', price: 3.00, category: 'Karak & Tea', icon: '☕' },
-            { id: 10, nameEn: 'Mint Tea', nameAr: 'شاي بالنعناع', price: 3.00, category: 'Karak & Tea', icon: '🌿' },
-            { id: 11, nameEn: 'Chicken Tikka Roll', nameAr: 'رول دجاج تكا', price: 9.00, category: 'Sandwiches', icon: '🌯' },
-            { id: 12, nameEn: 'Falafel Chapati Wrap', nameAr: 'لفائف فلافل شباتي', price: 6.00, category: 'Sandwiches', icon: '🥙' },
-            { id: 13, nameEn: 'Fresh Orange Juice', nameAr: 'عصير برتقال طازج', price: 8.00, category: 'Drinks', icon: '🍊' },
-            { id: 14, nameEn: 'Mineral Water', nameAr: 'مياه معدنية', price: 1.00, category: 'Drinks', icon: '💧' },
-            { id: 15, nameEn: 'Extra Cheese Slice', nameAr: 'شريحة جبن إضافية', price: 2.00, category: 'Extras', icon: '➕' },
-            { id: 16, nameEn: 'Spicy Chutney Dip', nameAr: 'صوص شاتني حار', price: 1.50, category: 'Extras', icon: '🌶️' }
-        ];
+      const menuItems = [
+      // WATER (একদম শুরুতে)
+      { id: 1, nameEn: 'Water', nameAr: 'ماء', price: 3.00, category: 'Cold Drinks', icon: '💧' },
 
+      // CHAPATI (الجباتي)
+      { id: 2, nameEn: 'Chapati Cheese', nameAr: 'جباتي جبن', price: 13.00, category: 'Chapati', icon: '🫓' },
+      { id: 3, nameEn: 'Chapati Cheese & Honey', nameAr: 'جباتي جبنة عسل', price: 15.00, category: 'Chapati', icon: '🍯' },
+      { id: 4, nameEn: 'Chapati Cheese & Oregano', nameAr: 'جباتي جبنة زعتر', price: 15.00, category: 'Chapati', icon: '🌿' },
+      { id: 5, nameEn: 'Chapati Rahash & Cheese', nameAr: 'جباتي رهش جبن', price: 15.00, category: 'Chapati', icon: '🫓' },
+      { id: 6, nameEn: 'Chapati Labnah', nameAr: 'جباتي لبنه', price: 14.00, category: 'Chapati', icon: '🫓' },
+      { id: 7, nameEn: 'Chapati Labnah Honey', nameAr: 'جباتي لبنه عسل', price: 15.00, category: 'Chapati', icon: '🍯' },
+      { id: 8, nameEn: 'Chapati Labnah Oregano', nameAr: 'جباتي لبنه زعتر', price: 15.00, category: 'Chapati', icon: '🌿' },
+      { id: 9, nameEn: 'Chapati Cream & Honey', nameAr: 'جباتي قشطة عسل', price: 15.00, category: 'Chapati', icon: '🍯' },
+      { id: 10, nameEn: 'Chapati Burata', nameAr: 'جباتي بوراتا', price: 17.00, category: 'Chapati', icon: '🧀' },
+      { id: 11, nameEn: 'Chapati Hallom', nameAr: 'جباتي حلوم', price: 16.00, category: 'Chapati', icon: '🧀' },
+      { id: 12, nameEn: 'Chapati Chicken', nameAr: 'جباتي حمسة دجاج', price: 16.00, category: 'Chapati', icon: '🍗' },
+      { id: 13, nameEn: 'Chips & Cheese', nameAr: 'جباتي تشيبس اند تشيز', price: 15.00, category: 'Chapati', icon: '🍟' },
+      { id: 14, nameEn: 'Falafil Special', nameAr: 'جباتي فلافل سبيشل', price: 16.00, category: 'Chapati', icon: '🧆' },
+      { id: 15, nameEn: 'Chapati Falafil', nameAr: 'جباتي فلافل', price: 15.00, category: 'Chapati', icon: '🧆' },
+      { id: 16, nameEn: 'Chapati Omelate', nameAr: 'جباتي اومليت', price: 15.00, category: 'Chapati', icon: '🍳' },
+      { id: 17, nameEn: 'Chapati Nutella', nameAr: 'جباتي نوتيلا', price: 15.00, category: 'Chapati', icon: '🍫' },
+
+      // COLD DRINKS (المشروبات الباردة)
+      { id: 18, nameEn: 'Red Mojito', nameAr: 'ريد موهيتو', price: 19.00, category: 'Cold Drinks', icon: '🍹' },
+      { id: 19, nameEn: 'Shiny Ocean', nameAr: 'شايني اوشن', price: 19.00, category: 'Cold Drinks', icon: '🥤' },
+      { id: 20, nameEn: 'Ise Tea Roman', nameAr: 'ايس تي رمان', price: 19.00, category: 'Cold Drinks', icon: '🧊' },
+      { id: 21, nameEn: 'Passion Fruit Mojito', nameAr: 'باشن فروت موهيتو', price: 19.00, category: 'Cold Drinks', icon: '🍹' },
+      { id: 22, nameEn: 'Orange Juice', nameAr: 'عصير برتقال', price: 19.00, category: 'Cold Drinks', icon: '🍊' },
+      { id: 23, nameEn: 'Smoothie Vimto', nameAr: 'سموذي فيمتو', price: 15.00, category: 'Cold Drinks', icon: '🥤' },
+      { id: 24, nameEn: 'Pepsi', nameAr: 'بيبسي', price: 5.00, category: 'Cold Drinks', icon: '🥤' },
+      { id: 25, nameEn: '7up', nameAr: 'سفن اب', price: 5.00, category: 'Cold Drinks', icon: '🥤' },
+      { id: 26, nameEn: 'Marinda', nameAr: 'ميراند', price: 5.00, category: 'Cold Drinks', icon: '🥤' },
+
+      // HOT DRINKS (المشروبات الساخنة)
+      { id: 27, nameEn: 'Karak Classic', nameAr: 'كرك كلاسيك', price: 12.00, category: 'Hot Drinks', icon: '☕' },
+      { id: 28, nameEn: 'Karak Zafron', ar: 'كرك زعفران', nameAr: 'كرك زعفران', price: 13.00, category: 'Hot Drinks', icon: '☕' },
+      { id: 29, nameEn: 'Karak Cinnamon', nameAr: 'كرك قرفة', price: 13.00, category: 'Hot Drinks', icon: '☕' },
+      { id: 30, nameEn: 'Karak Ganger', nameAr: 'كرك زنجبيل', price: 13.00, category: 'Hot Drinks', icon: '☕' },
+      { id: 31, nameEn: 'Tea', nameAr: 'شاي', price: 10.00, category: 'Hot Drinks', icon: '🍵' },
+      { id: 32, nameEn: 'V60 Hot / Cold', nameAr: 'قهوة مقطرة', price: 23.00, category: 'Hot Drinks', icon: '☕' },
+      { id: 33, nameEn: 'Black Coffee Hot / Cold', nameAr: 'قهوة سودا حار / بارد', price: 15.00, category: 'Hot Drinks', icon: '☕' },
+
+      // DESSERTS (الحلويات)
+      { id: 34, nameEn: 'Cookies', nameAr: 'كوكيز', price: 12.00, category: 'Desserts', icon: '🍪' },
+      { id: 35, nameEn: 'Um Ali', nameAr: 'ام علي', price: 23.00, category: 'Desserts', icon: '🍮' },
+
+      // FRENCH FRIES (فرايز)
+      { id: 36, nameEn: 'Fries Classic', nameAr: 'فرايز كلاسيك', price: 18.00, category: 'French Fries', icon: '🍟' },
+      { id: 37, nameEn: 'Najdi Flavored Fries', nameAr: 'فرايز بنكهة نجدية', price: 19.00, category: 'French Fries', icon: '🍟' }
+    ];
         const categories = ['All', 'Chapati', 'Karak & Tea', 'Sandwiches', 'Drinks', 'Extras'];
         let selectedCategory = 'All';
         let currentBranch = localStorage.getItem('hazzat_current_branch') || 'BOLIFARD_1';
