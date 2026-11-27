@@ -45,7 +45,7 @@
         header {
             background-color: var(--primary);
             color: var(--white);
-            padding: 8px 18px;
+            padding: 8px 16px;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -54,16 +54,34 @@
             flex-shrink: 0;
         }
 
+        .brand-title {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
         .brand-title h1 {
-            font-size: 1.3rem;
-            letter-spacing: 0.7px;
+            font-size: 1.22rem;
+            letter-spacing: 0.6px;
             white-space: nowrap;
         }
 
         .brand-title span {
-            font-size: 0.98rem;
+            font-size: 0.92rem;
             color: var(--accent);
             font-weight: normal;
+        }
+
+        .branch-select {
+            background-color: var(--primary-dark);
+            color: var(--white);
+            border: 1.5px solid var(--accent);
+            border-radius: 6px;
+            padding: 5px 10px;
+            font-size: 0.82rem;
+            font-weight: 700;
+            cursor: pointer;
         }
 
         .header-right {
@@ -267,7 +285,7 @@
             background-color: var(--bg-light);
             color: var(--primary);
             font-weight: bold;
-            font-size: 0.98rem;
+            font-size: 0.96rem;
             padding: 4px 8px;
             border-radius: 6px;
             border: 1px solid var(--border);
@@ -506,7 +524,7 @@
 
         .modal-box.history-modal-box,
         .modal-box.shift-modal-box {
-            max-width: 900px;
+            max-width: 920px;
         }
 
         .modal-header {
@@ -570,7 +588,7 @@
             border: 2px solid var(--border);
             background: var(--white);
             border-radius: 10px;
-            padding: 11px 10px;
+            padding: 12px 10px;
             cursor: pointer;
             text-align: center;
             transition: 0.2s;
@@ -596,7 +614,7 @@
 
         .pay-title-en {
             font-weight: 700;
-            font-size: 0.9rem;
+            font-size: 0.95rem;
             display: block;
         }
 
@@ -707,7 +725,7 @@
         }
 
         .report-card-value {
-            font-size: 1.1rem;
+            font-size: 1.05rem;
             font-weight: 700;
             color: var(--primary);
             margin-top: 3px;
@@ -871,6 +889,22 @@
             font-size: 0.9rem;
         }
 
+        .tab-btn {
+            padding: 7px 12px;
+            border-radius: 6px;
+            border: 1px solid var(--primary);
+            background: var(--white);
+            color: var(--primary);
+            font-weight: 700;
+            font-size: 0.82rem;
+            cursor: pointer;
+        }
+
+        .tab-btn.active {
+            background: var(--primary);
+            color: var(--white);
+        }
+
         .history-table {
             width: 100%;
             border-collapse: collapse;
@@ -950,12 +984,17 @@
             }
 
             .brand-title h1 {
-                font-size: 0.84rem;
+                font-size: 0.82rem;
                 letter-spacing: 0.2px;
             }
 
             .brand-title span {
-                font-size: 0.72rem;
+                display: none;
+            }
+
+            .branch-select {
+                padding: 3px 6px;
+                font-size: 0.65rem;
             }
 
             .header-right {
@@ -964,9 +1003,7 @@
             }
 
             .sync-badge {
-                display: inline-block;
-                font-size: 0.62rem;
-                padding: 2px 6px;
+                display: none;
             }
 
             .hdr-btn {
@@ -1120,12 +1157,6 @@
                 padding: 2px 0;
             }
 
-            .cart-items p {
-                margin-top: 6px !important;
-                font-size: 0.72rem !important;
-                line-height: 1.2;
-            }
-
             .cart-item {
                 padding: 3px 2px;
                 gap: 4px;
@@ -1259,240 +1290,236 @@
                 border-bottom: 1px dashed #000;
                 padding-bottom: 6px;
             }
+            .receipt-info p {
+                margin: 2px 0;
+            }
             .receipt-table {
                 width: 100%;
                 border-collapse: collapse;
                 font-size: 11px;
                 margin-bottom: 8px;
             }
-            .receipt-table th {
-                border-bottom: 1px dashed #000;
+            .receipt-table th, .receipt-table td {
+                padding: 3px 2px;
                 text-align: left;
-                padding-bottom: 4px;
+                border-bottom: 1px dotted #ccc;
             }
-            .receipt-table td {
-                padding: 4px 0;
-                vertical-align: top;
+            .receipt-table th.right, .receipt-table td.right {
+                text-align: right;
             }
             .receipt-totals {
+                font-size: 12px;
                 border-top: 1px dashed #000;
                 padding-top: 6px;
-                font-size: 12px;
             }
-            .receipt-totals div {
+            .receipt-total-line {
                 display: flex;
                 justify-content: space-between;
-                margin-bottom: 4px;
+                margin: 3px 0;
             }
-            .receipt-grand-total {
+            .receipt-total-line.grand {
                 font-weight: bold;
                 font-size: 14px;
                 border-top: 1px solid #000;
-                padding-top: 5px;
+                padding-top: 4px;
+                margin-top: 4px;
             }
             .zatca-qr-box {
                 text-align: center;
-                margin-top: 8px;
-                padding-top: 6px;
-                border-top: 1px dashed #000;
+                margin-top: 10px;
+                padding: 8px;
+                border: 1px solid #000;
             }
-            .zatca-qr-box canvas {
-                display: block;
-                margin: 4px auto;
-                width: 128px;
-                height: 128px;
+            .zatca-qr-box .qr-code-visual {
+                font-size: 10px;
+                letter-spacing: 1px;
+                word-break: break-all;
+                background: #f4f4f4;
+                padding: 6px;
+                margin: 4px 0;
+                border: 1px dashed #000;
             }
             .receipt-footer {
                 text-align: center;
-                margin-top: 10px;
                 font-size: 11px;
+                margin-top: 10px;
                 border-top: 1px dashed #000;
-                padding-top: 6px;
+                padding-top: 8px;
             }
         }
     </style>
 </head>
 <body>
-
     <header>
         <div class="brand-title">
-            <h1>🥙 HAZZAT CHAPATI <span>| حزة جباتي</span></h1>
+            <h1>HAZZAT CHAPATI <span>هزة شباتي | POS</span></h1>
+            <select id="branch-selector" class="branch-select" onchange="switchBranch(this.value)">
+                <option value="BOLIFARD_1">BOLIFARD 1</option>
+                <option value="BOLIFARD_2">BOLIFARD 2</option>
+            </select>
         </div>
         <div class="header-right">
-            <span class="sync-badge" id="db-status" onclick="fetchSalesFromFirebase(true)" title="Click to retry sync">⏳ REST Syncing...</span>
-            <button class="hdr-btn" onclick="toggleFullscreen()" title="Fullscreen">⛶ Fullscreen</button>
-            <div id="live-clock" style="font-size: 0.86rem;"></div>
+            <span id="sync-status-badge" class="sync-badge" onclick="openFirebaseModal()" title="Click to configure Firebase Realtime Database">🔥 Firebase / Local</span>
+            <button class="hdr-btn" onclick="openShiftModal()">📊 Shift / Drawer</button>
+            <button class="hdr-btn" onclick="openHistoryModal()">📜 History</button>
+            <span id="live-clock" style="font-size: 0.85rem; color: var(--accent);"></span>
         </div>
     </header>
 
-    <div class="foodics-action-bar" role="toolbar" aria-label="Quick POS Actions">
-        <button type="button" class="f-action-btn" onclick="quickPrintDraftReceipt()">🖨️ Print</button>
-        <button type="button" class="f-action-btn" onclick="printKitchenOrder()">🍳 Kitchen</button>
-        <button type="button" class="f-action-btn danger-btn" onclick="voidCurrentOrder()">🚫 Void</button>
-        <button type="button" class="f-action-btn" id="bar-btn-discount" onclick="openDiscountModal()">🏷️ Discount</button>
-        <button type="button" class="f-action-btn" id="bar-btn-notes" onclick="openNotesModal()">📝 Notes</button>
-        <button type="button" class="f-action-btn" id="bar-btn-tags" onclick="openTagsModal()">🔖 Tags</button>
-        <button type="button" class="f-action-btn" onclick="openMoreMenuModal()">⋮ More</button>
+    <div class="foodics-action-bar">
+        <button class="f-action-btn" onclick="holdCurrentOrder()">⏸️ Hold</button>
+        <button class="f-action-btn" id="discount-btn" onclick="openDiscountModal()">🏷️ Discount</button>
+        <button class="f-action-btn" id="note-btn" onclick="openNoteModal()">📝 Note</button>
+        <button class="f-action-btn" id="customer-btn" onclick="openCustomerModal()">👤 Customer</button>
+        <button class="f-action-btn" id="table-btn" onclick="openTableModal()">🍽️ Table</button>
+        <button class="f-action-btn" id="recall-btn" onclick="openRecallModal()">🔄 Recall (0)</button>
+        <button class="f-action-btn danger-btn" onclick="voidOrder()">🗑️ Void</button>
     </div>
 
     <div class="main-container">
         <div class="menu-section">
             <div class="search-filter-bar">
-                <input type="text" id="search-input" class="search-box" placeholder="Search item (e.g., Karak, Cheese, Water, ماء)..." onkeyup="filterMenu()">
+                <input type="text" id="search-input" class="search-box" placeholder="Search chapati, karak, sandwich or Arabic..." oninput="renderMenu()">
             </div>
-
-            <div class="category-buttons">
-                <button class="cat-btn active" onclick="filterCategory('all', this)">All Items (الكل)</button>
-                <button class="cat-btn" onclick="filterCategory('chapati', this)">Chapati (الجباتي)</button>
-                <button class="cat-btn" onclick="filterCategory('cold_drinks', this)">Cold Drinks (المشروبات الباردة)</button>
-                <button class="cat-btn" onclick="filterCategory('hot_drinks', this)">Hot Drinks (المشروبات الساخنة)</button>
-                <button class="cat-btn" onclick="filterCategory('desserts', this)">Desserts (الحلويات)</button>
-                <button class="cat-btn" onclick="filterCategory('fries', this)">French Fries (فرايز)</button>
-            </div>
-
+            <div class="category-buttons" id="category-buttons"></div>
             <div class="menu-grid" id="menu-grid"></div>
         </div>
 
         <div class="cart-section">
             <div class="customer-info">
-                <input type="text" id="customer-name" placeholder="Customer Name (Optional)">
-                <select id="order-type" onchange="updateOrderMetaStrip()">
-                    <option value="Takeaway (سفري)">Takeaway (سفري)</option>
-                    <option value="Dine-in">Dine-in (محلي)</option>
-                    <option value="Drive-Thru">Drive-Thru (سيارة)</option>
-                    <option value="Dine-In Table 1">Table 01</option>
-                    <option value="Dine-In Table 2">Table 02</option>
-                    <option value="Dine-In Table 3">Table 03</option>
-                    <option value="Dine-In Table 4">Table 04</option>
+                <input type="text" id="customer-name-input" placeholder="Customer name (optional)" oninput="syncOrderMetaFromCart()">
+                <select id="order-type-select" onchange="syncOrderMetaFromCart()">
+                    <option value="Dine-In">Dine-In (محلي)</option>
+                    <option value="Takeaway">Takeaway (سفري)</option>
+                    <option value="Delivery">Delivery (توصيل)</option>
                 </select>
             </div>
 
             <div class="order-meta-strip" id="order-meta-strip"></div>
 
             <div class="cart-items" id="cart-items">
-                <p style="text-align: center; color: #888; margin-top: 24px;">No items selected<br>لم يتم اختيار أي صنف</p>
+                <p style="text-align: center; color: #888; margin-top: 25px; font-size: 0.88rem;">Cart is empty. Tap an item to add.</p>
             </div>
 
             <div class="summary-section">
                 <div class="summary-row">
-                    <span>Gross Items Total (إجمالي الأصناف):</span>
-                    <span id="gross-total">0.00 SAR</span>
+                    <span>Subtotal (Excl. VAT)</span>
+                    <span id="subtotal-val">0.00 SAR</span>
                 </div>
                 <div class="summary-row">
-                    <span id="discount-label-text">Discount (الخصم SAR):</span>
-                    <input type="number" id="discount-input" value="0" min="0" step="0.01" style="width: 78px; text-align: right; padding: 3px 6px; border: 1px solid var(--border); border-radius: 4px;" onchange="syncManualDiscountInput()">
+                    <span>VAT (15% Included)</span>
+                    <span id="vat-val">0.00 SAR</span>
                 </div>
                 <div class="summary-row">
-                    <span>Subtotal / Excl. VAT (المجموع قبل الضريبة):</span>
-                    <span id="subtotal">0.00 SAR</span>
-                </div>
-                <div class="summary-row">
-                    <span>VAT 15% Included (ضريبة القيمة المضافة):</span>
-                    <span id="vat-amount">0.00 SAR</span>
+                    <span>Discount (SAR)</span>
+                    <input type="number" id="discount-input" value="0" min="0" step="0.5" style="width: 75px; padding: 2px 5px; border: 1px solid var(--border); border-radius: 4px; text-align: right;" oninput="updateSummary()">
                 </div>
                 <div class="summary-row total">
-                    <span>Grand Total / Incl. VAT (الإجمالي شامل الضريبة):</span>
-                    <span id="grand-total">0.00 SAR</span>
+                    <span>Total (SAR)</span>
+                    <span id="total-val">0.00 SAR</span>
                 </div>
 
                 <div class="action-buttons">
-                    <button class="btn btn-clear" onclick="clearCart()">Clear (إلغاء)</button>
-                    <button class="btn btn-print" onclick="openPaymentModal()">💳 Checkout / Pay</button>
+                    <button class="btn btn-clear" onclick="clearCart()">Clear</button>
+                    <button class="btn btn-print" onclick="openPaymentModal()">Pay & Print</button>
                 </div>
             </div>
         </div>
     </div>
 
+    <!-- Payment Modal (VISA default + Cash only) -->
     <div class="modal-overlay" id="payment-modal">
         <div class="modal-box">
             <div class="modal-header">
-                <h3>Select Payment Method / اختر طريقة الدفع</h3>
-                <button class="modal-close" onclick="closePaymentModal()">✖</button>
+                <h3>Select Payment Method - <span id="pay-modal-branch">BOLIFARD 1</span></h3>
+                <button class="modal-close" onclick="closePaymentModal()">&times;</button>
             </div>
             <div class="modal-body">
                 <div class="modal-amount-box">
-                    <div class="modal-amount-label">Total Payable (المبلغ المستحق)</div>
-                    <div class="modal-amount-value" id="modal-grand-total">0.00 SAR</div>
+                    <div class="modal-amount-label">Total Payable Amount (Inclusive 15% VAT)</div>
+                    <div class="modal-amount-value" id="modal-total-amount">0.00 SAR</div>
                 </div>
 
                 <div class="payment-options">
-                    <button type="button" class="pay-option-btn selected" id="opt-cash" onclick="selectPaymentMethod('Cash / كاش', this)">
+                    <button type="button" class="pay-option-btn selected" id="opt-visa" onclick="selectPaymentMethod('VISA')">
+                        <span class="pay-icon">💳</span>
+                        <span class="pay-title-en">VISA</span>
+                        <span class="pay-title-ar">فيزا (افتراضي)</span>
+                    </button>
+                    <button type="button" class="pay-option-btn" id="opt-cash" onclick="selectPaymentMethod('Cash')">
                         <span class="pay-icon">💵</span>
                         <span class="pay-title-en">Cash</span>
-                        <span class="pay-title-ar">كاش</span>
-                    </button>
-
-                    <button type="button" class="pay-option-btn" id="opt-visa" onclick="selectPaymentMethod('Visa / Mada / مدى', this)">
-                        <span class="pay-icon">💳</span>
-                        <span class="pay-title-en">Visa / Mada</span>
-                        <span class="pay-title-ar">فيزا / مدى</span>
+                        <span class="pay-title-ar">نقدي</span>
                     </button>
                 </div>
 
+                <div id="cash-tendered-box" style="display: none; margin-bottom: 12px; background: #fdfaf5; border: 1px solid var(--border); border-radius: 8px; padding: 10px;">
+                    <div class="field-group" style="margin-bottom: 6px;">
+                        <label for="cash-received-input">Cash Received (SAR)</label>
+                        <input type="number" id="cash-received-input" min="0" step="0.5" oninput="calculateCashChange()">
+                    </div>
+                    <div style="display: flex; justify-content: space-between; font-size: 0.88rem; font-weight: 700; color: var(--primary-dark);">
+                        <span>Change Due:</span>
+                        <span id="cash-change-display">0.00 SAR</span>
+                    </div>
+                </div>
+
                 <div class="modal-actions-grid">
-                    <button type="button" class="btn btn-pay-only" onclick="processOrder(false)">✅ Pay Only (No Print)</button>
-                    <button type="button" class="btn btn-confirm-pay" onclick="processOrder(true)">🖨️ Pay & Print (ZATCA)</button>
-                    <button type="button" class="btn btn-cancel-modal" onclick="closePaymentModal()">Cancel (إلغاء)</button>
+                    <button type="button" class="btn btn-pay-only" onclick="completePayment(false)">Pay Only</button>
+                    <button type="button" class="btn btn-confirm-pay" onclick="completePayment(true)">Pay & Print Receipt</button>
+                    <button type="button" class="btn btn-cancel-modal" onclick="closePaymentModal()">Cancel</button>
                 </div>
             </div>
         </div>
     </div>
 
+    <!-- Discount Modal -->
     <div class="modal-overlay" id="discount-modal">
         <div class="modal-box">
             <div class="modal-header">
-                <h3>🏷️ Order Discount / خصم الطلب (SAR / %)</h3>
-                <button class="modal-close" onclick="closeModal('discount-modal')">✖</button>
+                <h3>🏷️ Order Discount (SAR)</h3>
+                <button class="modal-close" onclick="closeModal('discount-modal')">&times;</button>
             </div>
             <div class="modal-body">
-                <div class="field-group">
-                    <label>Discount Type / نوع الخصم</label>
-                    <select id="disc-type-select" onchange="renderDiscountPreview()">
-                        <option value="amount">Fixed Amount (SAR / ريال)</option>
-                        <option value="percent">Percentage (% / نسبة مئوية)</option>
-                    </select>
-                </div>
-                <div class="field-group">
-                    <label>Discount Value / قيمة الخصم</label>
-                    <input type="number" id="disc-value-input" min="0" step="0.01" value="0" oninput="renderDiscountPreview()">
-                </div>
+                <p style="font-size: 0.86rem; color: #6d5443;">Choose a quick discount amount or enter a custom SAR discount:</p>
                 <div class="quick-chips">
-                    <button type="button" class="chip-btn" onclick="applyQuickDiscount('percent', 5)">5%</button>
-                    <button type="button" class="chip-btn" onclick="applyQuickDiscount('percent', 10)">10%</button>
-                    <button type="button" class="chip-btn" onclick="applyQuickDiscount('percent', 15)">15%</button>
-                    <button type="button" class="chip-btn" onclick="applyQuickDiscount('amount', 5)">5 SAR</button>
-                    <button type="button" class="chip-btn" onclick="applyQuickDiscount('amount', 10)">10 SAR</button>
-                    <button type="button" class="chip-btn" onclick="applyQuickDiscount('amount', 0)">Reset (0)</button>
+                    <button type="button" class="chip-btn" onclick="applyQuickDiscount(0)">0 SAR</button>
+                    <button type="button" class="chip-btn" onclick="applyQuickDiscount(2)">2 SAR</button>
+                    <button type="button" class="chip-btn" onclick="applyQuickDiscount(5)">5 SAR</button>
+                    <button type="button" class="chip-btn" onclick="applyQuickDiscount(10)">10 SAR</button>
+                    <button type="button" class="chip-btn" onclick="applyQuickDiscount(15)">15 SAR</button>
+                    <button type="button" class="chip-btn" onclick="applyQuickDiscount(20)">20 SAR</button>
                 </div>
-                <div class="modal-amount-box">
-                    <div class="modal-amount-label">Calculated Discount (قيمة الخصم بالريال)</div>
-                    <div class="modal-amount-value" id="disc-preview-sar">0.00 SAR</div>
+                <div class="field-group">
+                    <label for="modal-discount-input">Custom Discount Amount (SAR)</label>
+                    <input type="number" id="modal-discount-input" min="0" step="0.5" placeholder="0.00">
                 </div>
                 <div class="action-buttons">
-                    <button type="button" class="btn btn-clear" onclick="applyQuickDiscount('amount', 0); closeModal('discount-modal')">Remove</button>
+                    <button type="button" class="btn btn-clear" onclick="applyQuickDiscount(0)">Remove Discount</button>
                     <button type="button" class="btn btn-print" onclick="saveDiscountFromModal()">Apply Discount</button>
                 </div>
             </div>
         </div>
     </div>
 
-    <div class="modal-overlay" id="notes-modal">
+    <!-- Order Note Modal -->
+    <div class="modal-overlay" id="note-modal">
         <div class="modal-box">
             <div class="modal-header">
-                <h3>📝 Order Notes / ملاحظات الطلب</h3>
-                <button class="modal-close" onclick="closeModal('notes-modal')">✖</button>
+                <h3>📝 Order / Kitchen Note</h3>
+                <button class="modal-close" onclick="closeModal('note-modal')">&times;</button>
             </div>
             <div class="modal-body">
-                <div class="field-group">
-                    <label>Kitchen / Customer Note (ملاحظة للمطبخ)</label>
-                    <textarea id="order-note-textarea" rows="3" placeholder="e.g., Less sugar, Extra cheese, Crispy..."></textarea>
-                </div>
                 <div class="quick-chips">
-                    <button type="button" class="chip-btn" onclick="appendQuickNote('Less Sugar (سكر خفيف)')">+ Less Sugar (سكر خفيف)</button>
-                    <button type="button" class="chip-btn" onclick="appendQuickNote('Extra Cheese (جبن إضافي)')">+ Extra Cheese (جبن إضافي)</button>
-                    <button type="button" class="chip-btn" onclick="appendQuickNote('No Onion (بدون بصل)')">+ No Onion (بدون بصل)</button>
-                    <button type="button" class="chip-btn" onclick="appendQuickNote('Spicy (حار)')">+ Spicy (حار)</button>
-                    <button type="button" class="chip-btn" onclick="appendQuickNote('Extra Napkins (مناديل إضافية)')">+ Extra Napkins</button>
+                    <button type="button" class="chip-btn" onclick="appendQuickNote('Extra spicy')">Extra spicy</button>
+                    <button type="button" class="chip-btn" onclick="appendQuickNote('Less sugar')">Less sugar</button>
+                    <button type="button" class="chip-btn" onclick="appendQuickNote('No chili')">No chili</button>
+                    <button type="button" class="chip-btn" onclick="appendQuickNote('Extra cheese')">Extra cheese</button>
+                    <button type="button" class="chip-btn" onclick="appendQuickNote('Cut in half')">Cut in half</button>
+                </div>
+                <div class="field-group">
+                    <label for="order-note-input">Kitchen / Customer Note</label>
+                    <textarea id="order-note-input" rows="3" placeholder="Enter special instructions..."></textarea>
                 </div>
                 <div class="action-buttons">
                     <button type="button" class="btn btn-clear" onclick="clearOrderNote()">Clear Note</button>
@@ -1502,1101 +1529,380 @@
         </div>
     </div>
 
-    <div class="modal-overlay" id="tags-modal">
+    <!-- Customer Details Modal -->
+    <div class="modal-overlay" id="customer-modal">
         <div class="modal-box">
             <div class="modal-header">
-                <h3>🔖 Order Tags / وسوم الطلب</h3>
-                <button class="modal-close" onclick="closeModal('tags-modal')">✖</button>
+                <h3>👤 Customer Details</h3>
+                <button class="modal-close" onclick="closeModal('customer-modal')">&times;</button>
             </div>
             <div class="modal-body">
-                <p style="font-size:0.86rem; color:#6d5443; margin-bottom:8px;">Select one or more order tags:</p>
-                <div class="quick-chips" id="tags-chip-container">
-                    <button type="button" class="chip-btn" data-tag="Dine-in" onclick="toggleOrderTag('Dine-in', this)">🍽️ Dine-in</button>
-                    <button type="button" class="chip-btn" data-tag="Takeaway" onclick="toggleOrderTag('Takeaway', this)">🛍️ Takeaway</button>
-                    <button type="button" class="chip-btn" data-tag="Drive-Thru" onclick="toggleOrderTag('Drive-Thru', this)">🚗 Drive-Thru</button>
-                    <button type="button" class="chip-btn" data-tag="Urgent / Rush" onclick="toggleOrderTag('Urgent / Rush', this)">⚡ Urgent</button>
-                    <button type="button" class="chip-btn" data-tag="VIP" onclick="toggleOrderTag('VIP', this)">⭐ VIP</button>
+                <div class="field-group">
+                    <label for="modal-customer-name">Customer Name</label>
+                    <input type="text" id="modal-customer-name" placeholder="e.g. Tariq Al-Qahtani">
+                </div>
+                <div class="field-group">
+                    <label for="modal-customer-phone">Mobile / WhatsApp</label>
+                    <input type="tel" id="modal-customer-phone" placeholder="e.g. 05XXXXXXXX">
+                </div>
+                <div class="field-group">
+                    <label for="modal-customer-address">Delivery / Pickup Address</label>
+                    <input type="text" id="modal-customer-address" placeholder="Street, building, landmark...">
                 </div>
                 <div class="action-buttons">
-                    <button type="button" class="btn btn-clear" onclick="clearOrderTags()">Clear Tags</button>
-                    <button type="button" class="btn btn-print" onclick="closeModal('tags-modal')">Done</button>
+                    <button type="button" class="btn btn-clear" onclick="clearCustomerMeta()">Clear</button>
+                    <button type="button" class="btn btn-print" onclick="saveCustomerMeta()">Save Customer</button>
                 </div>
             </div>
         </div>
     </div>
 
-    <div class="modal-overlay" id="more-modal">
+    <!-- Table Selection Modal -->
+    <div class="modal-overlay" id="table-modal">
         <div class="modal-box">
             <div class="modal-header">
-                <h3>⋮ More Options / خيارات إضافية</h3>
-                <button class="modal-close" onclick="closeModal('more-modal')">✖</button>
+                <h3>🍽️ Select Table</h3>
+                <button class="modal-close" onclick="closeModal('table-modal')">&times;</button>
             </div>
-            <div class="modal-body" style="display:flex; flex-direction:column; gap:10px;">
-                <button type="button" class="btn" style="background:var(--primary); padding:13px;" onclick="closeModal('more-modal'); openSalesHistoryModal()">📊 Sales History & Daily Report (سجل المبيعات)</button>
-                <button type="button" class="btn" style="background:var(--purple-bar); padding:13px;" onclick="closeModal('more-modal'); openShiftModal()">🧾 Shift Closing Report / Z-Report (إغلاق الوردية)</button>
-                <button type="button" class="btn" style="background:var(--info); padding:13px;" onclick="closeModal('more-modal'); fetchSalesFromFirebase(true)">🔄 Sync Sales Now (مزامنة البيانات)</button>
-                <button type="button" class="btn btn-cancel-modal" onclick="closeModal('more-modal')">Close (إغلاق)</button>
+            <div class="modal-body">
+                <div class="quick-chips" id="table-chips-container"></div>
+                <div class="field-group">
+                    <label for="modal-table-input">Table Number / Label</label>
+                    <input type="text" id="modal-table-input" placeholder="e.g. T-01 or Family 2">
+                </div>
+                <div class="action-buttons">
+                    <button type="button" class="btn btn-clear" onclick="clearTableMeta()">Unassign Table</button>
+                    <button type="button" class="btn btn-print" onclick="saveTableMeta()">Assign Table</button>
+                </div>
             </div>
         </div>
     </div>
 
+    <!-- Recall Held Orders Modal -->
+    <div class="modal-overlay" id="recall-modal">
+        <div class="modal-box history-modal-box">
+            <div class="modal-header">
+                <h3>🔄 Held Orders (Recall) - <span id="recall-modal-branch">BOLIFARD 1</span></h3>
+                <button class="modal-close" onclick="closeModal('recall-modal')">&times;</button>
+            </div>
+            <div class="modal-body" id="recall-modal-body"></div>
+        </div>
+    </div>
+
+    <!-- Shift & Cash Drawer Modal (with 80mm Print Report) -->
     <div class="modal-overlay" id="shift-modal">
         <div class="modal-box shift-modal-box">
             <div class="modal-header">
-                <h3>🧾 Shift Closing Report (Z-Report) & Cash Drawer / إغلاق الوردية والصندوق</h3>
-                <button class="modal-close" onclick="closeShiftModal()">✖</button>
+                <h3>📊 Shift & Cash Drawer - <span id="shift-modal-branch">BOLIFARD 1</span></h3>
+                <button class="modal-close" onclick="closeModal('shift-modal')">&times;</button>
             </div>
-            <div class="modal-body">
-                <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px; margin-bottom:12px;">
-                    <div style="font-size:0.86rem;">
-                        <strong>Shift Started:</strong> <span id="shift-start-display">-</span>
-                    </div>
-                    <button type="button" class="mini-print-btn" style="background: var(--info); padding:6px 10px;" onclick="setOpeningCashPrompt()">✏️ Set Opening Amount</button>
-                </div>
-
-                <div class="report-summary-cards">
-                    <div class="report-card">
-                        <div class="report-card-label">Opening Amount</div>
-                        <div class="report-card-value" id="z-opening-amount">0.00 SAR</div>
-                    </div>
-                    <div class="report-card">
-                        <div class="report-card-label">Cash Sales (كاش)</div>
-                        <div class="report-card-value" id="z-cash-sales" style="color:var(--success);">0.00 SAR</div>
-                    </div>
-                    <div class="report-card">
-                        <div class="report-card-label">VISA / Mada (شبكة)</div>
-                        <div class="report-card-value" id="z-visa-sales" style="color:var(--info);">0.00 SAR</div>
-                    </div>
-                    <div class="report-card">
-                        <div class="report-card-label">VAT 15% Included</div>
-                        <div class="report-card-value" id="z-vat-total">0.00 SAR</div>
-                    </div>
-                    <div class="report-card">
-                        <div class="report-card-label">Total Shift Sales</div>
-                        <div class="report-card-value" id="z-total-sales">0.00 SAR</div>
-                    </div>
-                </div>
-
-                <div class="shift-grid-2">
-                    <div class="shift-box">
-                        <h4>💵 Cash Drawer Reconciliation (حساب الصندوق)</h4>
-                        <div class="drawer-line">
-                            <span>Opening Cash (الرصيد الافتتاحي):</span>
-                            <span id="drw-opening">0.00 SAR</span>
-                        </div>
-                        <div class="drawer-line">
-                            <span>(+) Cash Sales (مبيعات نقدية):</span>
-                            <span id="drw-cash-sales">0.00 SAR</span>
-                        </div>
-                        <div class="drawer-line">
-                            <span>(+) Pay In (إيداع نقدي):</span>
-                            <span id="drw-pay-in" class="tag-in">0.00 SAR</span>
-                        </div>
-                        <div class="drawer-line">
-                            <span>(-) Pay Out / Expenses (مصروفات / سحب):</span>
-                            <span id="drw-pay-out" class="tag-out">0.00 SAR</span>
-                        </div>
-                        <div class="drawer-line highlight">
-                            <span>Expected Cash in Drawer (المتوقع بالصندوق):</span>
-                            <span id="drw-expected">0.00 SAR</span>
-                        </div>
-                    </div>
-
-                    <div class="shift-box">
-                        <h4>📥📤 Pay In / Pay Out (إيداع / سحب نقدي)</h4>
-                        <div class="pay-io-form">
-                            <select id="io-type">
-                                <option value="IN">Pay In (+)</option>
-                                <option value="OUT">Pay Out (-)</option>
-                            </select>
-                            <input type="number" id="io-amount" min="0" step="0.01" placeholder="Amount SAR">
-                            <input type="text" id="io-note" placeholder="Reason / ملاحظة">
-                            <button type="button" class="mini-print-btn" style="background:var(--success); padding:7px 10px;" onclick="addCashMovement()">Add</button>
-                        </div>
-                        <div class="io-list" id="io-list">
-                            <p style="color:#888; text-align:center; padding:10px;">No Pay In / Pay Out entries yet.</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="actual-cash-row">
-                    <label for="actual-cash-input" style="font-weight:700; font-size:0.92rem;">Actual Counted Cash in Drawer (النقد الفعلي المعدود SAR):</label>
-                    <input type="number" id="actual-cash-input" min="0" step="0.01" value="0" oninput="updateDrawerCalculation()">
-                </div>
-
-                <div class="diff-box diff-balanced" id="cash-diff-box">
-                    <span id="cash-diff-label">Drawer Balanced (مطابق)</span>
-                    <span id="cash-diff-value">0.00 SAR</span>
-                </div>
-
-                <div class="action-buttons" style="flex-wrap:wrap;">
-                    <button type="button" class="btn" style="background:var(--info);" onclick="printZReport(false)">🖨️ Print Z-Report</button>
-                    <button type="button" class="btn btn-print" onclick="closeAndResetShift()">🔒 Close Shift & Start New</button>
-                </div>
-
-                <div style="margin-top:16px;">
-                    <h4 style="font-size:0.92rem; color:var(--primary); margin-bottom:8px;">📋 Closed Shifts History (سجل الورديات المغلقة)</h4>
-                    <div style="overflow-x:auto;">
-                        <table class="history-table">
-                            <thead>
-                                <tr>
-                                    <th>Shift ID</th>
-                                    <th>Closed At</th>
-                                    <th>Sales (SAR)</th>
-                                    <th>Expected Cash</th>
-                                    <th>Actual Cash</th>
-                                    <th>Shortage / Diff</th>
-                                    <th>Action</th>
-                                </tr>
-                            </thead>
-                            <tbody id="closed-shifts-tbody"></tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
+            <div class="modal-body" id="shift-modal-body"></div>
         </div>
     </div>
 
+    <!-- Sales History & Item-Wise Sales Summary Modal -->
     <div class="modal-overlay" id="history-modal">
         <div class="modal-box history-modal-box">
             <div class="modal-header">
-                <h3>📊 Sales History & Daily Report / سجل المبيعات والتقرير اليومي</h3>
-                <button class="modal-close" onclick="closeSalesHistoryModal()">✖</button>
+                <h3>📜 Sales History & Item Summary - <span id="history-modal-branch">BOLIFARD 1</span></h3>
+                <button class="modal-close" onclick="closeModal('history-modal')">&times;</button>
             </div>
             <div class="modal-body">
                 <div class="history-filter-bar">
                     <div class="history-filter-controls">
-                        <label for="report-date-filter" style="font-weight: 600; font-size: 0.9rem;">Filter by Date: </label>
-                        <input type="date" id="report-date-filter" onchange="renderSalesHistory()">
-                        <button type="button" class="mini-print-btn" style="padding: 7px 10px;" onclick="resetDateFilter()">Show All</button>
-                        <button type="button" class="mini-print-btn" style="background: var(--info); padding: 7px 10px;" onclick="fetchSalesFromFirebase(true)">🔄 Refresh</button>
+                        <button type="button" class="tab-btn active" id="tab-orders-btn" onclick="switchHistoryTab('orders')">🧾 Orders History</button>
+                        <button type="button" class="tab-btn" id="tab-items-btn" onclick="switchHistoryTab('items')">📦 Item-Wise Summary</button>
                     </div>
-                    <button type="button" class="mini-print-btn" style="background: var(--danger); padding: 7px 12px;" onclick="clearSalesHistory()">🗑️ Clear History</button>
-                </div>
-
-                <div class="report-summary-cards">
-                    <div class="report-card">
-                        <div class="report-card-label">Total Orders (عدد الطلبات)</div>
-                        <div class="report-card-value" id="rep-orders-count">0</div>
-                    </div>
-                    <div class="report-card">
-                        <div class="report-card-label">Cash Sales (مبيعات كاش)</div>
-                        <div class="report-card-value" id="rep-cash-total" style="color: #2e7d32;">0.00 SAR</div>
-                    </div>
-                    <div class="report-card">
-                        <div class="report-card-label">Visa / Mada (مبيعات شبكة)</div>
-                        <div class="report-card-value" id="rep-visa-total" style="color: #1565c0;">0.00 SAR</div>
-                    </div>
-                    <div class="report-card">
-                        <div class="report-card-label">Total VAT 15% (إجمالي الضريبة)</div>
-                        <div class="report-card-value" id="rep-vat-total">0.00 SAR</div>
-                    </div>
-                    <div class="report-card">
-                        <div class="report-card-label">Grand Sales (إجمالي المبيعات)</div>
-                        <div class="report-card-value" id="rep-grand-total">0.00 SAR</div>
+                    <div class="history-filter-controls">
+                        <label for="history-date-filter" style="font-weight: 600; font-size: 0.85rem;">Filter Date:</label>
+                        <input type="date" id="history-date-filter" onchange="renderHistoryView()">
+                        <button class="mini-print-btn" style="padding: 7px 10px;" onclick="showAllHistory()">Show All</button>
+                        <button class="mini-print-btn" id="print-item-summary-btn" style="padding: 7px 10px; background: var(--success); display: none;" onclick="printItemWiseSummary80mm()">🖨️ Print 80mm Summary</button>
                     </div>
                 </div>
+                <div class="report-summary-cards" id="history-summary-cards"></div>
+                <div id="history-content-container" style="overflow-x: auto;"></div>
+            </div>
+        </div>
+    </div>
 
-                <div style="overflow-x: auto;">
-                    <table class="history-table">
-                        <thead>
-                            <tr>
-                                <th>Invoice</th>
-                                <th>Date & Time</th>
-                                <th>Customer / Type</th>
-                                <th>Items & Note</th>
-                                <th>Payment</th>
-                                <th>Total (SAR)</th>
-                                <th>Status</th>
-                                <th>Action</th>
-                            </tr>
-                        </thead>
-                        <tbody id="history-table-body"></tbody>
-                    </table>
+    <!-- Firebase Realtime Database Config Modal -->
+    <div class="modal-overlay" id="firebase-modal">
+        <div class="modal-box">
+            <div class="modal-header">
+                <h3>🔥 Firebase Realtime Database Setup</h3>
+                <button class="modal-close" onclick="closeModal('firebase-modal')">&times;</button>
+            </div>
+            <div class="modal-body">
+                <p style="font-size: 0.84rem; color: #5c4636; margin-bottom: 10px;">
+                    Data saves separately under:
+                    <br><strong>/hazzat_chapati/BOLIFARD_1</strong>
+                    <br><strong>/hazzat_chapati/BOLIFARD_2</strong>
+                </p>
+                <div class="field-group">
+                    <label for="firebase-db-url-input">Firebase Realtime Database URL</label>
+                    <input type="url" id="firebase-db-url-input" placeholder="https://your-project-default-rtdb.firebaseio.com">
+                </div>
+                <div class="action-buttons">
+                    <button type="button" class="btn btn-clear" onclick="clearFirebaseUrl()">Local Only</button>
+                    <button type="button" class="btn btn-print" onclick="saveFirebaseUrl()">Save & Sync Now</button>
                 </div>
             </div>
         </div>
     </div>
 
-    <div class="toast" id="toast-msg"></div>
+    <!-- 80mm Printable Receipt Container -->
+    <div id="printable-receipt"></div>
 
-    <div id="printable-receipt">
-        <div class="receipt-header">
-            <h2>حزة جباتي</h2>
-            <h2>HAZZAT CHAPATI</h2>
-            <p id="rec-subtitle">Simplified Tax Invoice / فاتورة ضريبية مبسطة</p>
-            <p>All Prices Include 15% VAT / الأسعار شاملة الضريبة 15%</p>
-            <p>VAT No: 311233882500003</p>
-            <div class="paid-stamp" id="rec-stamp">PAID (مدفوع)</div>
-        </div>
-        <div class="receipt-info" id="rec-info-block"></div>
-        <table class="receipt-table" id="rec-table-block">
-            <thead>
-                <tr>
-                    <th>Item / الصنف</th>
-                    <th style="text-align: center;">Qty</th>
-                    <th style="text-align: right;">Total</th>
-                </tr>
-            </thead>
-            <tbody id="rec-items"></tbody>
-        </table>
-        <div class="receipt-totals" id="rec-totals-block"></div>
-        <div class="zatca-qr-box" id="rec-zatca-box">
-            <p style="font-size:10px; font-weight:bold;">ZATCA QR Code / رمز الاستجابة السريعة</p>
-            <canvas id="zatca-qr-canvas" width="128" height="128"></canvas>
-            <p style="font-size:9px; word-break:break-all;" id="zatca-vat-line">VAT: 311233882500003</p>
-        </div>
-        <div class="receipt-footer" id="rec-footer-block"></div>
-    </div>
+    <div class="toast" id="toast"></div>
 
     <script>
-        const ZATCA_VAT_NUMBER = "311233882500003";
-        const SELLER_NAME_AR = "حزة جباتي";
-
-        const firebaseConfig = {
-            apiKey: "AIzaSyCPKhNpglPHGwV3cpYsPeFUcGCqwj09HSA",
-            authDomain: "hazzat-pos.firebaseapp.com",
-            projectId: "hazzat-pos",
-            storageBucket: "hazzat-pos.firebasestorage.app",
-            messagingSenderId: "726124382195",
-            appId: "1:726124382195:web:8f9269d6b765621dd1f486",
-            measurementId: "G-ZW2KRK4PGP"
-        };
-
-        const DATABASE_BASE_URL = "https://hazzat-pos-default-rtdb.firebaseio.com";
-        const ORDERS_REST_URL = `${DATABASE_BASE_URL}/hazzat_chapati/sales_orders.json`;
-        const SHIFTS_REST_URL = `${DATABASE_BASE_URL}/hazzat_chapati/shift_reports.json`;
-        const SHIFT_STATE_KEY = "hazzat_current_shift_v1";
-        const CLOSED_SHIFTS_KEY = "hazzat_closed_shifts_v1";
+        const VAT_RATE = 0.15;
+        const CURRENCY = 'SAR';
+        const DEFAULT_FIREBASE_URL = 'https://firebaseio.com';
+        const BRANCHES = ['BOLIFARD_1', 'BOLIFARD_2'];
 
         const menuItems = [
-            { id: 1, nameEn: "Chapati Cheese", nameAr: "جباتي جبن", price: 13, category: "chapati", icon: "🫓" },
-            { id: 2, nameEn: "Chapati Cheese & Honey", nameAr: "جباتي جبنة عسل", price: 15, category: "chapati", icon: "🍯" },
-            { id: 3, nameEn: "Chapati Cheese & Oregano", nameAr: "جباتي جبنة زعتر", price: 15, category: "chapati", icon: "🌿" },
-            { id: 4, nameEn: "Chapati Rahash & Cheese", nameAr: "جباتي رهش جبن", price: 15, category: "chapati", icon: "🫓" },
-            { id: 5, nameEn: "Chapati Labnah", nameAr: "جباتي لبنه", price: 14, category: "chapati", icon: "🥛" },
-            { id: 6, nameEn: "Chapati Labnah Honey", nameAr: "جباتي لبنه عسل", price: 15, category: "chapati", icon: "🍯" },
-            { id: 7, nameEn: "Chapati Labnah Oregano", nameAr: "جباتي لبنه زعتر", price: 15, category: "chapati", icon: "🌿" },
-            { id: 8, nameEn: "Chapati Cream & Honey", nameAr: "جباتي قشطة عسل", price: 15, category: "chapati", icon: "🫓" },
-            { id: 9, nameEn: "Chapati Burata", nameAr: "جباتي بوراتا", price: 17, category: "chapati", icon: "🧀" },
-            { id: 10, nameEn: "Chapati Hallom", nameAr: "جباتي حلوم", price: 16, category: "chapati", icon: "🧀" },
-            { id: 11, nameEn: "Chapati Chicken", nameAr: "جباتي حمسة دجاج", price: 16, category: "chapati", icon: "🍗" },
-            { id: 12, nameEn: "Chips & Cheese", nameAr: "جباتي تشيبس اند تشيز", price: 15, category: "chapati", icon: "🍟" },
-            { id: 13, nameEn: "Falafil Special", nameAr: "جباتي فلافل سبيشل", price: 16, category: "chapati", icon: "🧆" },
-            { id: 14, nameEn: "Chapati Falafil", nameAr: "جباتي فلافل", price: 15, category: "chapati", icon: "🧆" },
-            { id: 15, nameEn: "Chapati Omelate", nameAr: "جباتي اومليت", price: 15, category: "chapati", icon: "🍳" },
-            { id: 16, nameEn: "Chapati Nutella", nameAr: "جباتي نوتيلا", price: 15, category: "chapati", icon: "🍫" },
-
-            { id: 17, nameEn: "Red Mojito", nameAr: "ريد موهيتو", price: 19, category: "cold_drinks", icon: "🍹" },
-            { id: 18, nameEn: "Shiny Ocean", nameAr: "شايني اوشن", price: 19, category: "cold_drinks", icon: "🧊" },
-            { id: 19, nameEn: "Ice Tea Roman", nameAr: "ايس تي رمان", price: 19, category: "cold_drinks", icon: "🍷" },
-            { id: 20, nameEn: "Passion Fruit Mojito", nameAr: "باشن فروت موهيتو", price: 19, category: "cold_drinks", icon: "🍹" },
-            { id: 21, nameEn: "Orange Juice", nameAr: "عصير برتقال", price: 19, category: "cold_drinks", icon: "🍊" },
-            { id: 22, nameEn: "Smoothie Vimto", nameAr: "سموذي فيمتو", price: 15, category: "cold_drinks", icon: "🥤" },
-            { id: 23, nameEn: "Pepsi", nameAr: "بيبسي", price: 5, category: "cold_drinks", icon: "🥫" },
-            { id: 24, nameEn: "7up", nameAr: "سفن اب", price: 5, category: "cold_drinks", icon: "🥫" },
-            { id: 25, nameEn: "Mirinda", nameAr: "ميرندا", price: 5, category: "cold_drinks", icon: "🥫" },
-            { id: 37, nameEn: "Water", nameAr: "ماء", price: 3, category: "cold_drinks", icon: "💧" },
-
-            { id: 26, nameEn: "Karak Classic", nameAr: "كرك كلاسيك", price: 12, category: "hot_drinks", icon: "☕" },
-            { id: 27, nameEn: "Karak Zafron", nameAr: "كرك زعفران", price: 13, category: "hot_drinks", icon: "🍵" },
-            { id: 28, nameEn: "Karak Cinnamon", nameAr: "كرك قرفة", price: 13, category: "hot_drinks", icon: "☕" },
-            { id: 29, nameEn: "Karak Ginger", nameAr: "كرك زنجبيل", price: 13, category: "hot_drinks", icon: "🍵" },
-            { id: 30, nameEn: "Tea", nameAr: "شاي", price: 10, category: "hot_drinks", icon: "🫖" },
-            { id: 31, nameEn: "V60 Hot / Cold", nameAr: "قهوة مقطرة", price: 23, category: "hot_drinks", icon: "☕" },
-            { id: 32, nameEn: "Black Coffee Hot / Cold", nameAr: "قهوة سودا حار / بارد", price: 15, category: "hot_drinks", icon: "☕" },
-
-            { id: 33, nameEn: "Cookies", nameAr: "كوكيز", price: 12, category: "desserts", icon: "🍪" },
-            { id: 34, nameEn: "Um Ali", nameAr: "ام علي", price: 23, category: "desserts", icon: "🍮" },
-
-            { id: 35, nameEn: "Fries Classic", nameAr: "فرايز كلاسيك", price: 18, category: "fries", icon: "🍟" },
-            { id: 36, nameEn: "Najdi Flavored Fries", nameAr: "فرايز بنكهة نجدية", price: 19, category: "fries", icon: "🍟" }
+            { id: 1, nameEn: 'Plain Chapati', nameAr: 'شباتي سادة', price: 2.00, category: 'Chapati', icon: '🫓' },
+            { id: 2, nameEn: 'Egg Chapati', nameAr: 'شباتي بيض', price: 4.00, category: 'Chapati', icon: '🍳' },
+            { id: 3, nameEn: 'Cheese Chapati', nameAr: 'شباتي جبن', price: 5.00, category: 'Chapati', icon: '🧀' },
+            { id: 4, nameEn: 'Egg & Cheese Chapati', nameAr: 'شباتي بيض وجبن', price: 6.00, category: 'Chapati', icon: '🥪' },
+            { id: 5, nameEn: 'Nutella Chapati', nameAr: 'شباتي نوتيلا', price: 7.00, category: 'Chapati', icon: '🍫' },
+            { id: 6, nameEn: 'Honey & Cream Chapati', nameAr: 'شباتي عسل وقشطة', price: 7.00, category: 'Chapati', icon: '🍯' },
+            { id: 7, nameEn: 'Karak Tea', nameAr: 'شاي كرك', price: 3.00, category: 'Karak & Tea', icon: '🍵' },
+            { id: 8, nameEn: 'Saffron Karak', nameAr: 'كرك زعفران', price: 4.00, category: 'Karak & Tea', icon: '🫖' },
+            { id: 9, nameEn: 'Adani Tea', nameAr: 'شاي عدني', price: 3.00, category: 'Karak & Tea', icon: '☕' },
+            { id: 10, nameEn: 'Mint Tea', nameAr: 'شاي بالنعناع', price: 3.00, category: 'Karak & Tea', icon: '🌿' },
+            { id: 11, nameEn: 'Chicken Tikka Roll', nameAr: 'رول دجاج تكا', price: 9.00, category: 'Sandwiches', icon: '🌯' },
+            { id: 12, nameEn: 'Falafel Chapati Wrap', nameAr: 'لفائف فلافل شباتي', price: 6.00, category: 'Sandwiches', icon: '🥙' },
+            { id: 13, nameEn: 'Fresh Orange Juice', nameAr: 'عصير برتقال طازج', price: 8.00, category: 'Drinks', icon: '🍊' },
+            { id: 14, nameEn: 'Mineral Water', nameAr: 'مياه معدنية', price: 1.00, category: 'Drinks', icon: '💧' },
+            { id: 15, nameEn: 'Extra Cheese Slice', nameAr: 'شريحة جبن إضافية', price: 2.00, category: 'Extras', icon: '➕' },
+            { id: 16, nameEn: 'Spicy Chutney Dip', nameAr: 'صوص شاتني حار', price: 1.50, category: 'Extras', icon: '🌶️' }
         ];
 
-        let cachedSalesHistory = [];
+        const categories = ['All', 'Chapati', 'Karak & Tea', 'Sandwiches', 'Drinks', 'Extras'];
+        let selectedCategory = 'All';
+        let currentBranch = localStorage.getItem('hazzat_current_branch') || 'BOLIFARD_1';
+        let firebaseDbUrl = localStorage.getItem('hazzat_firebase_url') || DEFAULT_FIREBASE_URL;
+        let selectedPaymentMethod = 'VISA';
+        let historyActiveTab = 'orders';
+
         let cart = [];
-        let currentCategory = 'all';
-        let selectedPaymentMethod = 'Cash / كاش';
-        let discountConfig = { type: 'amount', rawValue: 0 };
-        let currentOrderNote = '';
-        let currentOrderTags = [];
+        let orderMeta = {
+            discount: 0,
+            note: '',
+            customerName: '',
+            customerPhone: '',
+            customerAddress: '',
+            tableNumber: '',
+            orderType: 'Dine-In'
+        };
 
-        function encodeZatcaTLV(sellerName, vatRegNo, isoTimestamp, totalInclVat, vatAmount) {
-            const encoder = new TextEncoder();
-            const tlvFields = [
-                { tag: 1, bytes: encoder.encode(sellerName) },
-                { tag: 2, bytes: encoder.encode(vatRegNo) },
-                { tag: 3, bytes: encoder.encode(isoTimestamp) },
-                { tag: 4, bytes: encoder.encode(Number(totalInclVat).toFixed(2)) },
-                { tag: 5, bytes: encoder.encode(Number(vatAmount).toFixed(2)) }
-            ];
-
-            let totalLen = 0;
-            tlvFields.forEach(f => { totalLen += 2 + f.bytes.length; });
-
-            const buffer = new Uint8Array(totalLen);
-            let offset = 0;
-            tlvFields.forEach(f => {
-                buffer[offset++] = f.tag;
-                buffer[offset++] = f.bytes.length;
-                buffer.set(f.bytes, offset);
-                offset += f.bytes.length;
-            });
-
-            let binary = '';
-            for (let i = 0; i < buffer.length; i++) {
-                binary += String.fromCharCode(buffer[i]);
-            }
-            return btoa(binary);
+        function getBranchStorageKey(suffix) {
+            return `hazzat_pos_${currentBranch}_${suffix}`;
         }
 
-        function renderZatcaQRCode(payloadStr) {
-            const canvas = document.getElementById('zatca-qr-canvas');
-            if (!canvas) return;
-            const ctx = canvas.getContext('2d');
-            const size = 25;
-            const cell = Math.floor(canvas.width / size);
-
-            ctx.fillStyle = '#ffffff';
-            ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-            function drawFinder(r0, c0) {
-                for (let r = 0; r < 7; r++) {
-                    for (let c = 0; c < 7; c++) {
-                        const isBorder = r === 0 || r === 6 || c === 0 || c === 6;
-                        const isCenter = r >= 2 && r <= 4 && c >= 2 && c <= 4;
-                        ctx.fillStyle = (isBorder || isCenter) ? '#000000' : '#ffffff';
-                        ctx.fillRect((c0 + c) * cell, (r0 + r) * cell, cell, cell);
-                    }
-                }
-            }
-            drawFinder(0, 0);
-            drawFinder(0, size - 7);
-            drawFinder(size - 7, 0);
-
-            let hash = 2166136261;
-            for (let i = 0; i < payloadStr.length; i++) {
-                hash ^= payloadStr.charCodeAt(i);
-                hash = Math.imul(hash, 16777619);
-            }
-
-            let bitIdx = 0;
-            for (let r = 0; r < size; r++) {
-                for (let c = 0; c < size; c++) {
-                    const inTopLeft = r < 8 && c < 8;
-                    const inTopRight = r < 8 && c >= size - 8;
-                    const inBottomLeft = r >= size - 8 && c < 8;
-                    if (inTopLeft || inTopRight || inBottomLeft) continue;
-
-                    const charCode = payloadStr.charCodeAt((r * size + c + bitIdx) % payloadStr.length);
-                    const bit = ((charCode + r * 13 + c * 7 + (hash >>> (bitIdx % 24))) & 1) === 1;
-                    if (bit) {
-                        ctx.fillStyle = '#000000';
-                        ctx.fillRect(c * cell, r * cell, cell, cell);
-                    }
-                    bitIdx++;
-                }
-            }
+        function formatSAR(amount) {
+            return `${Number(amount || 0).toFixed(2)} ${CURRENCY}`;
         }
 
-        function openModal(id) {
-            document.getElementById(id).classList.add('active');
+        function formatBranchLabel(branchCode) {
+            return branchCode === 'BOLIFARD_2' ? 'BOLIFARD 2' : 'BOLIFARD 1';
         }
 
-        function closeModal(id) {
-            document.getElementById(id).classList.remove('active');
-        }
-
-        function quickPrintDraftReceipt() {
-            if (cart.length === 0) {
-                alert("Please select at least one item to print! / الرجاء اختيار صنف للطباعة!");
-                return;
-            }
-            const grossItemsTotal = cart.reduce((sum, item) => sum + item.price * item.qty, 0);
-            const { safeDiscount, subtotal, vat, grandTotal } = calculateTotals(grossItemsTotal);
-            const nowObj = new Date();
-            const draftOrder = {
-                invoiceNo: "DRAFT-" + Math.floor(1000 + Math.random() * 9000),
-                timestamp: nowObj.getTime(),
-                dateTime: nowObj.toLocaleString('en-GB'),
-                customerName: document.getElementById('customer-name').value.trim() || "Walk-in Customer",
-                orderType: document.getElementById('order-type').value,
-                paymentMethod: "Pending / قيد الدفع",
-                status: "DRAFT",
-                items: cart,
-                discount: safeDiscount,
-                subtotal,
-                vat,
-                grandTotal,
-                note: currentOrderNote,
-                tags: currentOrderTags
-            };
-            populateReceipt(draftOrder, "DRAFT RECEIPT / مسودة فاتورة", "DRAFT (مسودة)");
-            window.print();
-        }
-
-        function printKitchenOrder() {
-            if (cart.length === 0) {
-                alert("No items in order for Kitchen Token! / لا توجد أصناف للمطبخ!");
-                return;
-            }
-            const nowObj = new Date();
-            const tokenNo = "KOT-" + Math.floor(100 + Math.random() * 900);
-            const custName = document.getElementById('customer-name').value.trim() || "Walk-in";
-            const orderType = document.getElementById('order-type').value;
-            const tagsStr = currentOrderTags.length ? currentOrderTags.join(", ") : "-";
-
-            document.getElementById("rec-subtitle").innerText = "Kitchen Order Token / تذكرة طلب المطبخ";
-            document.getElementById("rec-stamp").innerText = `KITCHEN (${tokenNo})`;
-            document.getElementById("rec-info-block").innerHTML = `
-                <p><strong>Token:</strong> ${tokenNo}</p>
-                <p><strong>Time:</strong> ${nowObj.toLocaleTimeString('en-GB')}</p>
-                <p><strong>Order Type:</strong> ${orderType}</p>
-                <p><strong>Customer:</strong> ${custName}</p>
-                <p><strong>Tags:</strong> ${tagsStr}</p>
-                ${currentOrderNote ? `<p><strong>NOTE / ملاحظة:</strong> ** ${currentOrderNote} **</p>` : ''}
-            `;
-            document.getElementById("rec-table-block").style.display = "table";
-            const recItemsBody = document.getElementById('rec-items');
-            recItemsBody.innerHTML = '';
-            cart.forEach(item => {
-                recItemsBody.innerHTML += `
-                    <tr>
-                        <td><strong>${item.nameEn}</strong><br><small>${item.nameAr}</small></td>
-                        <td style="text-align: center; font-weight:bold; font-size:14px;">x${item.qty}</td>
-                        <td style="text-align: right;">-</td>
-                    </tr>
-                `;
-            });
-            document.getElementById("rec-totals-block").innerHTML = currentOrderNote
-                ? `<div class="receipt-grand-total"><span>Note:</span><span>${currentOrderNote}</span></div>`
-                : `<div><span>Items Count:</span><span>${cart.reduce((s, i) => s + i.qty, 0)}</span></div>`;
-            document.getElementById("rec-zatca-box").style.display = "none";
-            document.getElementById("rec-footer-block").innerHTML = `<p>HAZZAT CHAPATI - KITCHEN COPY</p>`;
-
-            window.print();
-            showToast(`🍳 Kitchen Order Token ${tokenNo} sent to print!`);
-        }
-
-        function voidCurrentOrder() {
-            if (cart.length === 0 && !currentOrderNote && currentOrderTags.length === 0 && discountConfig.rawValue === 0) {
-                showToast("No active order to void.", true);
-                return;
-            }
-            if (confirm("Void / Cancel this entire order? / هل تريد إلغاء الطلب بالكامل؟")) {
-                resetCurrentOrder();
-                showToast("🚫 Order voided / cancelled.", true);
-            }
-        }
-
-        function openDiscountModal() {
-            const gross = cart.reduce((sum, item) => sum + item.price * item.qty, 0);
-            document.getElementById('disc-type-select').value = discountConfig.type;
-            document.getElementById('disc-value-input').value = discountConfig.rawValue;
-            renderDiscountPreview(gross);
-            openModal('discount-modal');
-        }
-
-        function applyQuickDiscount(type, val) {
-            document.getElementById('disc-type-select').value = type;
-            document.getElementById('disc-value-input').value = val;
-            renderDiscountPreview();
-        }
-
-        function getCalculatedDiscountSar(grossItemsTotal) {
-            const val = Math.max(0, parseFloat(document.getElementById('disc-value-input')?.value ?? discountConfig.rawValue) || 0);
-            const type = document.getElementById('disc-type-select')?.value ?? discountConfig.type;
-            if (type === 'percent') {
-                return Math.min(grossItemsTotal, (grossItemsTotal * Math.min(100, val)) / 100);
-            }
-            return Math.min(grossItemsTotal, val);
-        }
-
-        function renderDiscountPreview(customGross = null) {
-            const gross = customGross !== null ? customGross : cart.reduce((sum, item) => sum + item.price * item.qty, 0);
-            const sar = getCalculatedDiscountSar(gross);
-            const el = document.getElementById('disc-preview-sar');
-            if (el) el.innerText = `${sar.toFixed(2)} SAR`;
-        }
-
-        function saveDiscountFromModal() {
-            const type = document.getElementById('disc-type-select').value;
-            const val = Math.max(0, parseFloat(document.getElementById('disc-value-input').value) || 0);
-            discountConfig = { type, rawValue: val };
-            updateCart();
-            closeModal('discount-modal');
-            showToast("🏷️ Discount applied!");
-        }
-
-        function syncManualDiscountInput() {
-            const manualVal = Math.max(0, parseFloat(document.getElementById('discount-input').value) || 0);
-            discountConfig = { type: 'amount', rawValue: manualVal };
-            updateCart();
-        }
-
-        function openNotesModal() {
-            document.getElementById('order-note-textarea').value = currentOrderNote;
-            openModal('notes-modal');
-        }
-
-        function appendQuickNote(text) {
-            const ta = document.getElementById('order-note-textarea');
-            const cur = ta.value.trim();
-            if (!cur) ta.value = text;
-            else if (!cur.includes(text)) ta.value = `${cur}, ${text}`;
-        }
-
-        function clearOrderNote() {
-            document.getElementById('order-note-textarea').value = '';
-            currentOrderNote = '';
-            updateOrderMetaStrip();
-        }
-
-        function saveOrderNote() {
-            currentOrderNote = document.getElementById('order-note-textarea').value.trim();
-            updateOrderMetaStrip();
-            closeModal('notes-modal');
-            showToast("📝 Order note saved!");
-        }
-
-        function openTagsModal() {
-            document.querySelectorAll('#tags-chip-container .chip-btn').forEach(btn => {
-                const tag = btn.getAttribute('data-tag');
-                btn.classList.toggle('active', currentOrderTags.includes(tag));
-            });
-            openModal('tags-modal');
-        }
-
-        function toggleOrderTag(tag, btn) {
-            if (currentOrderTags.includes(tag)) {
-                currentOrderTags = currentOrderTags.filter(t => t !== tag);
-                btn.classList.remove('active');
-            } else {
-                currentOrderTags.push(tag);
-                btn.classList.add('active');
-            }
-            updateOrderMetaStrip();
-        }
-
-        function clearOrderTags() {
-            currentOrderTags = [];
-            document.querySelectorAll('#tags-chip-container .chip-btn').forEach(b => b.classList.remove('active'));
-            updateOrderMetaStrip();
-        }
-
-        function updateOrderMetaStrip() {
-            const strip = document.getElementById('order-meta-strip');
-            const pills = [];
-
-            if (currentOrderTags.length > 0) pills.push(`🔖 ${currentOrderTags.join(', ')}`);
-            if (currentOrderNote) pills.push(`📝 ${currentOrderNote}`);
-
-            if (pills.length === 0) {
-                strip.classList.remove('active');
-                strip.innerHTML = '';
-            } else {
-                strip.classList.add('active');
-                strip.innerHTML = pills.map(p => `<span class="meta-pill" title="${p}">${p}</span>`).join('');
-            }
-
-            document.getElementById('bar-btn-discount').classList.toggle('has-badge', discountConfig.rawValue > 0);
-            document.getElementById('bar-btn-notes').classList.toggle('has-badge', currentOrderNote.length > 0);
-            document.getElementById('bar-btn-tags').classList.toggle('has-badge', currentOrderTags.length > 0);
-        }
-
-        function openMoreMenuModal() {
-            openModal('more-modal');
-        }
-
-        function initPWA() {
-            try {
-                const svgIcon = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 192 192"><rect width="192" height="192" rx="36" fill="#5c3a21"/><text x="96" y="122" font-size="96" text-anchor="middle">🥙</text></svg>`;
-                const iconUrl = `data:image/svg+xml;base64,${btoa(unescape(encodeURIComponent(svgIcon)))}`;
-
-                const manifestData = {
-                    name: "HAZZAT CHAPATI POS | حزة جباتي",
-                    short_name: "HAZZAT POS",
-                    description: "HAZZAT CHAPATI Restaurant POS",
-                    start_url: "./",
-                    display: "fullscreen",
-                    orientation: "any",
-                    background_color: "#f5efe6",
-                    theme_color: "#5c3a21",
-                    icons: [
-                        { src: iconUrl, sizes: "192x192", type: "image/svg+xml", purpose: "any maskable" },
-                        { src: iconUrl, sizes: "512x512", type: "image/svg+xml", purpose: "any maskable" }
-                    ]
-                };
-
-                const manifestBlob = new Blob([JSON.stringify(manifestData)], { type: "application/json" });
-                const manifestLink = document.createElement("link");
-                manifestLink.rel = "manifest";
-                manifestLink.href = URL.createObjectURL(manifestBlob);
-                document.head.appendChild(manifestLink);
-
-                if ("serviceWorker" in navigator && window.location.protocol !== "file:") {
-                    const swCode = `
-                        self.addEventListener("install", () => self.skipWaiting());
-                        self.addEventListener("activate", (e) => e.waitUntil(clients.claim()));
-                        self.addEventListener("fetch", (e) => {
-                            if (e.request.method !== "GET") return;
-                            e.respondWith(fetch(e.request).catch(() => caches.match(e.request)));
-                        });
-                    `;
-                    const swBlob = new Blob([swCode], { type: "application/javascript" });
-                    navigator.serviceWorker.register(URL.createObjectURL(swBlob)).catch(() => {});
-                }
-            } catch (e) {}
-        }
-
-        function toggleFullscreen() {
-            if (!document.fullscreenElement && !document.webkitFullscreenElement) {
-                const el = document.documentElement;
-                if (el.requestFullscreen) el.requestFullscreen().catch(() => {});
-                else if (el.webkitRequestFullscreen) el.webkitRequestFullscreen();
-            } else {
-                if (document.exitFullscreen) document.exitFullscreen().catch(() => {});
-                else if (document.webkitExitFullscreen) document.webkitExitFullscreen();
-            }
-        }
-
-        function createNewShift(openingAmount = 0) {
-            const now = new Date();
+        function createDefaultShift(openingAmount = 0) {
             return {
-                shiftId: "SH-" + Math.floor(10000 + Math.random() * 90000),
-                openedAt: now.toLocaleString("en-GB"),
-                openedTimestamp: now.getTime(),
-                openingAmount: Math.max(0, parseFloat(openingAmount) || 0),
-                movements: []
+                isOpen: true,
+                openedAt: new Date().toISOString(),
+                closedAt: null,
+                openingCash: Number(openingAmount) || 0,
+                closingCashActual: null,
+                cashMovements: []
             };
         }
 
-        function getCurrentShift() {
+        function loadBranchOrders() {
             try {
-                const saved = JSON.parse(localStorage.getItem(SHIFT_STATE_KEY));
-                if (saved && saved.shiftId) return saved;
-            } catch (e) {}
-            const fresh = createNewShift(0);
-            try { localStorage.setItem(SHIFT_STATE_KEY, JSON.stringify(fresh)); } catch (e) {}
-            return fresh;
-        }
-
-        function saveCurrentShift(shift) {
-            try { localStorage.setItem(SHIFT_STATE_KEY, JSON.stringify(shift)); } catch (e) {}
-        }
-
-        function getClosedShifts() {
-            try {
-                return JSON.parse(localStorage.getItem(CLOSED_SHIFTS_KEY)) || [];
-            } catch (e) {
+                return JSON.parse(localStorage.getItem(getBranchStorageKey('orders')) || '[]');
+            } catch {
                 return [];
             }
         }
 
-        function saveClosedShifts(list) {
-            try { localStorage.setItem(CLOSED_SHIFTS_KEY, JSON.stringify(list)); } catch (e) {}
+        function saveBranchOrders(orders) {
+            localStorage.setItem(getBranchStorageKey('orders'), JSON.stringify(orders));
+            syncBranchToFirebase('orders', orders);
         }
 
-        function getShiftSalesSummary() {
-            const shift = getCurrentShift();
-            const shiftOrders = cachedSalesHistory.filter(o => (Number(o.timestamp) || 0) >= shift.openedTimestamp);
-
-            let cashSales = 0;
-            let visaSales = 0;
-            let vatTotal = 0;
-            let totalSales = 0;
-
-            shiftOrders.forEach(o => {
-                const amt = Number(o.grandTotal) || 0;
-                const vat = Number(o.vat) || 0;
-                if ((o.paymentMethod || "").includes("Cash")) cashSales += amt;
-                else visaSales += amt;
-                vatTotal += vat;
-                totalSales += amt;
-            });
-
-            let payIn = 0;
-            let payOut = 0;
-            (shift.movements || []).forEach(m => {
-                if (m.type === "IN") payIn += Number(m.amount) || 0;
-                else payOut += Number(m.amount) || 0;
-            });
-
-            const opening = Number(shift.openingAmount) || 0;
-            const expectedCash = opening + cashSales + payIn - payOut;
-
-            return {
-                shift,
-                ordersCount: shiftOrders.length,
-                opening,
-                cashSales,
-                visaSales,
-                vatTotal,
-                totalSales,
-                payIn,
-                payOut,
-                expectedCash
-            };
-        }
-
-        function openShiftModal() {
-            fetchSalesFromFirebase(false);
-            renderShiftModal();
-            document.getElementById("shift-modal").classList.add("active");
-        }
-
-        function closeShiftModal() {
-            document.getElementById("shift-modal").classList.remove("active");
-        }
-
-        function setOpeningCashPrompt() {
-            const shift = getCurrentShift();
-            const input = prompt("Enter Opening Cash Amount in Drawer (SAR):", shift.openingAmount);
-            if (input !== null) {
-                const val = Math.max(0, parseFloat(input) || 0);
-                shift.openingAmount = val;
-                saveCurrentShift(shift);
-                renderShiftModal();
-                showToast(`💵 Opening amount set to ${val.toFixed(2)} SAR`);
-            }
-        }
-
-        function addCashMovement() {
-            const type = document.getElementById("io-type").value;
-            const amount = parseFloat(document.getElementById("io-amount").value);
-            const note = document.getElementById("io-note").value.trim() || (type === "IN" ? "Cash In" : "Cash Expense");
-
-            if (!amount || amount <= 0) {
-                alert("Please enter a valid amount greater than 0.");
-                return;
-            }
-
-            const shift = getCurrentShift();
-            shift.movements = shift.movements || [];
-            shift.movements.push({
-                id: Date.now(),
-                type,
-                amount,
-                note,
-                time: new Date().toLocaleTimeString("en-GB", { hour: "2-digit", minute: "2-digit" })
-            });
-            saveCurrentShift(shift);
-
-            document.getElementById("io-amount").value = "";
-            document.getElementById("io-note").value = "";
-            renderShiftModal();
-            showToast(`${type === "IN" ? "📥 Pay In" : "📤 Pay Out"} of ${amount.toFixed(2)} SAR recorded.`);
-        }
-
-        function updateDrawerCalculation() {
-            const summary = getShiftSalesSummary();
-            const actualCash = Math.max(0, parseFloat(document.getElementById("actual-cash-input").value) || 0);
-            const diff = actualCash - summary.expectedCash;
-
-            const diffBox = document.getElementById("cash-diff-box");
-            const diffLabel = document.getElementById("cash-diff-label");
-            const diffValue = document.getElementById("cash-diff-value");
-
-            diffBox.classList.remove("diff-balanced", "diff-shortage", "diff-overage");
-
-            if (Math.abs(diff) < 0.005) {
-                diffBox.classList.add("diff-balanced");
-                diffLabel.innerText = "✅ Drawer Balanced (الصندوق مطابق)";
-                diffValue.innerText = "0.00 SAR";
-            } else if (diff < 0) {
-                diffBox.classList.add("diff-shortage");
-                diffLabel.innerText = "⚠️ Cash Shortage (عجز بالصندوق)";
-                diffValue.innerText = `-${Math.abs(diff).toFixed(2)} SAR`;
-            } else {
-                diffBox.classList.add("diff-overage");
-                diffLabel.innerText = "ℹ️ Cash Overage (زيادة بالصندوق)";
-                diffValue.innerText = `+${diff.toFixed(2)} SAR`;
-            }
-        }
-
-        function renderShiftModal() {
-            const s = getShiftSalesSummary();
-
-            document.getElementById("shift-start-display").innerText = `${s.shift.shiftId} (${s.shift.openedAt})`;
-            document.getElementById("z-opening-amount").innerText = `${s.opening.toFixed(2)} SAR`;
-            document.getElementById("z-cash-sales").innerText = `${s.cashSales.toFixed(2)} SAR`;
-            document.getElementById("z-visa-sales").innerText = `${s.visaSales.toFixed(2)} SAR`;
-            document.getElementById("z-vat-total").innerText = `${s.vatTotal.toFixed(2)} SAR`;
-            document.getElementById("z-total-sales").innerText = `${s.totalSales.toFixed(2)} SAR`;
-
-            document.getElementById("drw-opening").innerText = `${s.opening.toFixed(2)} SAR`;
-            document.getElementById("drw-cash-sales").innerText = `${s.cashSales.toFixed(2)} SAR`;
-            document.getElementById("drw-pay-in").innerText = `+${s.payIn.toFixed(2)} SAR`;
-            document.getElementById("drw-pay-out").innerText = `-${s.payOut.toFixed(2)} SAR`;
-            document.getElementById("drw-expected").innerText = `${s.expectedCash.toFixed(2)} SAR`;
-
-            const ioListEl = document.getElementById("io-list");
-            ioListEl.innerHTML = "";
-            if (!s.shift.movements || s.shift.movements.length === 0) {
-                ioListEl.innerHTML = `<p style="color:#888; text-align:center; padding:10px;">No Pay In / Pay Out entries yet.</p>`;
-            } else {
-                s.shift.movements.slice().reverse().forEach(m => {
-                    const row = document.createElement("div");
-                    row.className = "io-item";
-                    row.innerHTML = `
-                        <span><strong class="${m.type === "IN" ? "tag-in" : "tag-out"}">[${m.type}]</strong> ${m.note} <small style="color:#777;">(${m.time})</small></span>
-                        <strong class="${m.type === "IN" ? "tag-in" : "tag-out"}">${m.type === "IN" ? "+" : "-"}${Number(m.amount).toFixed(2)} SAR</strong>
-                    `;
-                    ioListEl.appendChild(row);
-                });
-            }
-
-            const actualInput = document.getElementById("actual-cash-input");
-            if (actualInput.value === "" || Number(actualInput.value) === 0) {
-                actualInput.value = s.expectedCash.toFixed(2);
-            }
-            updateDrawerCalculation();
-            renderClosedShiftsTable();
-        }
-
-        function buildZReportObject(customActualCash = null) {
-            const s = getShiftSalesSummary();
-            const actualCash = customActualCash !== null
-                ? Math.max(0, parseFloat(customActualCash) || 0)
-                : Math.max(0, parseFloat(document.getElementById("actual-cash-input").value) || 0);
-            const diff = actualCash - s.expectedCash;
-
-            return {
-                shiftId: s.shift.shiftId,
-                openedAt: s.shift.openedAt,
-                closedAt: new Date().toLocaleString("en-GB"),
-                ordersCount: s.ordersCount,
-                openingAmount: s.opening,
-                cashSales: s.cashSales,
-                visaSales: s.visaSales,
-                vatTotal: s.vatTotal,
-                totalSales: s.totalSales,
-                payIn: s.payIn,
-                payOut: s.payOut,
-                expectedCash: s.expectedCash,
-                actualCash: actualCash,
-                difference: diff,
-                movements: s.shift.movements || []
-            };
-        }
-
-        function populateZReportReceipt(z) {
-            document.getElementById("rec-subtitle").innerText = "Shift Closing Report (Z-Report) / تقرير إغلاق الوردية";
-            document.getElementById("rec-stamp").innerText = "Z-REPORT (إغلاق الوردية)";
-
-            const diffText = Math.abs(z.difference) < 0.005
-                ? "0.00 SAR (Balanced)"
-                : (z.difference < 0 ? `-${Math.abs(z.difference).toFixed(2)} SAR (Shortage)` : `+${z.difference.toFixed(2)} SAR (Overage)`);
-
-            document.getElementById("rec-info-block").innerHTML = `
-                <p><strong>Shift ID:</strong> ${z.shiftId}</p>
-                <p><strong>Opened:</strong> ${z.openedAt}</p>
-                <p><strong>Closed:</strong> ${z.closedAt}</p>
-                <p><strong>Total Orders:</strong> ${z.ordersCount}</p>
-            `;
-            document.getElementById("rec-table-block").style.display = "none";
-            document.getElementById("rec-totals-block").innerHTML = `
-                <div><span>Opening Cash:</span><span>${Number(z.openingAmount).toFixed(2)} SAR</span></div>
-                <div><span>Cash Sales:</span><span>${Number(z.cashSales).toFixed(2)} SAR</span></div>
-                <div><span>VISA / Mada Sales:</span><span>${Number(z.visaSales).toFixed(2)} SAR</span></div>
-                <div><span>VAT 15% Incl.:</span><span>${Number(z.vatTotal).toFixed(2)} SAR</span></div>
-                <div><span>Pay In (+):</span><span>+${Number(z.payIn).toFixed(2)} SAR</span></div>
-                <div><span>Pay Out (-):</span><span>-${Number(z.payOut).toFixed(2)} SAR</span></div>
-                <div><span>Expected Cash:</span><span>${Number(z.expectedCash).toFixed(2)} SAR</span></div>
-                <div><span>Actual Cash:</span><span>${Number(z.actualCash).toFixed(2)} SAR</span></div>
-                <div class="receipt-grand-total"><span>Shortage / Diff:</span><span>${diffText}</span></div>
-            `;
-            document.getElementById("rec-zatca-box").style.display = "none";
-            document.getElementById("rec-footer-block").innerHTML = `
-                <p>HAZZAT CHAPATI - Shift Z-Report</p>
-                <p>VAT No: ${ZATCA_VAT_NUMBER}</p>
-            `;
-        }
-
-        function printZReport(existingReport = null) {
-            const z = existingReport || buildZReportObject();
-            populateZReportReceipt(z);
-            window.print();
-        }
-
-        async function closeAndResetShift() {
-            const z = buildZReportObject();
-            if (!confirm(`Close Shift ${z.shiftId}?\nTotal Sales: ${z.totalSales.toFixed(2)} SAR\nExpected Cash: ${z.expectedCash.toFixed(2)} SAR\nActual Cash: ${z.actualCash.toFixed(2)} SAR`)) {
-                return;
-            }
-
-            const closedList = getClosedShifts();
-            closedList.unshift(z);
-            saveClosedShifts(closedList);
-
+        function loadHeldOrders() {
             try {
-                await fetch(SHIFTS_REST_URL, {
-                    method: "POST",
-                    headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify(z)
-                });
-            } catch (e) {}
-
-            const nextShift = createNewShift(z.actualCash);
-            saveCurrentShift(nextShift);
-
-            document.getElementById("actual-cash-input").value = z.actualCash.toFixed(2);
-            populateZReportReceipt(z);
-            renderShiftModal();
-            window.print();
-            showToast(`🔒 Shift ${z.shiftId} closed! Next shift opened with ${z.actualCash.toFixed(2)} SAR.`);
+                return JSON.parse(localStorage.getItem(getBranchStorageKey('held_orders')) || '[]');
+            } catch {
+                return [];
+            }
         }
 
-        function renderClosedShiftsTable() {
-            const tbody = document.getElementById("closed-shifts-tbody");
-            const list = getClosedShifts();
-            tbody.innerHTML = "";
+        function saveHeldOrders(held) {
+            localStorage.setItem(getBranchStorageKey('held_orders'), JSON.stringify(held));
+            syncBranchToFirebase('held_orders', held);
+        }
 
-            if (list.length === 0) {
-                tbody.innerHTML = `<tr><td colspan="7" style="text-align:center; color:#777; padding:12px;">No closed shifts yet.</td></tr>`;
+        function loadShiftData() {
+            try {
+                const raw = localStorage.getItem(getBranchStorageKey('shift'));
+                if (!raw) {
+                    const initial = createDefaultShift(0);
+                    localStorage.setItem(getBranchStorageKey('shift'), JSON.stringify(initial));
+                    return initial;
+                }
+                return JSON.parse(raw);
+            } catch {
+                return createDefaultShift(0);
+            }
+        }
+
+        function saveShiftData(shiftObj) {
+            localStorage.setItem(getBranchStorageKey('shift'), JSON.stringify(shiftObj));
+            syncBranchToFirebase('shift', shiftObj);
+        }
+
+        async function syncBranchToFirebase(nodeName, data) {
+            updateSyncBadge('⏳ Syncing...', '#fbbf24');
+            const cleanUrl = (firebaseDbUrl || '').trim().replace(/\/+$/, '');
+            if (!cleanUrl || !cleanUrl.startsWith('http')) {
+                updateSyncBadge('💾 Local Only', '#cbd5e1');
                 return;
             }
-
-            list.forEach((z, idx) => {
-                const diff = Number(z.difference) || 0;
-                const diffStr = Math.abs(diff) < 0.005
-                    ? `<span style="color:var(--success); font-weight:700;">0.00</span>`
-                    : (diff < 0
-                        ? `<span style="color:var(--danger); font-weight:700;">-${Math.abs(diff).toFixed(2)} (Short)</span>`
-                        : `<span style="color:var(--info); font-weight:700;">+${diff.toFixed(2)} (Over)</span>`);
-
-                const tr = document.createElement("tr");
-                tr.innerHTML = `
-                    <td><strong>${z.shiftId}</strong></td>
-                    <td>${z.closedAt}</td>
-                    <td>${Number(z.totalSales).toFixed(2)}</td>
-                    <td>${Number(z.expectedCash).toFixed(2)}</td>
-                    <td>${Number(z.actualCash).toFixed(2)}</td>
-                    <td>${diffStr}</td>
-                    <td><button class="mini-print-btn" onclick="reprintClosedShift(${idx})">🖨️ Z-Print</button></td>
-                `;
-                tbody.appendChild(tr);
-            });
-        }
-
-        function reprintClosedShift(index) {
-            const list = getClosedShifts();
-            if (list[index]) printZReport(list[index]);
-        }
-
-        async function fetchSalesFromFirebase(showManualToast = false) {
-            const statusEl = document.getElementById('db-status');
+            const endpoint = `${cleanUrl}/hazzat_chapati/${currentBranch}/${nodeName}.json`;
             try {
-                const res = await fetch(`${ORDERS_REST_URL}?t=${Date.now()}`, {
-                    method: 'GET',
-                    headers: { 'Accept': 'application/json' }
+                const res = await fetch(endpoint, {
+                    method: 'PUT',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        branch: currentBranch,
+                        updatedAt: new Date().toISOString(),
+                        data: data
+                    })
                 });
-
-                if (!res.ok) throw new Error(`HTTP ${res.status}`);
-
-                const data = await res.json();
-                const list = [];
-                if (data && typeof data === 'object') {
-                    Object.entries(data).forEach(([recordKey, order]) => {
-                        if (order && typeof order === 'object') {
-                            list.push({ ...order, _recordKey: recordKey });
-                        }
-                    });
+                if (res.ok) {
+                    updateSyncBadge(`🔥 ${currentBranch} Synced`, '#86efac');
+                } else {
+                    updateSyncBadge('💾 Saved Local', '#fed7aa');
                 }
-
-                list.sort((a, b) => (b.timestamp || 0) - (a.timestamp || 0));
-                cachedSalesHistory = list;
-
-                statusEl.innerText = "🟢 Live Sync";
-                statusEl.style.background = "rgba(46, 125, 50, 0.35)";
-
-                if (document.getElementById('history-modal').classList.contains('active')) {
-                    renderSalesHistory();
-                }
-                if (document.getElementById('shift-modal').classList.contains('active')) {
-                    renderShiftModal();
-                }
-                if (showManualToast) {
-                    showToast("🔄 Sales synced from server!");
-                }
-            } catch (err) {
-                console.error("REST fetch error:", err);
-                statusEl.innerText = "⚠️ Sync Check";
-                statusEl.style.background = "#7f1d1d";
-                if (showManualToast) {
-                    showToast("⚠️ Firebase Realtime DB Rules বা URL চেক করুন।", true);
-                }
+            } catch {
+                updateSyncBadge('💾 Offline Local', '#fed7aa');
             }
         }
 
-        async function saveOrderViaRest(orderRecord) {
-            const res = await fetch(ORDERS_REST_URL, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(orderRecord)
-            });
-
-            if (!res.ok) throw new Error(`HTTP ${res.status}`);
-            return await res.json();
+        function updateSyncBadge(text, borderColor) {
+            const badge = document.getElementById('sync-status-badge');
+            if (!badge) return;
+            badge.textContent = text;
+            badge.style.borderColor = borderColor || 'var(--accent)';
         }
 
-        function startLivePolling() {
-            fetchSalesFromFirebase(false);
-            setInterval(() => {
-                if (!document.hidden) fetchSalesFromFirebase(false);
-            }, 5000);
+        function switchBranch(newBranch) {
+            if (!BRANCHES.includes(newBranch)) return;
+            currentBranch = newBranch;
+            localStorage.setItem('hazzat_current_branch', currentBranch);
+            cart = [];
+            orderMeta = {
+                discount: 0,
+                note: '',
+                customerName: '',
+                customerPhone: '',
+                customerAddress: '',
+                tableNumber: '',
+                orderType: 'Dine-In'
+            };
+            document.getElementById('customer-name-input').value = '';
+            document.getElementById('order-type-select').value = 'Dine-In';
+            document.getElementById('discount-input').value = '0';
+            renderCart();
+            updateOrderMetaUI();
+            updateRecallButtonBadge();
+            syncBranchToFirebase('shift', loadShiftData());
+            showToast(`Switched to ${formatBranchLabel(currentBranch)}`);
         }
 
-        function showToast(message, isError = false) {
-            const toast = document.getElementById('toast-msg');
-            toast.innerText = message;
-            toast.style.background = isError ? "var(--danger)" : "var(--success)";
-            toast.style.display = 'block';
-            setTimeout(() => {
-                toast.style.display = 'none';
-            }, 3000);
+        function openFirebaseModal() {
+            document.getElementById('firebase-db-url-input').value = firebaseDbUrl || '';
+            document.getElementById('firebase-modal').classList.add('active');
         }
 
-        function calculateTotals(grossItemsTotal) {
-            let safeDiscount = 0;
-            if (discountConfig.type === 'percent') {
-                safeDiscount = Math.min(grossItemsTotal, (grossItemsTotal * Math.min(100, Math.max(0, discountConfig.rawValue))) / 100);
-            } else {
-                safeDiscount = Math.min(grossItemsTotal, Math.max(0, discountConfig.rawValue));
-            }
-            const grandTotal = Math.max(0, grossItemsTotal - safeDiscount);
-            const subtotal = grandTotal / 1.15;
-            const vat = grandTotal - subtotal;
-            return { grossItemsTotal, safeDiscount, subtotal, vat, grandTotal };
+        function saveFirebaseUrl() {
+            const val = document.getElementById('firebase-db-url-input').value.trim();
+            firebaseDbUrl = val;
+            localStorage.setItem('hazzat_firebase_url', firebaseDbUrl);
+            closeModal('firebase-modal');
+            syncBranchToFirebase('orders', loadBranchOrders());
+            syncBranchToFirebase('shift', loadShiftData());
+            showToast('Firebase URL updated');
+        }
+
+        function clearFirebaseUrl() {
+            firebaseDbUrl = '';
+            localStorage.removeItem('hazzat_firebase_url');
+            closeModal('firebase-modal');
+            updateSyncBadge('💾 Local Only', '#cbd5e1');
+            showToast('Firebase sync disabled (Local mode)');
         }
 
         function updateClock() {
             const now = new Date();
-            const clockEl = document.getElementById('live-clock');
-            if (clockEl) {
-                clockEl.innerText = now.toLocaleString('en-US', {
-                    dateStyle: 'medium',
-                    timeStyle: 'short'
-                });
+            const el = document.getElementById('live-clock');
+            if (el) {
+                el.textContent = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' });
             }
         }
-        setInterval(updateClock, 1000);
-        updateClock();
 
-        function renderMenu(items) {
+        function renderCategories() {
+            const container = document.getElementById('category-buttons');
+            container.innerHTML = '';
+            categories.forEach(cat => {
+                const btn = document.createElement('button');
+                btn.className = `cat-btn ${cat === selectedCategory ? 'active' : ''}`;
+                btn.textContent = cat;
+                btn.onclick = () => {
+                    selectedCategory = cat;
+                    renderCategories();
+                    renderMenu();
+                };
+                container.appendChild(btn);
+            });
+        }
+
+        function renderMenu() {
+            const query = (document.getElementById('search-input').value || '').trim().toLowerCase();
             const grid = document.getElementById('menu-grid');
-            if (!grid) return;
+            const filtered = menuItems.filter(item => {
+                const matchesCat = selectedCategory === 'All' || item.category === selectedCategory;
+                const matchesSearch = !query ||
+                    item.nameEn.toLowerCase().includes(query) ||
+                    item.nameAr.includes(query) ||
+                    item.category.toLowerCase().includes(query);
+                return matchesCat && matchesSearch;
+            });
+
             grid.innerHTML = '';
-            items.forEach(item => {
+            if (!filtered.length) {
+                grid.innerHTML = `<p style="grid-column: 1/-1; text-align:center; color:#777; padding: 20px;">No items found.</p>`;
+                return;
+            }
+
+            filtered.forEach(item => {
                 const card = document.createElement('div');
                 card.className = 'menu-card';
-                card.onclick = () => addToCart(item);
+                card.onclick = () => addToCart(item.id);
                 card.innerHTML = `
-                    <div class="menu-icon">${item.icon}</div>
-                    <div class="menu-title-en">${item.nameEn}</div>
-                    <div class="menu-title-ar">${item.nameAr}</div>
+                    <div>
+                        <div class="menu-icon">${item.icon}</div>
+                        <div class="menu-title-en">${escapeHtml(item.nameEn)}</div>
+                        <div class="menu-title-ar">${escapeHtml(item.nameAr)}</div>
+                    </div>
                     <div class="menu-price">
-                        ${item.price} SAR
+                        ${formatSAR(item.price)}
                         <span class="vat-tag">Incl. 15% VAT</span>
                     </div>
                 `;
@@ -2604,122 +1910,360 @@
             });
         }
 
-        function filterCategory(category, btn) {
-            currentCategory = category;
-            document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active'));
-            if (btn) btn.classList.add('active');
-            filterMenu();
-        }
-
-        function filterMenu() {
-            const searchText = (document.getElementById('search-input')?.value || '').toLowerCase();
-            const filtered = menuItems.filter(item => {
-                const matchesCat = currentCategory === 'all' || item.category === currentCategory;
-                const matchesSearch = item.nameEn.toLowerCase().includes(searchText) || item.nameAr.includes(searchText);
-                return matchesCat && matchesSearch;
-            });
-            renderMenu(filtered);
-        }
-
-        function addToCart(item) {
-            const existing = cart.find(i => i.id === item.id);
-            if (existing) existing.qty += 1;
-            else cart.push({ ...item, qty: 1 });
-            updateCart();
-        }
-
-        function changeQty(id, delta) {
-            const item = cart.find(i => i.id === id);
-            if (item) {
-                item.qty += delta;
-                if (item.qty <= 0) cart = cart.filter(i => i.id !== id);
+        function addToCart(itemId) {
+            const product = menuItems.find(m => m.id === itemId);
+            if (!product) return;
+            const existing = cart.find(c => c.id === itemId);
+            if (existing) {
+                existing.qty += 1;
+            } else {
+                cart.push({
+                    id: product.id,
+                    nameEn: product.nameEn,
+                    nameAr: product.nameAr,
+                    price: product.price,
+                    qty: 1
+                });
             }
-            updateCart();
+            renderCart();
         }
 
-        function removeItem(id) {
-            cart = cart.filter(i => i.id !== id);
-            updateCart();
-        }
-
-        function updateCart() {
-            const cartContainer = document.getElementById('cart-items');
-            cartContainer.innerHTML = '';
-
-            if (cart.length === 0) {
-                const emptyMsgMargin = window.innerWidth <= 768 ? '6px' : '24px';
-                cartContainer.innerHTML = `<p style="text-align: center; color: #888; margin-top: ${emptyMsgMargin};">No items selected<br>لم يتم اختيار أي صنف</p>`;
+        function changeQty(itemId, delta) {
+            const idx = cart.findIndex(c => c.id === itemId);
+            if (idx === -1) return;
+            cart[idx].qty += delta;
+            if (cart[idx].qty <= 0) {
+                cart.splice(idx, 1);
             }
-
-            let grossItemsTotal = 0;
-
-            cart.forEach(item => {
-                const itemTotal = item.price * item.qty;
-                grossItemsTotal += itemTotal;
-
-                const div = document.createElement('div');
-                div.className = 'cart-item';
-                div.innerHTML = `
-                    <div class="item-details">
-                        <div class="item-name">${item.nameEn}</div>
-                        <div class="item-unit-price">${item.nameAr} | ${item.price} SAR x ${item.qty}</div>
-                    </div>
-                    <div class="qty-controls">
-                        <button class="qty-btn" onclick="changeQty(${item.id}, -1)">-</button>
-                        <span>${item.qty}</span>
-                        <button class="qty-btn" onclick="changeQty(${item.id}, 1)">+</button>
-                    </div>
-                    <div class="item-total">${itemTotal.toFixed(2)}</div>
-                    <button class="remove-btn" onclick="removeItem(${item.id})">✖</button>
-                `;
-                cartContainer.appendChild(div);
-            });
-
-            const { grossItemsTotal: gross, safeDiscount, subtotal, vat, grandTotal } = calculateTotals(grossItemsTotal);
-
-            document.getElementById('discount-label-text').innerText = discountConfig.type === 'percent' && discountConfig.rawValue > 0
-                ? `Discount (${discountConfig.rawValue}% / الخصم):`
-                : `Discount (الخصم SAR):`;
-
-            document.getElementById('discount-input').value = safeDiscount.toFixed(2);
-            document.getElementById('gross-total').innerText = `${gross.toFixed(2)} SAR`;
-            document.getElementById('subtotal').innerText = `${subtotal.toFixed(2)} SAR`;
-            document.getElementById('vat-amount').innerText = `${vat.toFixed(2)} SAR`;
-            document.getElementById('grand-total').innerText = `${grandTotal.toFixed(2)} SAR`;
-            updateOrderMetaStrip();
+            renderCart();
         }
 
-        function resetCurrentOrder() {
-            cart = [];
-            discountConfig = { type: 'amount', rawValue: 0 };
-            currentOrderNote = '';
-            currentOrderTags = [];
-            document.getElementById('discount-input').value = 0;
-            document.getElementById('customer-name').value = '';
-            updateCart();
+        function removeCartItem(itemId) {
+            cart = cart.filter(c => c.id !== itemId);
+            renderCart();
         }
 
-        function clearCart() {
-            if (cart.length > 0 && confirm("Clear current order? / هل تريد إلغاء الطلب الحالي؟")) {
-                resetCurrentOrder();
-            }
-        }
-
-        function openPaymentModal() {
-            if (cart.length === 0) {
-                alert("Please select at least one item! / الرجاء اختيار صنف واحد على الأقل!");
+        function renderCart() {
+            const container = document.getElementById('cart-items');
+            if (!cart.length) {
+                container.innerHTML = `<p style="text-align: center; color: #888; margin-top: 25px; font-size: 0.88rem;">Cart is empty. Tap an item to add.</p>`;
+                updateSummary();
                 return;
             }
 
-            const grossItemsTotal = cart.reduce((sum, item) => sum + item.price * item.qty, 0);
-            const { grandTotal } = calculateTotals(grossItemsTotal);
+            container.innerHTML = '';
+            cart.forEach(item => {
+                const lineTotal = item.price * item.qty;
+                const row = document.createElement('div');
+                row.className = 'cart-item';
+                row.innerHTML = `
+                    <div class="item-details">
+                        <div class="item-name">${escapeHtml(item.nameEn)}</div>
+                        <div class="item-unit-price">${formatSAR(item.price)} each</div>
+                    </div>
+                    <div class="qty-controls">
+                        <button type="button" class="qty-btn" onclick="changeQty(${item.id}, -1)">-</button>
+                        <span>${item.qty}</span>
+                        <button type="button" class="qty-btn" onclick="changeQty(${item.id}, 1)">+</button>
+                    </div>
+                    <div class="item-total">${formatSAR(lineTotal)}</div>
+                    <button type="button" class="remove-btn" onclick="removeCartItem(${item.id})" title="Remove">&times;</button>
+                `;
+                container.appendChild(row);
+            });
+            updateSummary();
+        }
 
-            document.getElementById('modal-grand-total').innerText = `${grandTotal.toFixed(2)} SAR`;
+        function calculateTotals() {
+            const grossTotal = cart.reduce((sum, item) => sum + item.price * item.qty, 0);
+            const discountRaw = parseFloat(document.getElementById('discount-input').value);
+            const discount = Math.max(0, Math.min(grossTotal, isNaN(discountRaw) ? 0 : discountRaw));
+            const netPayable = Math.max(0, grossTotal - discount);
+            const subtotalExclVat = netPayable / (1 + VAT_RATE);
+            const vatAmount = netPayable - subtotalExclVat;
+            return { grossTotal, discount, subtotalExclVat, vatAmount, netPayable };
+        }
 
-            selectedPaymentMethod = 'Cash / كاش';
-            document.getElementById('opt-cash').classList.add('selected');
-            document.getElementById('opt-visa').classList.remove('selected');
+        function updateSummary() {
+            const totals = calculateTotals();
+            document.getElementById('subtotal-val').textContent = formatSAR(totals.subtotalExclVat);
+            document.getElementById('vat-val').textContent = formatSAR(totals.vatAmount);
+            document.getElementById('total-val').textContent = formatSAR(totals.netPayable);
+        }
 
+        function syncOrderMetaFromCart() {
+            orderMeta.customerName = document.getElementById('customer-name-input').value.trim();
+            orderMeta.orderType = document.getElementById('order-type-select').value;
+            updateOrderMetaUI();
+        }
+
+        function updateOrderMetaUI() {
+            const strip = document.getElementById('order-meta-strip');
+            const pills = [];
+            if (orderMeta.tableNumber) pills.push(`🍽️ Table: ${orderMeta.tableNumber}`);
+            if (orderMeta.customerPhone) pills.push(`📞 ${orderMeta.customerPhone}`);
+            if (orderMeta.customerAddress) pills.push(`📍 ${orderMeta.customerAddress}`);
+            if (orderMeta.note) pills.push(`📝 ${orderMeta.note}`);
+            if (orderMeta.discount > 0) pills.push(`🏷️ Disc: ${formatSAR(orderMeta.discount)}`);
+
+            if (pills.length) {
+                strip.className = 'order-meta-strip active';
+                strip.innerHTML = pills.map(p => `<span class="meta-pill">${escapeHtml(p)}</span>`).join('');
+            } else {
+                strip.className = 'order-meta-strip';
+                strip.innerHTML = '';
+            }
+
+            document.getElementById('discount-btn').classList.toggle('has-badge', orderMeta.discount > 0);
+            document.getElementById('note-btn').classList.toggle('has-badge', Boolean(orderMeta.note));
+            document.getElementById('customer-btn').classList.toggle('has-badge', Boolean(orderMeta.customerName || orderMeta.customerPhone || orderMeta.customerAddress));
+            document.getElementById('table-btn').classList.toggle('has-badge', Boolean(orderMeta.tableNumber));
+        }
+
+        function clearCart() {
+            cart = [];
+            orderMeta = {
+                discount: 0,
+                note: '',
+                customerName: '',
+                customerPhone: '',
+                customerAddress: '',
+                tableNumber: '',
+                orderType: 'Dine-In'
+            };
+            document.getElementById('customer-name-input').value = '';
+            document.getElementById('order-type-select').value = 'Dine-In';
+            document.getElementById('discount-input').value = '0';
+            renderCart();
+            updateOrderMetaUI();
+        }
+
+        function voidOrder() {
+            if (!cart.length && !orderMeta.note && orderMeta.discount <= 0) {
+                showToast('Nothing to void');
+                return;
+            }
+            clearCart();
+            showToast('Order voided');
+        }
+
+        function holdCurrentOrder() {
+            if (!cart.length) {
+                showToast('Add items before holding an order');
+                return;
+            }
+            syncOrderMetaFromCart();
+            const totals = calculateTotals();
+            const held = loadHeldOrders();
+            held.unshift({
+                holdId: 'HOLD-' + Date.now().toString().slice(-5),
+                branch: currentBranch,
+                heldAt: new Date().toISOString(),
+                items: JSON.parse(JSON.stringify(cart)),
+                meta: { ...orderMeta },
+                total: totals.netPayable
+            });
+            saveHeldOrders(held);
+            updateRecallButtonBadge();
+            clearCart();
+            showToast(`Order held in ${formatBranchLabel(currentBranch)}`);
+        }
+
+        function updateRecallButtonBadge() {
+            const held = loadHeldOrders();
+            const btn = document.getElementById('recall-btn');
+            btn.textContent = `🔄 Recall (${held.length})`;
+            btn.classList.toggle('has-badge', held.length > 0);
+        }
+
+        function openRecallModal() {
+            document.getElementById('recall-modal-branch').textContent = formatBranchLabel(currentBranch);
+            const body = document.getElementById('recall-modal-body');
+            const held = loadHeldOrders();
+            if (!held.length) {
+                body.innerHTML = `<p style="text-align:center; color:#777; padding: 20px;">No held orders for ${formatBranchLabel(currentBranch)}.</p>`;
+            } else {
+                body.innerHTML = held.map((h, index) => `
+                    <div style="border:1px solid var(--border); border-radius:8px; padding:10px; margin-bottom:10px; background:#fdfaf5; display:flex; justify-content:space-between; align-items:center; gap:10px; flex-wrap:wrap;">
+                        <div>
+                            <strong>${escapeHtml(h.holdId)}</strong> — ${new Date(h.heldAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
+                            <div style="font-size:0.82rem; color:#5c4636;">
+                                ${h.items.length} item(s) | Total: <strong>${formatSAR(h.total)}</strong>
+                                ${h.meta.tableNumber ? ` | Table: ${escapeHtml(h.meta.tableNumber)}` : ''}
+                            </div>
+                        </div>
+                        <div style="display:flex; gap:6px;">
+                            <button type="button" class="mini-print-btn" style="background:var(--success);" onclick="recallOrder(${index})">Recall</button>
+                            <button type="button" class="mini-print-btn" style="background:var(--danger);" onclick="deleteHeldOrder(${index})">Delete</button>
+                        </div>
+                    </div>
+                `).join('');
+            }
+            document.getElementById('recall-modal').classList.add('active');
+        }
+
+        function recallOrder(index) {
+            const held = loadHeldOrders();
+            const target = held[index];
+            if (!target) return;
+            cart = target.items || [];
+            orderMeta = {
+                discount: target.meta?.discount || 0,
+                note: target.meta?.note || '',
+                customerName: target.meta?.customerName || '',
+                customerPhone: target.meta?.customerPhone || '',
+                customerAddress: target.meta?.customerAddress || '',
+                tableNumber: target.meta?.tableNumber || '',
+                orderType: target.meta?.orderType || 'Dine-In'
+            };
+            document.getElementById('customer-name-input').value = orderMeta.customerName;
+            document.getElementById('order-type-select').value = orderMeta.orderType;
+            document.getElementById('discount-input').value = orderMeta.discount;
+            held.splice(index, 1);
+            saveHeldOrders(held);
+            updateRecallButtonBadge();
+            renderCart();
+            updateOrderMetaUI();
+            closeModal('recall-modal');
+            showToast('Held order recalled');
+        }
+
+        function deleteHeldOrder(index) {
+            const held = loadHeldOrders();
+            held.splice(index, 1);
+            saveHeldOrders(held);
+            updateRecallButtonBadge();
+            openRecallModal();
+        }
+
+        function closeModal(id) {
+            document.getElementById(id).classList.remove('active');
+        }
+
+        // Discount Modal
+        function openDiscountModal() {
+            document.getElementById('modal-discount-input').value = parseFloat(document.getElementById('discount-input').value) || 0;
+            document.getElementById('discount-modal').classList.add('active');
+        }
+
+        function applyQuickDiscount(amount) {
+            document.getElementById('modal-discount-input').value = amount;
+            saveDiscountFromModal();
+        }
+
+        function saveDiscountFromModal() {
+            const val = Math.max(0, parseFloat(document.getElementById('modal-discount-input').value) || 0);
+            document.getElementById('discount-input').value = val;
+            orderMeta.discount = val;
+            updateSummary();
+            updateOrderMetaUI();
+            closeModal('discount-modal');
+            showToast(`Discount set to ${formatSAR(val)}`);
+        }
+
+        // Note Modal
+        function openNoteModal() {
+            document.getElementById('order-note-input').value = orderMeta.note || '';
+            document.getElementById('note-modal').classList.add('active');
+        }
+
+        function appendQuickNote(text) {
+            const input = document.getElementById('order-note-input');
+            const current = input.value.trim();
+            if (!current) {
+                input.value = text;
+            } else if (!current.toLowerCase().includes(text.toLowerCase())) {
+                input.value = `${current}, ${text}`;
+            }
+        }
+
+        function clearOrderNote() {
+            orderMeta.note = '';
+            document.getElementById('order-note-input').value = '';
+            updateOrderMetaUI();
+            closeModal('note-modal');
+        }
+
+        function saveOrderNote() {
+            orderMeta.note = document.getElementById('order-note-input').value.trim();
+            updateOrderMetaUI();
+            closeModal('note-modal');
+            showToast('Order note saved');
+        }
+
+        // Customer Modal
+        function openCustomerModal() {
+            document.getElementById('modal-customer-name').value = orderMeta.customerName || document.getElementById('customer-name-input').value.trim();
+            document.getElementById('modal-customer-phone').value = orderMeta.customerPhone || '';
+            document.getElementById('modal-customer-address').value = orderMeta.customerAddress || '';
+            document.getElementById('customer-modal').classList.add('active');
+        }
+
+        function saveCustomerMeta() {
+            orderMeta.customerName = document.getElementById('modal-customer-name').value.trim();
+            orderMeta.customerPhone = document.getElementById('modal-customer-phone').value.trim();
+            orderMeta.customerAddress = document.getElementById('modal-customer-address').value.trim();
+            document.getElementById('customer-name-input').value = orderMeta.customerName;
+            updateOrderMetaUI();
+            closeModal('customer-modal');
+            showToast('Customer details saved');
+        }
+
+        function clearCustomerMeta() {
+            orderMeta.customerName = '';
+            orderMeta.customerPhone = '';
+            orderMeta.customerAddress = '';
+            document.getElementById('customer-name-input').value = '';
+            updateOrderMetaUI();
+            closeModal('customer-modal');
+        }
+
+        // Table Modal
+        function openTableModal() {
+            const container = document.getElementById('table-chips-container');
+            const tables = ['T-01', 'T-02', 'T-03', 'T-04', 'T-05', 'T-06', 'Family 1', 'Family 2'];
+            container.innerHTML = tables.map(t =>
+                `<button type="button" class="chip-btn ${orderMeta.tableNumber === t ? 'active' : ''}" onclick="selectTableQuick('${t}')">${t}</button>`
+            ).join('');
+            document.getElementById('modal-table-input').value = orderMeta.tableNumber || '';
+            document.getElementById('table-modal').classList.add('active');
+        }
+
+        function selectTableQuick(t) {
+            document.getElementById('modal-table-input').value = t;
+            saveTableMeta();
+        }
+
+        function saveTableMeta() {
+            orderMeta.tableNumber = document.getElementById('modal-table-input').value.trim();
+            if (orderMeta.tableNumber) {
+                orderMeta.orderType = 'Dine-In';
+                document.getElementById('order-type-select').value = 'Dine-In';
+            }
+            updateOrderMetaUI();
+            closeModal('table-modal');
+            showToast(orderMeta.tableNumber ? `Assigned ${orderMeta.tableNumber}` : 'Table cleared');
+        }
+
+        function clearTableMeta() {
+            orderMeta.tableNumber = '';
+            document.getElementById('modal-table-input').value = '';
+            updateOrderMetaUI();
+            closeModal('table-modal');
+        }
+
+        // Payment Modal (VISA always selected by default)
+        function openPaymentModal() {
+            if (!cart.length) {
+                showToast('Please select at least one item!');
+                return;
+            }
+            const totals = calculateTotals();
+            document.getElementById('pay-modal-branch').textContent = formatBranchLabel(currentBranch);
+            document.getElementById('modal-total-amount').textContent = formatSAR(totals.netPayable);
+            selectPaymentMethod('VISA');
+            document.getElementById('cash-received-input').value = totals.netPayable.toFixed(2);
+            calculateCashChange();
             document.getElementById('payment-modal').classList.add('active');
         }
 
@@ -2727,238 +2271,671 @@
             document.getElementById('payment-modal').classList.remove('active');
         }
 
-        function selectPaymentMethod(method, btn) {
-            selectedPaymentMethod = method;
-            document.querySelectorAll('.pay-option-btn').forEach(b => b.classList.remove('selected'));
-            btn.classList.add('selected');
+        function selectPaymentMethod(method) {
+            selectedPaymentMethod = method === 'Cash' ? 'Cash' : 'VISA';
+            document.getElementById('opt-visa').classList.toggle('selected', selectedPaymentMethod === 'VISA');
+            document.getElementById('opt-cash').classList.toggle('selected', selectedPaymentMethod === 'Cash');
+            document.getElementById('cash-tendered-box').style.display = selectedPaymentMethod === 'Cash' ? 'block' : 'none';
+            calculateCashChange();
         }
 
-        function populateReceipt(order, subtitleOverride = null, stampOverride = null) {
-            document.getElementById("rec-subtitle").innerText = subtitleOverride || "Simplified Tax Invoice / فاتورة ضريبية مبسطة";
-            document.getElementById("rec-stamp").innerText = stampOverride || "PAID (مدفوع)";
-
-            const tagsDisplay = (order.tags && order.tags.length > 0) ? order.tags.join(", ") : "-";
-            const noteDisplay = order.note ? order.note : "-";
-
-            document.getElementById("rec-info-block").innerHTML = `
-                <p><strong>Status / الحالة:</strong> ${order.status || "PAID"} (مدفوع)</p>
-                <p><strong>Payment / الدفع:</strong> ${order.paymentMethod}</p>
-                <p><strong>Invoice / الفاتورة:</strong> ${order.invoiceNo}</p>
-                <p><strong>Date / التاريخ:</strong> ${order.dateTime}</p>
-                <p><strong>Customer / العميل:</strong> ${order.customerName}</p>
-                <p><strong>Order Type / النوع:</strong> ${order.orderType}</p>
-                <p><strong>Tags / الوسوم:</strong> ${tagsDisplay}</p>
-                ${order.note ? `<p><strong>Note / ملاحظة:</strong> ${noteDisplay}</p>` : ''}
-            `;
-
-            document.getElementById("rec-table-block").style.display = "table";
-            const recItemsBody = document.getElementById('rec-items');
-            recItemsBody.innerHTML = '';
-
-            (order.items || []).forEach(item => {
-                const total = item.price * item.qty;
-                recItemsBody.innerHTML += `
-                    <tr>
-                        <td>${item.nameEn}<br><small>${item.nameAr}</small></td>
-                        <td style="text-align: center;">${item.qty}</td>
-                        <td style="text-align: right;">${total.toFixed(2)}</td>
-                    </tr>
-                `;
-            });
-
-            document.getElementById("rec-totals-block").innerHTML = `
-                <div><span>Subtotal / Excl. VAT (المجموع):</span><span>${Number(order.subtotal).toFixed(2)} SAR</span></div>
-                <div><span>Discount (الخصم):</span><span>${Number(order.discount).toFixed(2)} SAR</span></div>
-                <div><span>VAT 15% Incl. (الضريبة):</span><span>${Number(order.vat).toFixed(2)} SAR</span></div>
-                <div class="receipt-grand-total"><span>Grand Total (الإجمالي):</span><span>${Number(order.grandTotal).toFixed(2)} SAR</span></div>
-            `;
-
-            const isoTime = new Date(order.timestamp || Date.now()).toISOString();
-            const zatcaBase64 = encodeZatcaTLV(
-                SELLER_NAME_AR,
-                ZATCA_VAT_NUMBER,
-                isoTime,
-                Number(order.grandTotal).toFixed(2),
-                Number(order.vat).toFixed(2)
-            );
-            document.getElementById("rec-zatca-box").style.display = "block";
-            document.getElementById("zatca-vat-line").innerText = `VAT: ${ZATCA_VAT_NUMBER}`;
-            renderZatcaQRCode(zatcaBase64);
-
-            document.getElementById("rec-footer-block").innerHTML = `
-                <p>Status: ${order.status || "PAID"} - ${order.paymentMethod}</p>
-                <p>Thank you for visiting HAZZAT CHAPATI!</p>
-                <p>شكراً لزيارتكم حزة جباتي</p>
-            `;
+        function calculateCashChange() {
+            const totals = calculateTotals();
+            const received = parseFloat(document.getElementById('cash-received-input').value) || 0;
+            const change = Math.max(0, received - totals.netPayable);
+            document.getElementById('cash-change-display').textContent = formatSAR(change);
         }
 
-        async function processOrder(shouldPrint) {
-            const nowObj = new Date();
-            const year = nowObj.getFullYear();
-            const month = String(nowObj.getMonth() + 1).padStart(2, '0');
-            const day = String(nowObj.getDate()).padStart(2, '0');
-            const localIsoDate = `${year}-${month}-${day}`;
-
-            const invNo = "HZ-" + Math.floor(100000 + Math.random() * 900000);
-            const dateTime = nowObj.toLocaleString('en-GB');
-            const custName = document.getElementById('customer-name').value.trim() || "Walk-in Customer";
-            const orderType = document.getElementById('order-type').value;
-
-            let grossItemsTotal = 0;
-            const orderItems = cart.map(item => {
-                grossItemsTotal += item.price * item.qty;
-                return {
-                    id: item.id,
-                    nameEn: item.nameEn,
-                    nameAr: item.nameAr,
-                    price: item.price,
-                    qty: item.qty
-                };
-            });
-
-            const { safeDiscount, subtotal, vat, grandTotal } = calculateTotals(grossItemsTotal);
+        function completePayment(shouldPrint) {
+            syncOrderMetaFromCart();
+            const totals = calculateTotals();
+            const now = new Date();
+            const dateStr = now.toISOString().split('T')[0];
+            const shift = loadShiftData();
+            if (!shift.isOpen) {
+                const reopened = createDefaultShift(shift.closingCashActual || 0);
+                saveShiftData(reopened);
+            }
 
             const orderRecord = {
-                invoiceNo: invNo,
-                timestamp: nowObj.getTime(),
-                isoDate: localIsoDate,
-                dateTime: dateTime,
-                customerName: custName,
-                orderType: orderType,
+                invoiceNo: 'HZ-' + now.getFullYear().toString().slice(-2) +
+                    String(now.getMonth() + 1).padStart(2, '0') +
+                    String(now.getDate()).padStart(2, '0') + '-' +
+                    String(Math.floor(1000 + Math.random() * 9000)),
+                branch: currentBranch,
+                date: dateStr,
+                timestamp: now.toISOString(),
+                shiftOpenedAt: loadShiftData().openedAt,
+                customerName: orderMeta.customerName || 'Walk-in Customer',
+                customerPhone: orderMeta.customerPhone || '',
+                customerAddress: orderMeta.customerAddress || '',
+                tableNumber: orderMeta.tableNumber || '',
+                orderType: orderMeta.orderType || 'Dine-In',
+                note: orderMeta.note || '',
                 paymentMethod: selectedPaymentMethod,
                 status: 'PAID',
-                vatNumber: ZATCA_VAT_NUMBER,
-                items: orderItems,
-                discount: safeDiscount,
-                subtotal: subtotal,
-                vat: vat,
-                grandTotal: grandTotal,
-                note: currentOrderNote,
-                tags: currentOrderTags
+                items: JSON.parse(JSON.stringify(cart)),
+                grossTotal: totals.grossTotal,
+                discount: totals.discount,
+                subtotalExclVat: totals.subtotalExclVat,
+                vatAmount: totals.vatAmount,
+                total: totals.netPayable
             };
 
-            try {
-                await saveOrderViaRest(orderRecord);
-                await fetchSalesFromFirebase(false);
-                closePaymentModal();
-                resetCurrentOrder();
+            const orders = loadBranchOrders();
+            orders.unshift(orderRecord);
+            saveBranchOrders(orders);
 
-                if (shouldPrint) {
-                    populateReceipt(orderRecord);
-                    window.print();
-                } else {
-                    showToast(`✅ Order ${invNo} Synced as PAID (${selectedPaymentMethod})!`);
-                }
-            } catch (error) {
-                console.error("Failed to save order via REST API:", error);
-                showToast("❌ Failed to save order. Check Realtime DB URL & Rules.", true);
+            closePaymentModal();
+            clearCart();
+            showToast(`Paid via ${orderRecord.paymentMethod} (${formatSAR(orderRecord.total)}) - ${formatBranchLabel(currentBranch)}`);
+
+            if (shouldPrint) {
+                printOrderReceipt80mm(orderRecord);
             }
         }
 
-        function openSalesHistoryModal() {
-            const nowObj = new Date();
-            const year = nowObj.getFullYear();
-            const month = String(nowObj.getMonth() + 1).padStart(2, '0');
-            const day = String(nowObj.getDate()).padStart(2, '0');
-            document.getElementById('report-date-filter').value = `${year}-${month}-${day}`;
-            fetchSalesFromFirebase(false);
-            renderSalesHistory();
+        // Shift & Cash Drawer Calculations + 80mm Shift Report Print
+        function computeShiftStats() {
+            const shift = loadShiftData();
+            const orders = loadBranchOrders();
+            const shiftStartMs = shift.openedAt ? new Date(shift.openedAt).getTime() : 0;
+
+            const shiftOrders = orders.filter(o => {
+                const t = new Date(o.timestamp).getTime();
+                return t >= shiftStartMs && o.status !== 'VOID';
+            });
+
+            let visaPayments = 0;
+            let visaReturns = 0;
+            let cashPayments = 0;
+            let cashReturns = 0;
+
+            shiftOrders.forEach(o => {
+                const amt = Number(o.total) || 0;
+                const isReturn = o.status === 'RETURN' || o.isReturn === true || amt < 0;
+                const absAmt = Math.abs(amt);
+                if (o.paymentMethod === 'Cash') {
+                    if (isReturn) cashReturns += absAmt;
+                    else cashPayments += absAmt;
+                } else {
+                    if (isReturn) visaReturns += absAmt;
+                    else visaPayments += absAmt;
+                }
+            });
+
+            const visaNet = visaPayments - visaReturns;
+            const cashNet = cashPayments - cashReturns;
+
+            const movements = shift.cashMovements || [];
+            let payInTotal = 0;
+            let payOutTotal = 0;
+            movements.forEach(m => {
+                if (m.type === 'IN') payInTotal += Number(m.amount) || 0;
+                else payOutTotal += Number(m.amount) || 0;
+            });
+
+            const openingCash = Number(shift.openingCash) || 0;
+            const estimatedCashInRegister = openingCash + cashNet + payInTotal - payOutTotal;
+            const closingCashActual = shift.closingCashActual !== null && shift.closingCashActual !== undefined
+                ? Number(shift.closingCashActual)
+                : estimatedCashInRegister;
+            // Shortage > 0 when actual cash is less than estimated cash
+            const cashShortage = estimatedCashInRegister - closingCashActual;
+
+            return {
+                shift,
+                shiftOrdersCount: shiftOrders.length,
+                visaPayments,
+                visaReturns,
+                visaNet,
+                cashPayments,
+                cashReturns,
+                cashNet,
+                payInTotal,
+                payOutTotal,
+                openingCash,
+                estimatedCashInRegister,
+                closingCashActual,
+                cashShortage
+            };
+        }
+
+        function openShiftModal() {
+            document.getElementById('shift-modal-branch').textContent = formatBranchLabel(currentBranch);
+            renderShiftModalBody();
+            document.getElementById('shift-modal').classList.add('active');
+        }
+
+        function renderShiftModalBody() {
+            const stats = computeShiftStats();
+            const { shift } = stats;
+            const openedStr = shift.openedAt ? new Date(shift.openedAt).toLocaleString() : 'N/A';
+            const closedStr = shift.closedAt ? new Date(shift.closedAt).toLocaleString() : (shift.isOpen ? 'Still Open' : 'Closed');
+
+            let diffClass = 'diff-balanced';
+            let diffLabel = 'Balanced (0.00 SAR)';
+            if (stats.cashShortage > 0.009) {
+                diffClass = 'diff-shortage';
+                diffLabel = `Cash Shortage: ${formatSAR(stats.cashShortage)}`;
+            } else if (stats.cashShortage < -0.009) {
+                diffClass = 'diff-overage';
+                diffLabel = `Cash Overage: ${formatSAR(Math.abs(stats.cashShortage))}`;
+            }
+
+            const ioRows = (shift.cashMovements || []).slice().reverse().map(m => `
+                <div class="io-item">
+                    <span>
+                        <span class="${m.type === 'IN' ? 'tag-in' : 'tag-out'}">[${m.type === 'IN' ? 'Pay In' : 'Pay Out'}]</span>
+                        ${escapeHtml(m.reason || 'Cash Drawer')}
+                        <small style="color:#777;">(${new Date(m.time).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })})</small>
+                    </span>
+                    <strong>${formatSAR(m.amount)}</strong>
+                </div>
+            `).join('') || `<p style="color:#888; padding:6px;">No Pay In / Pay Out entries yet.</p>`;
+
+            document.getElementById('shift-modal-body').innerHTML = `
+                <div class="report-summary-cards">
+                    <div class="report-card">
+                        <div class="report-card-label">Shift Status</div>
+                        <div class="report-card-value">${shift.isOpen ? '🟢 OPEN' : '🔴 CLOSED'}</div>
+                    </div>
+                    <div class="report-card">
+                        <div class="report-card-label">Shift Open Time</div>
+                        <div class="report-card-value" style="font-size:0.86rem;">${escapeHtml(openedStr)}</div>
+                    </div>
+                    <div class="report-card">
+                        <div class="report-card-label">Shift Close Time</div>
+                        <div class="report-card-value" style="font-size:0.86rem;">${escapeHtml(closedStr)}</div>
+                    </div>
+                    <div class="report-card">
+                        <div class="report-card-label">Net Total Sales</div>
+                        <div class="report-card-value">${formatSAR(stats.visaNet + stats.cashNet)}</div>
+                    </div>
+                </div>
+
+                <div class="shift-grid-2">
+                    <div class="shift-box">
+                        <h4>💳 VISA & 💵 Cash Breakdown</h4>
+                        <div class="drawer-line"><span>VISA Total Payments:</span><strong>${formatSAR(stats.visaPayments)}</strong></div>
+                        <div class="drawer-line"><span>VISA Total Returns:</span><strong>${formatSAR(stats.visaReturns)}</strong></div>
+                        <div class="drawer-line"><span>VISA Net Payments:</span><strong>${formatSAR(stats.visaNet)}</strong></div>
+                        <div class="drawer-line" style="margin-top:6px;"><span>Cash Total Payments:</span><strong>${formatSAR(stats.cashPayments)}</strong></div>
+                        <div class="drawer-line"><span>Cash Total Returns:</span><strong>${formatSAR(stats.cashReturns)}</strong></div>
+                        <div class="drawer-line highlight"><span>Cash Net Payments:</span><span>${formatSAR(stats.cashNet)}</span></div>
+                    </div>
+
+                    <div class="shift-box">
+                        <h4>🗄️ Cash Drawer & Pay In / Out</h4>
+                        <div class="drawer-line">
+                            <span>Opening Amount (SAR):</span>
+                            <input type="number" id="opening-cash-input" value="${stats.openingCash}" min="0" step="1" style="width:110px; padding:4px 7px; border:1px solid var(--border); border-radius:5px; text-align:right;" onchange="updateOpeningCash(this.value)">
+                        </div>
+                        <div class="drawer-line"><span>Pay In (+):</span><strong class="tag-in">+${formatSAR(stats.payInTotal)}</strong></div>
+                        <div class="drawer-line"><span>Pay Out (-):</span><strong class="tag-out">-${formatSAR(stats.payOutTotal)}</strong></div>
+                        <div class="drawer-line highlight"><span>Estimated Cash In Register:</span><span>${formatSAR(stats.estimatedCashInRegister)}</span></div>
+
+                        <div class="pay-io-form" style="margin-top:8px;">
+                            <select id="io-type-select">
+                                <option value="IN">Pay In</option>
+                                <option value="OUT">Pay Out</option>
+                            </select>
+                            <input type="number" id="io-amount-input" placeholder="Amount" min="0" step="0.5">
+                            <input type="text" id="io-reason-input" placeholder="Reason">
+                            <button type="button" class="mini-print-btn" style="background:var(--info);" onclick="addCashMovement()">Add</button>
+                        </div>
+                        <div class="io-list">${ioRows}</div>
+                    </div>
+                </div>
+
+                <div class="actual-cash-row">
+                    <div>
+                        <strong>Closing Amount (Counted Cash in Drawer):</strong>
+                        <div style="font-size:0.78rem; color:#6d5443;">Estimated Cash: ${formatSAR(stats.estimatedCashInRegister)}</div>
+                    </div>
+                    <input type="number" id="closing-cash-input" value="${stats.closingCashActual.toFixed(2)}" min="0" step="0.5" oninput="liveRecalcShortage()">
+                </div>
+
+                <div class="diff-box ${diffClass}" id="shift-shortage-banner">
+                    <span>Cash Shortage:</span>
+                    <span id="shift-shortage-val">${formatSAR(Math.max(0, stats.cashShortage))}</span>
+                    <small>${escapeHtml(diffLabel)}</small>
+                </div>
+
+                <div class="action-buttons" style="flex-wrap:wrap;">
+                    <button type="button" class="btn" style="background:var(--info);" onclick="printShiftCashReport80mm()">🖨️ Print 80mm Shift & Cash Report</button>
+                    ${shift.isOpen
+                        ? `<button type="button" class="btn btn-clear" onclick="closeCurrentShift()">🔒 Close Shift</button>`
+                        : `<button type="button" class="btn btn-print" onclick="openNewShift()">🔓 Open New Shift</button>`
+                    }
+                </div>
+            `;
+        }
+
+        function updateOpeningCash(val) {
+            const shift = loadShiftData();
+            shift.openingCash = Math.max(0, parseFloat(val) || 0);
+            saveShiftData(shift);
+            renderShiftModalBody();
+        }
+
+        function addCashMovement() {
+            const type = document.getElementById('io-type-select').value;
+            const amount = parseFloat(document.getElementById('io-amount-input').value) || 0;
+            const reason = document.getElementById('io-reason-input').value.trim();
+            if (amount <= 0) {
+                showToast('Enter a valid amount');
+                return;
+            }
+            const shift = loadShiftData();
+            shift.cashMovements = shift.cashMovements || [];
+            shift.cashMovements.push({
+                type,
+                amount,
+                reason: reason || (type === 'IN' ? 'Drawer Pay In' : 'Drawer Pay Out'),
+                time: new Date().toISOString()
+            });
+            saveShiftData(shift);
+            renderShiftModalBody();
+            showToast(`${type === 'IN' ? 'Pay In' : 'Pay Out'} recorded`);
+        }
+
+        function liveRecalcShortage() {
+            const stats = computeShiftStats();
+            const closingVal = parseFloat(document.getElementById('closing-cash-input').value);
+            const actual = isNaN(closingVal) ? stats.estimatedCashInRegister : closingVal;
+            const shortage = stats.estimatedCashInRegister - actual;
+            const banner = document.getElementById('shift-shortage-banner');
+            const valEl = document.getElementById('shift-shortage-val');
+            if (!banner || !valEl) return;
+            valEl.textContent = formatSAR(Math.max(0, shortage));
+            banner.className = 'diff-box ' + (shortage > 0.009 ? 'diff-shortage' : (shortage < -0.009 ? 'diff-overage' : 'diff-balanced'));
+        }
+
+        function closeCurrentShift() {
+            const closingInput = document.getElementById('closing-cash-input');
+            const closingVal = closingInput ? parseFloat(closingInput.value) : 0;
+            const shift = loadShiftData();
+            shift.isOpen = false;
+            shift.closedAt = new Date().toISOString();
+            shift.closingCashActual = isNaN(closingVal) ? 0 : Math.max(0, closingVal);
+            saveShiftData(shift);
+            renderShiftModalBody();
+            showToast('Shift closed');
+        }
+
+        function openNewShift() {
+            const prev = loadShiftData();
+            const startCash = prev.closingCashActual !== null && prev.closingCashActual !== undefined ? prev.closingCashActual : 0;
+            const fresh = createDefaultShift(startCash);
+            saveShiftData(fresh);
+            renderShiftModalBody();
+            showToast('New shift opened');
+        }
+
+        function printShiftCashReport80mm() {
+            const closingInput = document.getElementById('closing-cash-input');
+            if (closingInput) {
+                const val = parseFloat(closingInput.value);
+                if (!isNaN(val)) {
+                    const s = loadShiftData();
+                    s.closingCashActual = Math.max(0, val);
+                    saveShiftData(s);
+                }
+            }
+            const stats = computeShiftStats();
+            const openedStr = stats.shift.openedAt ? new Date(stats.shift.openedAt).toLocaleString() : 'N/A';
+            const closedStr = stats.shift.closedAt ? new Date(stats.shift.closedAt).toLocaleString() : new Date().toLocaleString();
+            const shortageDisplay = Math.max(0, stats.cashShortage);
+
+            const receiptEl = document.getElementById('printable-receipt');
+            receiptEl.innerHTML = `
+                <div class="receipt-header">
+                    <h2>HAZZAT CHAPATI</h2>
+                    <p>هزة شباتي | SHIFT & CASH REPORT</p>
+                    <p>Branch: <strong>${formatBranchLabel(currentBranch)}</strong></p>
+                    <div class="paid-stamp">SHIFT REPORT</div>
+                </div>
+                <div class="receipt-info">
+                    <p><strong>Shift Open:</strong> ${escapeHtml(openedStr)}</p>
+                    <p><strong>Shift Close:</strong> ${escapeHtml(closedStr)}</p>
+                    <p><strong>Printed At:</strong> ${new Date().toLocaleString()}</p>
+                </div>
+                <table class="receipt-table">
+                    <thead>
+                        <tr>
+                            <th>Payment Method</th>
+                            <th class="right">Amount</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>VISA Total Payments</td><td class="right">${formatSAR(stats.visaPayments)}</td></tr>
+                        <tr><td>VISA Total Returns</td><td class="right">${formatSAR(stats.visaReturns)}</td></tr>
+                        <tr><td><strong>VISA Net Payments</strong></td><td class="right"><strong>${formatSAR(stats.visaNet)}</strong></td></tr>
+                        <tr><td>Cash Total Payments</td><td class="right">${formatSAR(stats.cashPayments)}</td></tr>
+                        <tr><td>Cash Total Returns</td><td class="right">${formatSAR(stats.cashReturns)}</td></tr>
+                        <tr><td><strong>Cash Net Payments</strong></td><td class="right"><strong>${formatSAR(stats.cashNet)}</strong></td></tr>
+                    </tbody>
+                </table>
+                <div class="receipt-totals">
+                    <div class="receipt-total-line"><span>Opening Amount:</span><span>${formatSAR(stats.openingCash)}</span></div>
+                    <div class="receipt-total-line"><span>Pay In (+):</span><span>${formatSAR(stats.payInTotal)}</span></div>
+                    <div class="receipt-total-line"><span>Pay Out (-):</span><span>${formatSAR(stats.payOutTotal)}</span></div>
+                    <div class="receipt-total-line"><span>Estimated Cash In Register:</span><span>${formatSAR(stats.estimatedCashInRegister)}</span></div>
+                    <div class="receipt-total-line"><span>Closing Amount:</span><span>${formatSAR(stats.closingCashActual)}</span></div>
+                    <div class="receipt-total-line grand"><span>Cash Shortage:</span><span>${formatSAR(shortageDisplay)}</span></div>
+                </div>
+                <div class="receipt-footer">
+                    <p>${formatBranchLabel(currentBranch)} - End of Shift</p>
+                </div>
+            `;
+            window.print();
+        }
+
+        // History & Item-Wise Sales Summary
+        function openHistoryModal() {
+            document.getElementById('history-modal-branch').textContent = formatBranchLabel(currentBranch);
+            document.getElementById('history-date-filter').value = new Date().toISOString().split('T')[0];
+            switchHistoryTab(historyActiveTab);
             document.getElementById('history-modal').classList.add('active');
         }
 
-        function closeSalesHistoryModal() {
-            document.getElementById('history-modal').classList.remove('active');
+        function switchHistoryTab(tabName) {
+            historyActiveTab = tabName === 'items' ? 'items' : 'orders';
+            document.getElementById('tab-orders-btn').classList.toggle('active', historyActiveTab === 'orders');
+            document.getElementById('tab-items-btn').classList.toggle('active', historyActiveTab === 'items');
+            document.getElementById('print-item-summary-btn').style.display = historyActiveTab === 'items' ? 'inline-block' : 'none';
+            renderHistoryView();
         }
 
-        function resetDateFilter() {
-            document.getElementById('report-date-filter').value = '';
-            renderSalesHistory();
+        function showAllHistory() {
+            document.getElementById('history-date-filter').value = '';
+            renderHistoryView();
         }
 
-        function renderSalesHistory() {
-            const allOrders = cachedSalesHistory;
-            const selectedDate = document.getElementById('report-date-filter').value;
+        function getFilteredOrders() {
+            const selectedDate = document.getElementById('history-date-filter').value;
+            const allOrders = loadBranchOrders();
+            return selectedDate ? allOrders.filter(o => o.date === selectedDate) : allOrders;
+        }
 
-            const filteredOrders = selectedDate
-                ? allOrders.filter(o => o.isoDate === selectedDate)
-                : allOrders;
+        function computeItemWiseSummary(orders) {
+            const map = new Map();
+            orders.forEach(order => {
+                if (order.status === 'VOID') return;
+                const items = order.items || [];
+                const gross = Number(order.grossTotal) || items.reduce((s, it) => s + (Number(it.price) || 0) * (Number(it.qty) || 0), 0);
+                const net = Number(order.total) || 0;
+                const ratio = gross > 0 ? (net / gross) : 1;
 
-            let cashTotal = 0;
+                items.forEach(item => {
+                    const key = item.nameEn || 'Item';
+                    const qty = Number(item.qty) || 0;
+                    const rawLineTotal = (Number(item.price) || 0) * qty;
+                    const adjustedTotal = rawLineTotal * ratio;
+                    if (!map.has(key)) {
+                        map.set(key, {
+                            nameEn: item.nameEn,
+                            nameAr: item.nameAr || '',
+                            totalQty: 0,
+                            totalAmount: 0
+                        });
+                    }
+                    const entry = map.get(key);
+                    entry.totalQty += qty;
+                    entry.totalAmount += adjustedTotal;
+                });
+            });
+            return Array.from(map.values()).sort((a, b) => b.totalQty - a.totalQty);
+        }
+
+        function renderHistoryView() {
+            const filtered = getFilteredOrders();
+            const cardsEl = document.getElementById('history-summary-cards');
+            const contentEl = document.getElementById('history-content-container');
+
+            let totalRevenue = 0;
             let visaTotal = 0;
-            let vatTotal = 0;
-            let grandSales = 0;
+            let cashTotal = 0;
 
-            const tbody = document.getElementById('history-table-body');
-            tbody.innerHTML = '';
-
-            if (filteredOrders.length === 0) {
-                tbody.innerHTML = '<tr><td colspan="8" style="text-align: center; color: #777; padding: 20px;">No paid orders found for this selection.</td></tr>';
-            }
-
-            filteredOrders.forEach(order => {
-                const amount = Number(order.grandTotal) || 0;
-                const vatAmt = Number(order.vat) || 0;
-
-                if ((order.paymentMethod || '').includes('Cash')) cashTotal += amount;
-                else visaTotal += amount;
-                vatTotal += vatAmt;
-                grandSales += amount;
-
-                const itemsSummary = (order.items || []).map(i => `${i.nameEn} (${i.qty})`).join(', ');
-                const extraMeta = [
-                    order.tags && order.tags.length ? `[${order.tags.join(', ')}]` : '',
-                    order.note ? `Note: ${order.note}` : ''
-                ].filter(Boolean).join(' | ');
-
-                const tr = document.createElement('tr');
-                tr.innerHTML = `
-                    <td><strong>${order.invoiceNo}</strong></td>
-                    <td>${order.dateTime}</td>
-                    <td>${order.customerName}<br><small style="color:#666;">${order.orderType}</small></td>
-                    <td>${itemsSummary}${extraMeta ? `<br><small style="color:var(--purple-dark);">${extraMeta}</small>` : ''}</td>
-                    <td>${order.paymentMethod}</td>
-                    <td><strong>${amount.toFixed(2)}</strong></td>
-                    <td><span class="badge-paid">PAID</span></td>
-                    <td><button class="mini-print-btn" onclick="reprintHistoryOrder('${order.invoiceNo}')">🖨️ Print</button></td>
-                `;
-                tbody.appendChild(tr);
+            filtered.forEach(o => {
+                if (o.status === 'VOID') return;
+                const amt = Number(o.total) || 0;
+                totalRevenue += amt;
+                if (o.paymentMethod === 'Cash') cashTotal += amt;
+                else visaTotal += amt;
             });
 
-            document.getElementById('rep-orders-count').innerText = filteredOrders.length;
-            document.getElementById('rep-cash-total').innerText = `${cashTotal.toFixed(2)} SAR`;
-            document.getElementById('rep-visa-total').innerText = `${visaTotal.toFixed(2)} SAR`;
-            document.getElementById('rep-vat-total').innerText = `${vatTotal.toFixed(2)} SAR`;
-            document.getElementById('rep-grand-total').innerText = `${grandSales.toFixed(2)} SAR`;
-        }
+            cardsEl.innerHTML = `
+                <div class="report-card">
+                    <div class="report-card-label">Orders Count</div>
+                    <div class="report-card-value">${filtered.length}</div>
+                </div>
+                <div class="report-card">
+                    <div class="report-card-label">VISA Sales</div>
+                    <div class="report-card-value">${formatSAR(visaTotal)}</div>
+                </div>
+                <div class="report-card">
+                    <div class="report-card-label">Cash Sales</div>
+                    <div class="report-card-value">${formatSAR(cashTotal)}</div>
+                </div>
+                <div class="report-card">
+                    <div class="report-card-label">Total Sales</div>
+                    <div class="report-card-value">${formatSAR(totalRevenue)}</div>
+                </div>
+            `;
 
-        function reprintHistoryOrder(invoiceNo) {
-            const order = cachedSalesHistory.find(o => o.invoiceNo === invoiceNo);
-            if (order) {
-                populateReceipt(order);
-                window.print();
-            }
-        }
-
-        async function clearSalesHistory() {
-            if (confirm("Are you sure you want to delete ALL synced sales history? / هل أنت متأكد من مسح سجل المبيعات؟")) {
-                try {
-                    const res = await fetch(ORDERS_REST_URL, { method: 'DELETE' });
-                    if (!res.ok) throw new Error(`HTTP ${res.status}`);
-                    cachedSalesHistory = [];
-                    renderSalesHistory();
-                    showToast("🗑️ All sales history cleared.");
-                } catch (err) {
-                    console.error("REST delete error:", err);
-                    showToast("❌ Failed to clear history.", true);
+            if (historyActiveTab === 'items') {
+                const summaryList = computeItemWiseSummary(filtered);
+                if (!summaryList.length) {
+                    contentEl.innerHTML = `<p style="text-align:center; color:#777; padding:20px;">No item sales found for this selection.</p>`;
+                    return;
                 }
+                const totalPcs = summaryList.reduce((s, it) => s + it.totalQty, 0);
+                const totalSum = summaryList.reduce((s, it) => s + it.totalAmount, 0);
+
+                contentEl.innerHTML = `
+                    <table class="history-table">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Item Name</th>
+                                <th>Total Qty (Pcs)</th>
+                                <th>Total Amount (SAR)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            ${summaryList.map((it, i) => `
+                                <tr>
+                                    <td>${i + 1}</td>
+                                    <td><strong>${escapeHtml(it.nameEn)}</strong> ${it.nameAr ? `<span style="color:#6d5443;">(${escapeHtml(it.nameAr)})</span>` : ''}</td>
+                                    <td><strong>${it.totalQty}</strong> pcs</td>
+                                    <td><strong>${formatSAR(it.totalAmount)}</strong></td>
+                                </tr>
+                            `).join('')}
+                            <tr style="background:#f5efe6; font-weight:700;">
+                                <td colspan="2">Grand Total</td>
+                                <td>${totalPcs} pcs</td>
+                                <td>${formatSAR(totalSum)}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                `;
+                return;
+            }
+
+            if (!filtered.length) {
+                contentEl.innerHTML = `<p style="text-align:center; color:#777; padding:20px;">No orders found for ${formatBranchLabel(currentBranch)}.</p>`;
+                return;
+            }
+
+            contentEl.innerHTML = `
+                <table class="history-table">
+                    <thead>
+                        <tr>
+                            <th>Invoice</th>
+                            <th>Time</th>
+                            <th>Customer</th>
+                            <th>Method</th>
+                            <th>Total</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        ${filtered.map(o => {
+                            const timeStr = new Date(o.timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+                            const encoded = encodeURIComponent(JSON.stringify(o));
+                            return `
+                                <tr>
+                                    <td><strong>${escapeHtml(o.invoiceNo)}</strong></td>
+                                    <td>${escapeHtml(timeStr)}</td>
+                                    <td>${escapeHtml(o.customerName || 'Walk-in Customer')}</td>
+                                    <td><span class="badge-paid">${escapeHtml(o.paymentMethod || 'VISA')}</span></td>
+                                    <td><strong>${formatSAR(o.total)}</strong></td>
+                                    <td><button type="button" class="mini-print-btn" onclick="reprintOrderFromHistory('${encoded}')">🖨️ Print</button></td>
+                                </tr>
+                            `;
+                        }).join('')}
+                    </tbody>
+                </table>
+            `;
+        }
+
+        function printItemWiseSummary80mm() {
+            const filtered = getFilteredOrders();
+            const summaryList = computeItemWiseSummary(filtered);
+            const selectedDate = document.getElementById('history-date-filter').value || 'All Dates';
+            const totalPcs = summaryList.reduce((s, it) => s + it.totalQty, 0);
+            const totalSum = summaryList.reduce((s, it) => s + it.totalAmount, 0);
+
+            const receiptEl = document.getElementById('printable-receipt');
+            receiptEl.innerHTML = `
+                <div class="receipt-header">
+                    <h2>HAZZAT CHAPATI</h2>
+                    <p>هزة شباتي | ITEM-WISE SALES SUMMARY</p>
+                    <p>Branch: <strong>${formatBranchLabel(currentBranch)}</strong></p>
+                    <p>Filter: <strong>${escapeHtml(selectedDate)}</strong></p>
+                    <div class="paid-stamp">ITEM SUMMARY</div>
+                </div>
+                <table class="receipt-table">
+                    <thead>
+                        <tr>
+                            <th>Item</th>
+                            <th class="right">Qty</th>
+                            <th class="right">Total</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        ${summaryList.map(it => `
+                            <tr>
+                                <td>${escapeHtml(it.nameEn)}</td>
+                                <td class="right">${it.totalQty}</td>
+                                <td class="right">${formatSAR(it.totalAmount)}</td>
+                            </tr>
+                        `).join('')}
+                    </tbody>
+                </table>
+                <div class="receipt-totals">
+                    <div class="receipt-total-line"><span>Total Sold Qty:</span><span>${totalPcs} pcs</span></div>
+                    <div class="receipt-total-line grand"><span>Total Sales:</span><span>${formatSAR(totalSum)}</span></div>
+                </div>
+                <div class="receipt-footer">
+                    <p>${formatBranchLabel(currentBranch)} - Item Summary</p>
+                </div>
+            `;
+            window.print();
+        }
+
+        function reprintOrderFromHistory(encodedOrder) {
+            try {
+                const order = JSON.parse(decodeURIComponent(encodedOrder));
+                printOrderReceipt80mm(order);
+            } catch {
+                showToast('Could not reprint receipt');
             }
         }
 
-        // মেনু কার্ড আগে রেন্ডার করা যাতে কোনো স্টোরেজ/নেটওয়ার্ক সমস্যা হলেও মেনু সবসময় দেখা যায়
-        renderMenu(menuItems);
-        getCurrentShift();
-        initPWA();
-        startLivePolling();
+        function printOrderReceipt80mm(order) {
+            const dt = new Date(order.timestamp || Date.now());
+            const qrPayload = `HAZZAT|${order.branch || currentBranch}|${order.invoiceNo}|${dt.toISOString()}|${Number(order.total || 0).toFixed(2)}|${Number(order.vatAmount || 0).toFixed(2)}`;
+            const itemsHtml = (order.items || []).map(it => `
+                <tr>
+                    <td>${escapeHtml(it.nameEn)} x${it.qty}</td>
+                    <td class="right">${formatSAR((Number(it.price) || 0) * (Number(it.qty) || 0))}</td>
+                </tr>
+            `).join('');
+
+            const receiptEl = document.getElementById('printable-receipt');
+            receiptEl.innerHTML = `
+                <div class="receipt-header">
+                    <h2>HAZZAT CHAPATI</h2>
+                    <p>هزة شباتي | TAX INVOICE</p>
+                    <p>Branch: <strong>${formatBranchLabel(order.branch || currentBranch)}</strong></p>
+                    <div class="paid-stamp">PAID - ${escapeHtml(order.paymentMethod || 'VISA')}</div>
+                </div>
+                <div class="receipt-info">
+                    <p><strong>Invoice:</strong> ${escapeHtml(order.invoiceNo)}</p>
+                    <p><strong>Date:</strong> ${dt.toLocaleString()}</p>
+                    <p><strong>Customer:</strong> ${escapeHtml(order.customerName || 'Walk-in Customer')}</p>
+                    <p><strong>Type:</strong> ${escapeHtml(order.orderType || 'Dine-In')}${order.tableNumber ? ` (${escapeHtml(order.tableNumber)})` : ''}</p>
+                    ${order.note ? `<p><strong>Note:</strong> ${escapeHtml(order.note)}</p>` : ''}
+                </div>
+                <table class="receipt-table">
+                    <thead>
+                        <tr>
+                            <th>Item</th>
+                            <th class="right">Amount</th>
+                        </tr>
+                    </thead>
+                    <tbody>${itemsHtml}</tbody>
+                </table>
+                <div class="receipt-totals">
+                    <div class="receipt-total-line"><span>Subtotal (Excl. VAT):</span><span>${formatSAR(order.subtotalExclVat)}</span></div>
+                    <div class="receipt-total-line"><span>VAT (15%):</span><span>${formatSAR(order.vatAmount)}</span></div>
+                    ${order.discount > 0 ? `<div class="receipt-total-line"><span>Discount:</span><span>-${formatSAR(order.discount)}</span></div>` : ''}
+                    <div class="receipt-total-line grand"><span>Total:</span><span>${formatSAR(order.total)}</span></div>
+                    <div class="receipt-total-line"><span>Payment Method:</span><span>${escapeHtml(order.paymentMethod || 'VISA')}</span></div>
+                </div>
+                <div class="zatca-qr-box">
+                    <div style="font-size:10px; font-weight:bold;">ZATCA E-INVOICE DATA</div>
+                    <div class="qr-code-visual">${escapeHtml(qrPayload)}</div>
+                </div>
+                <div class="receipt-footer">
+                    <p>شكراً لزيارتكم • Thank You</p>
+                </div>
+            `;
+            window.print();
+        }
+
+        function escapeHtml(str) {
+            return String(str ?? '')
+                .replace(/&/g, '&amp;')
+                .replace(/</g, '&lt;')
+                .replace(/>/g, '&gt;')
+                .replace(/"/g, '&quot;')
+                .replace(/'/g, '&#39;');
+        }
+
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            toast.textContent = message;
+            toast.style.display = 'block';
+            clearTimeout(window.__toastTimer);
+            window.__toastTimer = setTimeout(() => {
+                toast.style.display = 'none';
+            }, 2400);
+        }
+
+        // Initialization
+        document.getElementById('branch-selector').value = currentBranch;
+        loadShiftData();
+        renderCategories();
+        renderMenu();
+        renderCart();
+        updateOrderMetaUI();
+        updateRecallButtonBadge();
+        updateClock();
+        setInterval(updateClock, 1000);
     </script>
 </body>
 </html>
