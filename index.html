@@ -1604,6 +1604,7 @@
             <span id="sync-status-badge" class="sync-badge" onclick="handleFirebaseBadgeClick()" title="Firebase Realtime Database">🔥 Firebase / Local</span>
             <button class="hdr-btn" onclick="openShiftModal()">📊 Shift / EOD</button>
             <button class="hdr-btn" onclick="openHistoryModal()">📜 History</button>
+            <button type="button" class="hdr-btn" onclick="openPrinterModal()" style="background:#0ea5e9; color:#fff;">🖨️ Printers</button>
             <button class="hdr-btn" style="background:#ef4444; color:#fff;" onclick="lockTerminal()" title="Lock Screen / Switch User">🔒</button>
             <span id="live-clock" style="font-size: 0.85rem; color: var(--accent);"></span>
         </div>
@@ -1932,7 +1933,46 @@
             </div>
         </div>
     </div>
-
+<!-- Universal Printer Setup Modal -->
+<div id="printer-modal" class="modal-backdrop" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.65); z-index:9999; align-items:center; justify-content:center;">
+  <div style="background:#fff; width:92%; max-width:440px; border-radius:12px; overflow:hidden; box-shadow:0 10px 25px rgba(0,0,0,0.3);">
+    <div style="background:#1e3a8a; color:#fff; padding:14px 18px; display:flex; justify-content:space-between; align-items:center;">
+      <h3 style="margin:0; font-size:1rem;">🖨️ Universal POS Printer Setup</h3>
+      <button type="button" onclick="closePrinterModal()" style="background:none; border:none; color:#fff; font-size:1.3rem; cursor:pointer;">&times;</button>
+    </div>
+    <div style="padding:18px; display:flex; flex-direction:column; gap:12px; font-size:0.9rem;">
+      <div>
+        <label style="font-weight:700; display:block; margin-bottom:4px;">Print Mode (প্রিন্ট পদ্ধতি):</label>
+        <select id="printer-mode" style="width:100%; padding:8px; border:1px solid #cbd5e1; border-radius:6px;">
+          <option value="browser">Standard Browser / AirPrint (Default)</option>
+          <option value="network">Wi-Fi / LAN Network Printer (IP Address)</option>
+          <option value="bluetooth">Bluetooth / USB App Bridge (RawBT / Thermer)</option>
+        </select>
+      </div>
+      <div style="display:grid; grid-template-columns: 2fr 1fr; gap:8px;">
+        <div>
+          <label style="font-weight:700; display:block; margin-bottom:4px;">Cashier Printer IP:</label>
+          <input type="text" id="printer-ip" placeholder="192.168.8.5" style="width:100%; padding:8px; border:1px solid #cbd5e1; border-radius:6px;">
+        </div>
+        <div>
+          <label style="font-weight:700; display:block; margin-bottom:4px;">Port:</label>
+          <input type="text" id="printer-port" value="9100" style="width:100%; padding:8px; border:1px solid #cbd5e1; border-radius:6px;">
+        </div>
+      </div>
+      <div>
+        <label style="font-weight:700; display:block; margin-bottom:4px;">Kitchen Printer IP (Optional):</label>
+        <input type="text" id="kitchen-printer-ip" placeholder="192.168.8.6" style="width:100%; padding:8px; border:1px solid #cbd5e1; border-radius:6px;">
+      </div>
+      <label style="display:flex; align-items:center; gap:8px; font-weight:600; cursor:pointer;">
+        <input type="checkbox" id="auto-drawer-kick" checked> Auto Open Cash Drawer on Cash Payment
+      </label>
+      <div style="display:flex; gap:8px; margin-top:6px;">
+        <button type="button" onclick="testUniversalPrint()" style="flex:1; padding:10px; background:#f59e0b; color:#0f172a; border:none; border-radius:6px; font-weight:700; cursor:pointer;">Test Print</button>
+        <button type="button" onclick="savePrinterConfig()" style="flex:1; padding:10px; background:#16a34a; color:#fff; border:none; border-radius:6px; font-weight:700; cursor:pointer;">Save Settings</button>
+      </div>
+    </div>
+  </div>
+</div>
     <!-- 80mm Printable Receipt Container -->
     <div id="printable-receipt"></div>
 
@@ -3988,6 +4028,73 @@
         updateRecallButtonBadge();
         updateClock();
         setInterval(updateClock, 1000);
+        // === Universal POS Printer & Cash Drawer Engine ===
+function getPrinterConfig() {
+  return JSON.parse(localStorage.getItem('hazzat_printer_cfg') || '{"mode":"browser","ip":"","port":"9100","kitchenIp":"","drawerKick":true}');
+}
+
+function openPrinterModal() {
+  const cfg = getPrinterConfig();
+  document.getElementById('printer-mode').value = cfg.mode || 'browser';
+  document.getElementById('printer-ip').value = cfg.ip || '';
+  document.getElementById('printer-port').value = cfg.port || '9100';
+  document.getElementById('kitchen-printer-ip').value = cfg.kitchenIp || '';
+  document.getElementById('auto-drawer-kick').checked = cfg.drawerKick !== false;
+  document.getElementById('printer-modal').style.display = 'flex';
+}
+
+function closePrinterModal() {
+  document.getElementById('printer-modal').style.display = 'none';
+}
+
+function savePrinterConfig() {
+  const cfg = {
+    mode: document.getElementById('printer-mode').value,
+    ip: document.getElementById('printer-ip').value.trim(),
+    port: document.getElementById('printer-port').value.trim() || '9100',
+    kitchenIp: document.getElementById('kitchen-printer-ip').value.trim(),
+    drawerKick: document.getElementById('auto-drawer-kick').checked
+  };
+  localStorage.setItem('hazzat_printer_cfg', JSON.stringify(cfg));
+  alert('Printer settings saved!');
+  closePrinterModal();
+}
+
+function buildEscPosPayload(receiptText, openDrawer) {
+  const ESC = '\x1B';
+  const GS = '\x1D';
+  let cmd = ESC + '@';
+  cmd += receiptText + '\n\n\n';
+  cmd += GS + 'V' + '\x41' + '\x03';
+  if (openDrawer) {
+    cmd += ESC + 'p' + '\x00' + '\x19' + '\xFA';
+  }
+  return cmd;
+}
+
+function executeUniversalPrint(receiptPlainText, isCashPayment = false) {
+  const cfg = getPrinterConfig();
+  const shouldKick = cfg.drawerKick && isCashPayment;
+  const escPosData = buildEscPosPayload(receiptPlainText, shouldKick);
+
+  if (cfg.mode === 'network' && cfg.ip) {
+    fetch(`http://${cfg.ip}:${cfg.port}`, {
+      method: 'POST',
+      mode: 'no-cors',
+      body: escPosData
+    }).catch(() => window.print());
+  } else if (cfg.mode === 'bluetooth') {
+    const base64Data = btoa(unescape(encodeURIComponent(escPosData)));
+    window.location.href = `rawbt:base64,${base64Data}`;
+  } else {
+    window.print();
+  }
+}
+
+function testUniversalPrint() {
+  const sampleText = "   HAZZAT CHAPATI POS\n------------------------\nPrinter Connection: OK!\nCash Drawer Test: OK!\n------------------------";
+  executeUniversalPrint(sampleText, true);
+}
     </script>
 </body>
 </html>
