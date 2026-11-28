@@ -1948,13 +1948,32 @@
       <button type="button" id="tab-btn-store" onclick="switchSettingsTab('store')" style="flex:1; padding:10px; border:none; background:transparent; font-weight:700; cursor:pointer;">🏪 Store Info</button>
     </div>
 
-    <!-- Tab 1: Language (100+ Countries via Google Translate) -->
-    <div id="settings-tab-lang" style="padding:18px; display:flex; flex-direction:column; gap:12px;">
-      <p style="margin:0; font-weight:700; font-size:0.95rem; color:#1e3a8a;">🌐 Select Any Language (100+ Countries):</p>
-      <p style="margin:0; font-size:0.82rem; color:#64748b;">Choose your preferred language below to translate the entire POS interface:</p>
-      <div id="google_translate_element" style="padding:10px; background:#f8fafc; border:1px solid #cbd5e1; border-radius:8px;"></div>
+   <!-- Tab 1: Language with Country Flags -->
+    <div id="settings-tab-lang" style="padding:18px; display:flex; flex-direction:column; gap:10px; max-height:360px; overflow-y:auto;">
+      <p style="margin:0 0 4px; font-weight:700; font-size:0.95rem; color:#1e3a8a;">🌐 Select Language by Country Flag:</p>
+      <div style="display:grid; grid-template-columns: 1fr 1fr; gap:8px;">
+        <button type="button" onclick="triggerFlagLang('en')" style="padding:10px; border:1px solid #cbd5e1; border-radius:8px; background:#f8fafc; font-weight:700; cursor:pointer; text-align:left;">🇺🇸 English</button>
+        <button type="button" onclick="triggerFlagLang('ar')" style="padding:10px; border:1px solid #cbd5e1; border-radius:8px; background:#f8fafc; font-weight:700; cursor:pointer; text-align:left;">🇸🇦 العربية (Arabic)</button>
+        <button type="button" onclick="triggerFlagLang('bn')" style="padding:10px; border:1px solid #cbd5e1; border-radius:8px; background:#f8fafc; font-weight:700; cursor:pointer; text-align:left;">🇧🇩 বাংলা (Bengali)</button>
+        <button type="button" onclick="triggerFlagLang('ur')" style="padding:10px; border:1px solid #cbd5e1; border-radius:8px; background:#f8fafc; font-weight:700; cursor:pointer; text-align:left;">🇵🇰 اردو (Urdu)</button>
+        <button type="button" onclick="triggerFlagLang('hi')" style="padding:10px; border:1px solid #cbd5e1; border-radius:8px; background:#f8fafc; font-weight:700; cursor:pointer; text-align:left;">🇮🇳 हिन्दी (Hindi)</button>
+        <button type="button" onclick="triggerFlagLang('tl')" style="padding:10px; border:1px solid #cbd5e1; border-radius:8px; background:#f8fafc; font-weight:700; cursor:pointer; text-align:left;">🇵🇭 Tagalog (Filipino)</button>
+        <button type="button" onclick="triggerFlagLang('tr')" style="padding:10px; border:1px solid #cbd5e1; border-radius:8px; background:#f8fafc; font-weight:700; cursor:pointer; text-align:left;">🇹🇷 Türkçe (Turkish)</button>
+        <button type="button" onclick="triggerFlagLang('fr')" style="padding:10px; border:1px solid #cbd5e1; border-radius:8px; background:#f8fafc; font-weight:700; cursor:pointer; text-align:left;">🇫🇷 Français</button>
+        <button type="button" onclick="triggerFlagLang('es')" style="padding:10px; border:1px solid #cbd5e1; border-radius:8px; background:#f8fafc; font-weight:700; cursor:pointer; text-align:left;">🇪🇸 Español</button>
+        <button type="button" onclick="triggerFlagLang('id')" style="padding:10px; border:1px solid #cbd5e1; border-radius:8px; background:#f8fafc; font-weight:700; cursor:pointer; text-align:left;">🇮🇩 Bahasa Indonesia</button>
+        <button type="button" onclick="triggerFlagLang('ms')" style="padding:10px; border:1px solid #cbd5e1; border-radius:8px; background:#f8fafc; font-weight:700; cursor:pointer; text-align:left;">🇲🇾 Bahasa Melayu</button>
+        <button type="button" onclick="triggerFlagLang('ml')" style="padding:10px; border:1px solid #cbd5e1; border-radius:8px; background:#f8fafc; font-weight:700; cursor:pointer; text-align:left;">🇮🇳 മലയാളം (Malayalam)</button>
+        <button type="button" onclick="triggerFlagLang('ta')" style="padding:10px; border:1px solid #cbd5e1; border-radius:8px; background:#f8fafc; font-weight:700; cursor:pointer; text-align:left;">🇮🇳 தமிழ் (Tamil)</button>
+        <button type="button" onclick="triggerFlagLang('ne')" style="padding:10px; border:1px solid #cbd5e1; border-radius:8px; background:#f8fafc; font-weight:700; cursor:pointer; text-align:left;">🇳🇵 नेपाली (Nepali)</button>
+        <button type="button" onclick="triggerFlagLang('zh-CN')" style="padding:10px; border:1px solid #cbd5e1; border-radius:8px; background:#f8fafc; font-weight:700; cursor:pointer; text-align:left;">🇨🇳 中文 (Chinese)</button>
+        <button type="button" onclick="triggerFlagLang('de')" style="padding:10px; border:1px solid #cbd5e1; border-radius:8px; background:#f8fafc; font-weight:700; cursor:pointer; text-align:left;">🇩🇪 Deutsch (German)</button>
+      </div>
+      <div style="margin-top:8px; border-top:1px solid #e2e8f0; padding-top:8px;">
+        <span style="font-size:0.78rem; color:#64748b; display:block; margin-bottom:4px;">Or choose from 100+ other languages:</span>
+        <div id="google_translate_element"></div>
+      </div>
     </div>
-
     <!-- Tab 2: Universal Printer -->
     <div id="settings-tab-printer" style="padding:18px; display:none; flex-direction:column; gap:10px; font-size:0.9rem;">
       <div>
@@ -4139,7 +4158,16 @@ function executeUniversalPrint(receiptPlainText, isCashPayment = false) {
 function testUniversalPrint() {
   executeUniversalPrint("   POS PRINTER TEST\n---------------------\nConnection: OK!\nCash Drawer: OK!\n---------------------", true);
 }
-
+function triggerFlagLang(langCode) {
+  const selectEl = document.querySelector('.goog-te-combo');
+  if (selectEl) {
+    selectEl.value = langCode;
+    selectEl.dispatchEvent(new Event('change'));
+    closeUnifiedSettings();
+  } else {
+    alert('Translation engine is still loading, please try again in 2 seconds.');
+  }
+}
 function googleTranslateElementInit() {
   new google.translate.TranslateElement({
     pageLanguage: 'en',
