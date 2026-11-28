@@ -1604,7 +1604,7 @@
             <span id="sync-status-badge" class="sync-badge" onclick="handleFirebaseBadgeClick()" title="Firebase Realtime Database">🔥 Firebase / Local</span>
             <button class="hdr-btn" onclick="openShiftModal()">📊 Shift / EOD</button>
             <button class="hdr-btn" onclick="openHistoryModal()">📜 History</button>
-            <button type="button" class="hdr-btn" onclick="openPrinterModal()" style="background:#0ea5e9; color:#fff;">🖨️ Printers</button>
+           <button type="button" class="hdr-btn" onclick="openUnifiedSettings()" style="background:#0ea5e9; color:#fff;">⚙️ Settings</button>
             <button class="hdr-btn" style="background:#ef4444; color:#fff;" onclick="lockTerminal()" title="Lock Screen / Switch User">🔒</button>
             <span id="live-clock" style="font-size: 0.85rem; color: var(--accent);"></span>
         </div>
@@ -1933,20 +1933,36 @@
             </div>
         </div>
     </div>
-<!-- Universal Printer Setup Modal -->
-<div id="printer-modal" class="modal-backdrop" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.65); z-index:9999; align-items:center; justify-content:center;">
-  <div style="background:#fff; width:92%; max-width:440px; border-radius:12px; overflow:hidden; box-shadow:0 10px 25px rgba(0,0,0,0.3);">
+<!-- Unified Settings Modal (100+ Languages + Printer + Store Info) -->
+<div id="unified-settings-modal" class="modal-backdrop" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.65); z-index:9999; align-items:center; justify-content:center;">
+  <div style="background:#fff; width:94%; max-width:480px; border-radius:12px; overflow:hidden; box-shadow:0 10px 25px rgba(0,0,0,0.3);">
     <div style="background:#1e3a8a; color:#fff; padding:14px 18px; display:flex; justify-content:space-between; align-items:center;">
-      <h3 style="margin:0; font-size:1rem;">🖨️ Universal POS Printer Setup</h3>
-      <button type="button" onclick="closePrinterModal()" style="background:none; border:none; color:#fff; font-size:1.3rem; cursor:pointer;">&times;</button>
+      <h3 style="margin:0; font-size:1rem;">⚙️ System Settings</h3>
+      <button type="button" onclick="closeUnifiedSettings()" style="background:none; border:none; color:#fff; font-size:1.3rem; cursor:pointer;">&times;</button>
     </div>
-    <div style="padding:18px; display:flex; flex-direction:column; gap:12px; font-size:0.9rem;">
+
+    <!-- Settings Tabs -->
+    <div style="display:flex; background:#f1f5f9; border-bottom:1px solid #cbd5e1;">
+      <button type="button" id="tab-btn-lang" onclick="switchSettingsTab('lang')" style="flex:1; padding:10px; border:none; background:#fff; font-weight:700; cursor:pointer; border-bottom:2px solid #1e3a8a;">🌐 Language</button>
+      <button type="button" id="tab-btn-printer" onclick="switchSettingsTab('printer')" style="flex:1; padding:10px; border:none; background:transparent; font-weight:700; cursor:pointer;">🖨️ Printers</button>
+      <button type="button" id="tab-btn-store" onclick="switchSettingsTab('store')" style="flex:1; padding:10px; border:none; background:transparent; font-weight:700; cursor:pointer;">🏪 Store Info</button>
+    </div>
+
+    <!-- Tab 1: Language (100+ Countries via Google Translate) -->
+    <div id="settings-tab-lang" style="padding:18px; display:flex; flex-direction:column; gap:12px;">
+      <p style="margin:0; font-weight:700; font-size:0.95rem; color:#1e3a8a;">🌐 Select Any Language (100+ Countries):</p>
+      <p style="margin:0; font-size:0.82rem; color:#64748b;">Choose your preferred language below to translate the entire POS interface:</p>
+      <div id="google_translate_element" style="padding:10px; background:#f8fafc; border:1px solid #cbd5e1; border-radius:8px;"></div>
+    </div>
+
+    <!-- Tab 2: Universal Printer -->
+    <div id="settings-tab-printer" style="padding:18px; display:none; flex-direction:column; gap:10px; font-size:0.9rem;">
       <div>
-        <label style="font-weight:700; display:block; margin-bottom:4px;">Print Mode (প্রিন্ট পদ্ধতি):</label>
+        <label style="font-weight:700; display:block; margin-bottom:4px;">Print Mode:</label>
         <select id="printer-mode" style="width:100%; padding:8px; border:1px solid #cbd5e1; border-radius:6px;">
-          <option value="browser">Standard Browser / AirPrint (Default)</option>
-          <option value="network">Wi-Fi / LAN Network Printer (IP Address)</option>
-          <option value="bluetooth">Bluetooth / USB App Bridge (RawBT / Thermer)</option>
+          <option value="browser">Standard Browser / AirPrint</option>
+          <option value="network">Wi-Fi / LAN Network Printer (IP)</option>
+          <option value="bluetooth">Bluetooth / USB Bridge (RawBT)</option>
         </select>
       </div>
       <div style="display:grid; grid-template-columns: 2fr 1fr; gap:8px;">
@@ -1964,12 +1980,25 @@
         <input type="text" id="kitchen-printer-ip" placeholder="192.168.8.6" style="width:100%; padding:8px; border:1px solid #cbd5e1; border-radius:6px;">
       </div>
       <label style="display:flex; align-items:center; gap:8px; font-weight:600; cursor:pointer;">
-        <input type="checkbox" id="auto-drawer-kick" checked> Auto Open Cash Drawer on Cash Payment
+        <input type="checkbox" id="auto-drawer-kick" checked> Auto Open Cash Drawer on Cash
       </label>
-      <div style="display:flex; gap:8px; margin-top:6px;">
+      <div style="display:flex; gap:8px; margin-top:4px;">
         <button type="button" onclick="testUniversalPrint()" style="flex:1; padding:10px; background:#f59e0b; color:#0f172a; border:none; border-radius:6px; font-weight:700; cursor:pointer;">Test Print</button>
-        <button type="button" onclick="savePrinterConfig()" style="flex:1; padding:10px; background:#16a34a; color:#fff; border:none; border-radius:6px; font-weight:700; cursor:pointer;">Save Settings</button>
+        <button type="button" onclick="savePrinterConfig()" style="flex:1; padding:10px; background:#16a34a; color:#fff; border:none; border-radius:6px; font-weight:700; cursor:pointer;">Save Printer</button>
       </div>
+    </div>
+
+    <!-- Tab 3: Store Info -->
+    <div id="settings-tab-store" style="padding:18px; display:none; flex-direction:column; gap:10px; font-size:0.9rem;">
+      <div>
+        <label style="font-weight:700; display:block; margin-bottom:4px;">Store Name:</label>
+        <input type="text" id="cfg-store-name" placeholder="HAZZAT CHAPATI" style="width:100%; padding:8px; border:1px solid #cbd5e1; border-radius:6px;">
+      </div>
+      <div>
+        <label style="font-weight:700; display:block; margin-bottom:4px;">VAT Number:</label>
+        <input type="text" id="cfg-vat-num" placeholder="311233882500003" style="width:100%; padding:8px; border:1px solid #cbd5e1; border-radius:6px;">
+      </div>
+      <button type="button" onclick="saveStoreInfo()" style="padding:10px; background:#16a34a; color:#fff; border:none; border-radius:6px; font-weight:700; cursor:pointer;">Save Store Info</button>
     </div>
   </div>
 </div>
@@ -4028,23 +4057,50 @@
         updateRecallButtonBadge();
         updateClock();
         setInterval(updateClock, 1000);
-        // === Universal POS Printer & Cash Drawer Engine ===
-function getPrinterConfig() {
-  return JSON.parse(localStorage.getItem('hazzat_printer_cfg') || '{"mode":"browser","ip":"","port":"9100","kitchenIp":"","drawerKick":true}');
-}
-
-function openPrinterModal() {
+       // === Unified Settings, Multi-Language & Universal Printer Engine ===
+function openUnifiedSettings() {
   const cfg = getPrinterConfig();
   document.getElementById('printer-mode').value = cfg.mode || 'browser';
   document.getElementById('printer-ip').value = cfg.ip || '';
   document.getElementById('printer-port').value = cfg.port || '9100';
   document.getElementById('kitchen-printer-ip').value = cfg.kitchenIp || '';
   document.getElementById('auto-drawer-kick').checked = cfg.drawerKick !== false;
-  document.getElementById('printer-modal').style.display = 'flex';
+
+  const storeCfg = JSON.parse(localStorage.getItem('hazzat_store_cfg') || '{"name":"HAZZAT CHAPATI","vat":"311233882500003"}');
+  document.getElementById('cfg-store-name').value = storeCfg.name;
+  document.getElementById('cfg-vat-num').value = storeCfg.vat;
+
+  switchSettingsTab('lang');
+  document.getElementById('unified-settings-modal').style.display = 'flex';
 }
 
-function closePrinterModal() {
-  document.getElementById('printer-modal').style.display = 'none';
+function closeUnifiedSettings() {
+  document.getElementById('unified-settings-modal').style.display = 'none';
+}
+
+function switchSettingsTab(tab) {
+  ['lang', 'printer', 'store'].forEach(t => {
+    document.getElementById('settings-tab-' + t).style.display = (t === tab) ? 'flex' : 'none';
+    const btn = document.getElementById('tab-btn-' + t);
+    btn.style.background = (t === tab) ? '#fff' : 'transparent';
+    btn.style.borderBottom = (t === tab) ? '2px solid #1e3a8a' : 'none';
+  });
+}
+
+function saveStoreInfo() {
+  const storeCfg = {
+    name: document.getElementById('cfg-store-name').value.trim() || 'HAZZAT CHAPATI',
+    vat: document.getElementById('cfg-vat-num').value.trim() || '311233882500003'
+  };
+  localStorage.setItem('hazzat_store_cfg', JSON.stringify(storeCfg));
+  const titleEl = document.querySelector('.brand-title h1');
+  if (titleEl) titleEl.innerHTML = `${storeCfg.name} <span>POS</span>`;
+  alert('Store info saved!');
+  closeUnifiedSettings();
+}
+
+function getPrinterConfig() {
+  return JSON.parse(localStorage.getItem('hazzat_printer_cfg') || '{"mode":"browser","ip":"","port":"9100","kitchenIp":"","drawerKick":true}');
 }
 
 function savePrinterConfig() {
@@ -4057,32 +4113,21 @@ function savePrinterConfig() {
   };
   localStorage.setItem('hazzat_printer_cfg', JSON.stringify(cfg));
   alert('Printer settings saved!');
-  closePrinterModal();
+  closeUnifiedSettings();
 }
 
 function buildEscPosPayload(receiptText, openDrawer) {
-  const ESC = '\x1B';
-  const GS = '\x1D';
-  let cmd = ESC + '@';
-  cmd += receiptText + '\n\n\n';
-  cmd += GS + 'V' + '\x41' + '\x03';
-  if (openDrawer) {
-    cmd += ESC + 'p' + '\x00' + '\x19' + '\xFA';
-  }
+  const ESC = '\x1B', GS = '\x1D';
+  let cmd = ESC + '@' + receiptText + '\n\n\n' + GS + 'V' + '\x41' + '\x03';
+  if (openDrawer) cmd += ESC + 'p' + '\x00' + '\x19' + '\xFA';
   return cmd;
 }
 
 function executeUniversalPrint(receiptPlainText, isCashPayment = false) {
   const cfg = getPrinterConfig();
-  const shouldKick = cfg.drawerKick && isCashPayment;
-  const escPosData = buildEscPosPayload(receiptPlainText, shouldKick);
-
+  const escPosData = buildEscPosPayload(receiptPlainText, cfg.drawerKick && isCashPayment);
   if (cfg.mode === 'network' && cfg.ip) {
-    fetch(`http://${cfg.ip}:${cfg.port}`, {
-      method: 'POST',
-      mode: 'no-cors',
-      body: escPosData
-    }).catch(() => window.print());
+    fetch(`http://${cfg.ip}:${cfg.port}`, { method: 'POST', mode: 'no-cors', body: escPosData }).catch(() => window.print());
   } else if (cfg.mode === 'bluetooth') {
     const base64Data = btoa(unescape(encodeURIComponent(escPosData)));
     window.location.href = `rawbt:base64,${base64Data}`;
@@ -4092,9 +4137,28 @@ function executeUniversalPrint(receiptPlainText, isCashPayment = false) {
 }
 
 function testUniversalPrint() {
-  const sampleText = "   HAZZAT CHAPATI POS\n------------------------\nPrinter Connection: OK!\nCash Drawer Test: OK!\n------------------------";
-  executeUniversalPrint(sampleText, true);
+  executeUniversalPrint("   POS PRINTER TEST\n---------------------\nConnection: OK!\nCash Drawer: OK!\n---------------------", true);
 }
-    </script>
+
+function googleTranslateElementInit() {
+  new google.translate.TranslateElement({
+    pageLanguage: 'en',
+    autoDisplay: false
+  }, 'google_translate_element');
+}
+
+window.addEventListener('DOMContentLoaded', () => {
+  const storeCfg = JSON.parse(localStorage.getItem('hazzat_store_cfg') || 'null');
+  if (storeCfg && storeCfg.name) {
+    const titleEl = document.querySelector('.brand-title h1');
+    if (titleEl) titleEl.innerHTML = `${storeCfg.name} <span>POS</span>`;
+  }
+});
+</script>
+<script>
+  const gt = document.createElement('script');
+ gt.src = 'https://' + 'translate.' + 'google.com/translate_a/element.js?cb=googleTranslateElementInit';
+  document.body.appendChild(gt);
+</script>
 </body>
 </html>
