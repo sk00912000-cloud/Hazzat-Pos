@@ -84,6 +84,17 @@
             cursor: pointer;
         }
 
+        .bday-pill {
+            background: rgba(245, 158, 11, 0.18);
+            border: 1px solid var(--accent);
+            color: #fef3c7;
+            padding: 4px 9px;
+            border-radius: 6px;
+            font-size: 0.76rem;
+            font-weight: 700;
+            white-space: nowrap;
+        }
+
         .header-right {
             display: flex;
             align-items: center;
@@ -97,6 +108,18 @@
             border-radius: 12px;
             background: rgba(255, 255, 255, 0.14);
             border: 1px solid var(--accent);
+            white-space: nowrap;
+            cursor: pointer;
+        }
+
+        .user-badge {
+            font-size: 0.75rem;
+            padding: 4px 9px;
+            border-radius: 12px;
+            background: rgba(22, 163, 74, 0.25);
+            border: 1px solid #86efac;
+            color: #fff;
+            font-weight: 700;
             white-space: nowrap;
             cursor: pointer;
         }
@@ -524,7 +547,7 @@
 
         .modal-box.history-modal-box,
         .modal-box.shift-modal-box {
-            max-width: 920px;
+            max-width: 960px;
         }
 
         .modal-header {
@@ -579,8 +602,8 @@
 
         .payment-options {
             display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 12px;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 10px;
             margin-bottom: 14px;
         }
 
@@ -588,7 +611,7 @@
             border: 2px solid var(--border);
             background: var(--white);
             border-radius: 10px;
-            padding: 12px 10px;
+            padding: 10px 6px;
             cursor: pointer;
             text-align: center;
             transition: 0.2s;
@@ -607,19 +630,19 @@
         }
 
         .pay-icon {
-            font-size: 1.65rem;
+            font-size: 1.5rem;
             display: block;
-            margin-bottom: 4px;
+            margin-bottom: 3px;
         }
 
         .pay-title-en {
             font-weight: 700;
-            font-size: 0.95rem;
+            font-size: 0.88rem;
             display: block;
         }
 
         .pay-title-ar {
-            font-size: 0.8rem;
+            font-size: 0.74rem;
             color: #5c4636;
             display: block;
             margin-top: 2px;
@@ -938,6 +961,28 @@
             white-space: nowrap;
         }
 
+        .badge-return {
+            background: #fee2e2;
+            color: var(--danger);
+            border: 1px solid #fca5a5;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-weight: 700;
+            font-size: 0.76rem;
+            white-space: nowrap;
+        }
+
+        .badge-partial {
+            background: #fef3c7;
+            color: #b45309;
+            border: 1px solid #fcd34d;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-weight: 700;
+            font-size: 0.76rem;
+            white-space: nowrap;
+        }
+
         .mini-print-btn {
             background: var(--primary);
             color: var(--white);
@@ -971,6 +1016,128 @@
             font-size: 0.9rem;
         }
 
+        /* Lock Screen Overlay for Owner Login & Cashier 4-Digit PIN */
+        .auth-lock-overlay {
+            position: fixed;
+            inset: 0;
+            background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary) 100%);
+            z-index: 3000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 16px;
+        }
+
+        .auth-lock-overlay.hidden {
+            display: none;
+        }
+
+        .auth-box {
+            background: var(--white);
+            width: 100%;
+            max-width: 400px;
+            border-radius: 14px;
+            border: 2px solid var(--accent);
+            box-shadow: 0 14px 36px rgba(0,0,0,0.4);
+            overflow: hidden;
+        }
+
+        .auth-header {
+            background: var(--primary-dark);
+            color: var(--white);
+            padding: 16px;
+            text-align: center;
+            border-bottom: 2px solid var(--accent);
+        }
+
+        .auth-header h2 {
+            font-size: 1.25rem;
+            letter-spacing: 0.5px;
+        }
+
+        .auth-header p {
+            font-size: 0.82rem;
+            color: var(--accent);
+            margin-top: 3px;
+        }
+
+        .auth-tabs {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            background: var(--bg-light);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .auth-tab {
+            padding: 11px;
+            border: none;
+            background: transparent;
+            font-weight: 700;
+            font-size: 0.9rem;
+            cursor: pointer;
+            color: var(--text-dark);
+            border-bottom: 3px solid transparent;
+        }
+
+        .auth-tab.active {
+            background: var(--white);
+            color: var(--primary);
+            border-bottom-color: var(--primary);
+        }
+
+        .auth-body {
+            padding: 18px;
+        }
+
+        .pin-display {
+            letter-spacing: 10px;
+            font-size: 1.6rem;
+            font-weight: 800;
+            text-align: center;
+            padding: 10px;
+            background: var(--bg-light);
+            border: 2px solid var(--border);
+            border-radius: 8px;
+            margin-bottom: 12px;
+            color: var(--primary-dark);
+            min-height: 48px;
+        }
+
+        .pin-keypad {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 8px;
+        }
+
+        .pin-key {
+            padding: 13px;
+            font-size: 1.15rem;
+            font-weight: 700;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            background: var(--white);
+            color: var(--text-dark);
+            cursor: pointer;
+            transition: 0.12s;
+        }
+
+        .pin-key:hover {
+            background: var(--bg-light);
+            border-color: var(--primary);
+        }
+
+        .pin-key.action-clear {
+            background: #fee2e2;
+            color: var(--danger);
+            border-color: #fecaca;
+        }
+
+        .pin-key.action-enter {
+            background: var(--success);
+            color: var(--white);
+            border-color: var(--success);
+        }
+
         @media (max-width: 768px) {
             body {
                 height: 100vh;
@@ -988,7 +1155,7 @@
                 letter-spacing: 0.2px;
             }
 
-            .brand-title span {
+            .brand-title span, .bday-pill {
                 display: none;
             }
 
@@ -1004,6 +1171,11 @@
 
             .sync-badge {
                 display: none;
+            }
+
+            .user-badge {
+                padding: 3px 6px;
+                font-size: 0.62rem;
             }
 
             .hdr-btn {
@@ -1275,11 +1447,29 @@
                 font-size: 11px;
                 margin: 2px 0;
             }
+            .foodics-order-box {
+                border: 2px solid #000;
+                padding: 5px 8px;
+                margin: 6px auto;
+                text-align: center;
+                background: #f9f9f9;
+            }
+            .foodics-order-box .ord-lbl {
+                font-size: 10px;
+                font-weight: bold;
+                letter-spacing: 1px;
+            }
+            .foodics-order-box .ord-num {
+                font-size: 26px;
+                font-weight: 900;
+                line-height: 1.1;
+                letter-spacing: 1.5px;
+            }
             .paid-stamp {
                 display: inline-block;
                 border: 2px solid #000;
                 padding: 3px 10px;
-                margin-top: 6px;
+                margin-top: 5px;
                 font-weight: bold;
                 font-size: 12px;
                 letter-spacing: 0.8px;
@@ -1292,6 +1482,8 @@
             }
             .receipt-info p {
                 margin: 2px 0;
+                display: flex;
+                justify-content: space-between;
             }
             .receipt-table {
                 width: 100%;
@@ -1330,14 +1522,11 @@
                 padding: 8px;
                 border: 1px solid #000;
             }
-            .zatca-qr-box .qr-code-visual {
-                font-size: 10px;
-                letter-spacing: 1px;
-                word-break: break-all;
-                background: #f4f4f4;
-                padding: 6px;
-                margin: 4px 0;
-                border: 1px dashed #000;
+            .zatca-qr-box img {
+                width: 140px;
+                height: 140px;
+                margin: 6px auto 2px;
+                display: block;
             }
             .receipt-footer {
                 text-align: center;
@@ -1350,6 +1539,57 @@
     </style>
 </head>
 <body>
+    <!-- Owner Login & Cashier 4-Digit PIN Lock Screen -->
+    <div class="auth-lock-overlay" id="auth-lock-screen">
+        <div class="auth-box">
+            <div class="auth-header">
+                <h2>HAZZAT CHAPATI POS</h2>
+                <p>هزة شباتي | Terminal Access</p>
+            </div>
+            <div class="auth-tabs">
+                <button type="button" class="auth-tab active" id="auth-tab-cashier" onclick="switchAuthTab('cashier')">🧑‍💼 Cashier PIN</button>
+                <button type="button" class="auth-tab" id="auth-tab-owner" onclick="switchAuthTab('owner')">👑 Owner Login</button>
+            </div>
+            <div class="auth-body">
+                <!-- Cashier 4-Digit PIN Panel -->
+                <div id="auth-panel-cashier">
+                    <div class="field-group">
+                        <label for="cashier-select">Select Cashier</label>
+                        <select id="cashier-select"></select>
+                    </div>
+                    <div class="pin-display" id="pin-display-box">••••</div>
+                    <div class="pin-keypad">
+                        <button type="button" class="pin-key" onclick="pressPinKey('1')">1</button>
+                        <button type="button" class="pin-key" onclick="pressPinKey('2')">2</button>
+                        <button type="button" class="pin-key" onclick="pressPinKey('3')">3</button>
+                        <button type="button" class="pin-key" onclick="pressPinKey('4')">4</button>
+                        <button type="button" class="pin-key" onclick="pressPinKey('5')">5</button>
+                        <button type="button" class="pin-key" onclick="pressPinKey('6')">6</button>
+                        <button type="button" class="pin-key" onclick="pressPinKey('7')">7</button>
+                        <button type="button" class="pin-key" onclick="pressPinKey('8')">8</button>
+                        <button type="button" class="pin-key" onclick="pressPinKey('9')">9</button>
+                        <button type="button" class="pin-key action-clear" onclick="clearPinInput()">Clear</button>
+                        <button type="button" class="pin-key" onclick="pressPinKey('0')">0</button>
+                        <button type="button" class="pin-key action-enter" onclick="submitCashierPin()">Enter</button>
+                    </div>
+                </div>
+
+                <!-- Owner Login Panel -->
+                <div id="auth-panel-owner" style="display: none;">
+                    <div class="field-group">
+                        <label for="owner-username-input">Owner Username</label>
+                        <input type="text" id="owner-username-input" placeholder="admin" value="admin">
+                    </div>
+                    <div class="field-group">
+                        <label for="owner-password-input">Owner Password</label>
+                        <input type="password" id="owner-password-input" placeholder="Enter password (default: 1234)">
+                    </div>
+                    <button type="button" class="btn btn-print" style="width: 100%; padding: 11px; font-size: 0.95rem;" onclick="submitOwnerLogin()">🔓 Login as Owner</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <header>
         <div class="brand-title">
             <h1>HAZZAT CHAPATI <span>هزة شباتي | POS</span></h1>
@@ -1357,11 +1597,14 @@
                 <option value="BOLIFARD_1">BOLIFARD 1</option>
                 <option value="BOLIFARD_2">BOLIFARD 2</option>
             </select>
+            <span id="business-day-badge" class="bday-pill" title="Active Business Day (persists past midnight until End of Day)">📅 B-Day: --</span>
         </div>
         <div class="header-right">
-            <span id="sync-status-badge" class="sync-badge" onclick="openFirebaseModal()" title="Click to configure Firebase Realtime Database">🔥 Firebase / Local</span>
-            <button class="hdr-btn" onclick="openShiftModal()">📊 Shift / Drawer</button>
+            <span id="active-user-badge" class="user-badge" onclick="openUserSettingsOrLock()" title="Click to switch user / lock screen">👤 --</span>
+            <span id="sync-status-badge" class="sync-badge" onclick="handleFirebaseBadgeClick()" title="Firebase Realtime Database">🔥 Firebase / Local</span>
+            <button class="hdr-btn" onclick="openShiftModal()">📊 Shift / EOD</button>
             <button class="hdr-btn" onclick="openHistoryModal()">📜 History</button>
+            <button class="hdr-btn" style="background:#ef4444; color:#fff;" onclick="lockTerminal()" title="Lock Screen / Switch User">🔒</button>
             <span id="live-clock" style="font-size: 0.85rem; color: var(--accent);"></span>
         </div>
     </header>
@@ -1427,7 +1670,7 @@
         </div>
     </div>
 
-    <!-- Payment Modal (VISA default + Cash only) -->
+    <!-- Payment Modal (VISA default + Cash + Split Payment Cash+VISA) -->
     <div class="modal-overlay" id="payment-modal">
         <div class="modal-box">
             <div class="modal-header">
@@ -1451,6 +1694,11 @@
                         <span class="pay-title-en">Cash</span>
                         <span class="pay-title-ar">نقدي</span>
                     </button>
+                    <button type="button" class="pay-option-btn" id="opt-split" onclick="selectPaymentMethod('Split')">
+                        <span class="pay-icon">➗</span>
+                        <span class="pay-title-en">Split</span>
+                        <span class="pay-title-ar">نقدي + فيزا</span>
+                    </button>
                 </div>
 
                 <div id="cash-tendered-box" style="display: none; margin-bottom: 12px; background: #fdfaf5; border: 1px solid var(--border); border-radius: 8px; padding: 10px;">
@@ -1464,12 +1712,46 @@
                     </div>
                 </div>
 
+                <div id="split-payment-box" style="display: none; margin-bottom: 12px; background: #f0f9ff; border: 1px solid #bae6fd; border-radius: 8px; padding: 10px;">
+                    <div class="field-group" style="margin-bottom: 8px;">
+                        <label for="split-cash-input">💵 Cash Portion (SAR)</label>
+                        <input type="number" id="split-cash-input" min="0" step="0.5" oninput="recalcSplitFromCash()">
+                    </div>
+                    <div class="field-group" style="margin-bottom: 4px;">
+                        <label for="split-visa-input">💳 VISA Portion (SAR)</label>
+                        <input type="number" id="split-visa-input" min="0" step="0.5" oninput="recalcSplitFromVisa()">
+                    </div>
+                    <div id="split-validation-msg" style="font-size: 0.78rem; font-weight: 700; color: var(--success); margin-top: 4px;"></div>
+                </div>
+
                 <div class="modal-actions-grid">
                     <button type="button" class="btn btn-pay-only" onclick="completePayment(false)">Pay Only</button>
                     <button type="button" class="btn btn-confirm-pay" onclick="completePayment(true)">Pay & Print Receipt</button>
                     <button type="button" class="btn btn-cancel-modal" onclick="closePaymentModal()">Cancel</button>
                 </div>
             </div>
+        </div>
+    </div>
+
+    <!-- Return Order Modal (Partial or Full Return - Owner Only) -->
+    <div class="modal-overlay" id="return-modal">
+        <div class="modal-box history-modal-box" style="max-width: 620px;">
+            <div class="modal-header" style="background: var(--danger);">
+                <h3>↩️ Return Order (Partial / Full)</h3>
+                <button class="modal-close" onclick="closeModal('return-modal')">&times;</button>
+            </div>
+            <div class="modal-body" id="return-modal-body"></div>
+        </div>
+    </div>
+
+    <!-- Owner Staff & Security Settings Modal -->
+    <div class="modal-overlay" id="owner-settings-modal">
+        <div class="modal-box" style="max-width: 540px;">
+            <div class="modal-header">
+                <h3>👑 Owner Security & Cashier PIN Management</h3>
+                <button class="modal-close" onclick="closeModal('owner-settings-modal')">&times;</button>
+            </div>
+            <div class="modal-body" id="owner-settings-body"></div>
         </div>
     </div>
 
@@ -1589,11 +1871,11 @@
         </div>
     </div>
 
-    <!-- Shift & Cash Drawer Modal (with 80mm Print Report) -->
+    <!-- Shift & Cash Drawer Modal (with Business Day End of Day + 80mm Print Report) -->
     <div class="modal-overlay" id="shift-modal">
         <div class="modal-box shift-modal-box">
             <div class="modal-header">
-                <h3>📊 Shift & Cash Drawer - <span id="shift-modal-branch">BOLIFARD 1</span></h3>
+                <h3>📊 Shift, Cash Drawer & End of Day - <span id="shift-modal-branch">BOLIFARD 1</span></h3>
                 <button class="modal-close" onclick="closeModal('shift-modal')">&times;</button>
             </div>
             <div class="modal-body" id="shift-modal-body"></div>
@@ -1614,9 +1896,9 @@
                         <button type="button" class="tab-btn" id="tab-items-btn" onclick="switchHistoryTab('items')">📦 Item-Wise Summary</button>
                     </div>
                     <div class="history-filter-controls">
-                        <label for="history-date-filter" style="font-weight: 600; font-size: 0.85rem;">Filter Date:</label>
+                        <label for="history-date-filter" style="font-weight: 600; font-size: 0.85rem;">Business Day:</label>
                         <input type="date" id="history-date-filter" onchange="renderHistoryView()">
-                        <button class="mini-print-btn" style="padding: 7px 10px;" onclick="showAllHistory()">Show All</button>
+                        <button class="mini-print-btn" style="padding: 7px 10px; background: var(--info);" onclick="showAllHistory()">All Orders</button>
                         <button class="mini-print-btn" id="print-item-summary-btn" style="padding: 7px 10px; background: var(--success); display: none;" onclick="printItemWiseSummary80mm()">🖨️ Print 80mm Summary</button>
                     </div>
                 </div>
@@ -1641,7 +1923,7 @@
                 </p>
                 <div class="field-group">
                     <label for="firebase-db-url-input">Firebase Realtime Database URL</label>
-                    <input type="url" id="firebase-db-url-input" placeholder="https://your-project-default-rtdb.firebaseio.com">
+                    <input type="url" id="firebase-db-url-input" placeholder="https://firebaseio.com">
                 </div>
                 <div class="action-buttons">
                     <button type="button" class="btn btn-clear" onclick="clearFirebaseUrl()">Local Only</button>
@@ -1659,6 +1941,8 @@
     <script>
         const VAT_RATE = 0.15;
         const CURRENCY = 'SAR';
+        const SELLER_NAME = 'HAZZAT CHAPATI';
+        const SELLER_VAT_NUMBER = '311233882500003';
         const DEFAULT_FIREBASE_URL = 'https://firebaseio.com';
         const BRANCHES = ['BOLIFARD_1', 'BOLIFARD_2'];
 
@@ -1703,12 +1987,16 @@
       { id: 38, nameEn: 'Masabib Medium', nameAr: 'مصابيب وسط', price: 19.00, category: 'Desserts', icon: '🥞' }
     ];
 
-    const categories = ['Chapati', 'Cold Drinks', 'Hot Drinks', 'French Fries', 'Desserts'];
+    const categories = ['All', 'Chapati', 'Cold Drinks', 'Hot Drinks', 'French Fries', 'Desserts'];
     let selectedCategory = 'All';
         let currentBranch = localStorage.getItem('hazzat_current_branch') || 'BOLIFARD_1';
-       let firebaseDbUrl = 'https://hazzat-pos-default-rtdb.firebaseio.com';
+        let firebaseDbUrl = 'https://hazzat-pos-default-rtdb.firebaseio.com';
         let selectedPaymentMethod = 'VISA';
         let historyActiveTab = 'orders';
+
+        // Auth State (Owner & Cashier 4-Digit PIN)
+        let currentUser = null; // { role: 'owner' | 'cashier', name: string }
+        let enteredPin = '';
 
         let cart = [];
         let orderMeta = {
@@ -1720,6 +2008,14 @@
             tableNumber: '',
             orderType: 'Dine-In'
         };
+
+        function getLocalTodayYMD() {
+            const d = new Date();
+            const y = d.getFullYear();
+            const m = String(d.getMonth() + 1).padStart(2, '0');
+            const day = String(d.getDate()).padStart(2, '0');
+            return `${y}-${m}-${day}`;
+        }
 
         function getBranchStorageKey(suffix) {
             return `hazzat_pos_${currentBranch}_${suffix}`;
@@ -1733,9 +2029,285 @@
             return branchCode === 'BOLIFARD_2' ? 'BOLIFARD 2' : 'BOLIFARD 1';
         }
 
+        // ==========================================
+        // 1. AUTHENTICATION (OWNER & CASHIER PIN)
+        // ==========================================
+        function getAuthConfig() {
+            const defaultConfig = {
+                ownerUser: 'admin',
+                ownerPass: '1234',
+                cashiers: [
+                    { id: 'c1', name: 'Cashier 1', pin: '1111' },
+                    { id: 'c2', name: 'Cashier 2', pin: '2222' }
+                ]
+            };
+            try {
+                const raw = localStorage.getItem('hazzat_auth_config');
+                if (!raw) {
+                    localStorage.setItem('hazzat_auth_config', JSON.stringify(defaultConfig));
+                    return defaultConfig;
+                }
+                const parsed = JSON.parse(raw);
+                return {
+                    ownerUser: parsed.ownerUser || 'admin',
+                    ownerPass: parsed.ownerPass || '1234',
+                    cashiers: Array.isArray(parsed.cashiers) && parsed.cashiers.length ? parsed.cashiers : defaultConfig.cashiers
+                };
+            } catch {
+                return defaultConfig;
+            }
+        }
+
+        function saveAuthConfig(cfg) {
+            localStorage.setItem('hazzat_auth_config', JSON.stringify(cfg));
+        }
+
+        function isOwner() {
+            return currentUser && currentUser.role === 'owner';
+        }
+
+        function populateCashierDropdown() {
+            const cfg = getAuthConfig();
+            const sel = document.getElementById('cashier-select');
+            if (!sel) return;
+            sel.innerHTML = cfg.cashiers.map(c => `<option value="${escapeHtml(c.id)}">${escapeHtml(c.name)}</option>`).join('');
+        }
+
+        function switchAuthTab(tab) {
+            document.getElementById('auth-tab-cashier').classList.toggle('active', tab === 'cashier');
+            document.getElementById('auth-tab-owner').classList.toggle('active', tab === 'owner');
+            document.getElementById('auth-panel-cashier').style.display = tab === 'cashier' ? 'block' : 'none';
+            document.getElementById('auth-panel-owner').style.display = tab === 'owner' ? 'block' : 'none';
+        }
+
+        function pressPinKey(digit) {
+            if (enteredPin.length >= 4) return;
+            enteredPin += digit;
+            updatePinDisplay();
+            if (enteredPin.length === 4) {
+                setTimeout(submitCashierPin, 120);
+            }
+        }
+
+        function clearPinInput() {
+            enteredPin = '';
+            updatePinDisplay();
+        }
+
+        function updatePinDisplay() {
+            const box = document.getElementById('pin-display-box');
+            if (!box) return;
+            box.textContent = enteredPin.padEnd(4, '•').replace(/[0-9]/g, '●');
+        }
+
+        function submitCashierPin() {
+            const cfg = getAuthConfig();
+            const selectedId = document.getElementById('cashier-select').value;
+            const cashier = cfg.cashiers.find(c => c.id === selectedId);
+            if (!cashier) {
+                showToast('Select a cashier');
+                return;
+            }
+            if (enteredPin === cashier.pin) {
+                currentUser = { role: 'cashier', name: cashier.name };
+                sessionStorage.setItem('hazzat_session_user', JSON.stringify(currentUser));
+                enteredPin = '';
+                updatePinDisplay();
+                document.getElementById('auth-lock-screen').classList.add('hidden');
+                applyRolePermissionsUI();
+                showToast(`Welcome, ${cashier.name} (Cashier Mode)`);
+            } else {
+                enteredPin = '';
+                updatePinDisplay();
+                showToast('Invalid 4-Digit PIN!');
+            }
+        }
+
+        function submitOwnerLogin() {
+            const cfg = getAuthConfig();
+            const u = (document.getElementById('owner-username-input').value || '').trim();
+            const p = (document.getElementById('owner-password-input').value || '').trim();
+            if (u.toLowerCase() === cfg.ownerUser.toLowerCase() && p === cfg.ownerPass) {
+                currentUser = { role: 'owner', name: 'Owner (' + cfg.ownerUser + ')' };
+                sessionStorage.setItem('hazzat_session_user', JSON.stringify(currentUser));
+                document.getElementById('owner-password-input').value = '';
+                document.getElementById('auth-lock-screen').classList.add('hidden');
+                applyRolePermissionsUI();
+                showToast('Logged in as Owner (Full Control)');
+            } else {
+                showToast('Invalid Owner credentials!');
+            }
+        }
+
+        function lockTerminal() {
+            currentUser = null;
+            sessionStorage.removeItem('hazzat_session_user');
+            enteredPin = '';
+            updatePinDisplay();
+            populateCashierDropdown();
+            document.getElementById('auth-lock-screen').classList.remove('hidden');
+        }
+
+        function applyRolePermissionsUI() {
+            const badge = document.getElementById('active-user-badge');
+            if (badge && currentUser) {
+                badge.textContent = isOwner() ? `👑 ${currentUser.name}` : `🧑‍💼 ${currentUser.name}`;
+                badge.style.background = isOwner() ? 'rgba(245, 158, 11, 0.3)' : 'rgba(22, 163, 74, 0.25)';
+                badge.style.borderColor = isOwner() ? '#fbbf24' : '#86efac';
+            }
+            renderMenu();
+        }
+
+        function openUserSettingsOrLock() {
+            if (!isOwner()) {
+                lockTerminal();
+                return;
+            }
+            openOwnerSettingsModal();
+        }
+
+        function handleFirebaseBadgeClick() {
+            if (!isOwner()) {
+                showToast('Owner login required to change Firebase settings');
+                return;
+            }
+            openFirebaseModal();
+        }
+
+        function openOwnerSettingsModal() {
+            if (!isOwner()) {
+                showToast('Owner login required');
+                return;
+            }
+            const cfg = getAuthConfig();
+            const cashierRows = cfg.cashiers.map((c, idx) => `
+                <div style="display:flex; justify-content:space-between; align-items:center; padding:6px 8px; border:1px solid var(--border); border-radius:6px; margin-bottom:6px; background:#fdfaf5;">
+                    <div><strong>${escapeHtml(c.name)}</strong> — PIN: <code>${escapeHtml(c.pin)}</code></div>
+                    ${cfg.cashiers.length > 1 ? `<button type="button" class="mini-print-btn" style="background:var(--danger);" onclick="removeCashierAccount(${idx})">Delete</button>` : ''}
+                </div>
+            `).join('');
+
+            document.getElementById('owner-settings-body').innerHTML = `
+                <div class="shift-box" style="margin-bottom:12px;">
+                    <h4>🔐 Owner Credentials</h4>
+                    <div class="field-group">
+                        <label>Owner Username</label>
+                        <input type="text" id="cfg-owner-user" value="${escapeHtml(cfg.ownerUser)}">
+                    </div>
+                    <div class="field-group">
+                        <label>Owner Password</label>
+                        <input type="text" id="cfg-owner-pass" value="${escapeHtml(cfg.ownerPass)}">
+                    </div>
+                    <button type="button" class="btn btn-print" style="width:100%;" onclick="saveOwnerCredentials()">Update Owner Login</button>
+                </div>
+
+                <div class="shift-box">
+                    <h4>🧑‍💼 Cashier 4-Digit PINs</h4>
+                    <div style="margin-bottom:10px;">${cashierRows}</div>
+                    <div style="display:grid; grid-template-columns: 1fr 110px auto; gap:6px;">
+                        <input type="text" id="new-cashier-name" placeholder="Cashier Name" style="padding:7px; border:1px solid var(--border); border-radius:6px;">
+                        <input type="text" id="new-cashier-pin" maxlength="4" pattern="\\d{4}" placeholder="4-Digit PIN" style="padding:7px; border:1px solid var(--border); border-radius:6px;">
+                        <button type="button" class="mini-print-btn" style="background:var(--info);" onclick="addCashierAccount()">+ Add</button>
+                    </div>
+                </div>
+            `;
+            document.getElementById('owner-settings-modal').classList.add('active');
+        }
+
+        function saveOwnerCredentials() {
+            const u = document.getElementById('cfg-owner-user').value.trim();
+            const p = document.getElementById('cfg-owner-pass').value.trim();
+            if (!u || !p) {
+                showToast('Username and password cannot be empty');
+                return;
+            }
+            const cfg = getAuthConfig();
+            cfg.ownerUser = u;
+            cfg.ownerPass = p;
+            saveAuthConfig(cfg);
+            currentUser.name = 'Owner (' + u + ')';
+            sessionStorage.setItem('hazzat_session_user', JSON.stringify(currentUser));
+            applyRolePermissionsUI();
+            showToast('Owner credentials updated');
+        }
+
+        function addCashierAccount() {
+            const name = document.getElementById('new-cashier-name').value.trim();
+            const pin = document.getElementById('new-cashier-pin').value.trim();
+            if (!name || !/^\d{4}$/.test(pin)) {
+                showToast('Enter Cashier Name and a 4-digit numeric PIN');
+                return;
+            }
+            const cfg = getAuthConfig();
+            cfg.cashiers.push({ id: 'c_' + Date.now(), name, pin });
+            saveAuthConfig(cfg);
+            populateCashierDropdown();
+            openOwnerSettingsModal();
+            showToast('Cashier added');
+        }
+
+        function removeCashierAccount(idx) {
+            const cfg = getAuthConfig();
+            cfg.cashiers.splice(idx, 1);
+            saveAuthConfig(cfg);
+            populateCashierDropdown();
+            openOwnerSettingsModal();
+            showToast('Cashier removed');
+        }
+
+        // ==========================================
+        // 2. BUSINESS DAY (PERSISTS PAST MIDNIGHT)
+        // ==========================================
+        function loadBusinessDayState() {
+            try {
+                const raw = localStorage.getItem(getBranchStorageKey('business_day'));
+                if (!raw) {
+                    const initial = {
+                        businessDate: getLocalTodayYMD(),
+                        openedAt: new Date().toISOString(),
+                        orderSeq: 0,
+                        isClosed: false
+                    };
+                    localStorage.setItem(getBranchStorageKey('business_day'), JSON.stringify(initial));
+                    return initial;
+                }
+                return JSON.parse(raw);
+            } catch {
+                return {
+                    businessDate: getLocalTodayYMD(),
+                    openedAt: new Date().toISOString(),
+                    orderSeq: 0,
+                    isClosed: false
+                };
+            }
+        }
+
+        function saveBusinessDayState(bdayObj) {
+            localStorage.setItem(getBranchStorageKey('business_day'), JSON.stringify(bdayObj));
+            syncBranchToFirebase('business_day', bdayObj);
+            updateBusinessDayBadge();
+        }
+
+        function updateBusinessDayBadge() {
+            const bday = loadBusinessDayState();
+            const el = document.getElementById('business-day-badge');
+            if (el) {
+                el.textContent = `📅 B-Day: ${bday.businessDate}`;
+            }
+        }
+
+        function getNextFoodicsOrderNumber() {
+            const bday = loadBusinessDayState();
+            bday.orderSeq = (Number(bday.orderSeq) || 0) + 1;
+            saveBusinessDayState(bday);
+            return String(bday.orderSeq).padStart(3, '0');
+        }
+
         function createDefaultShift(openingAmount = 0) {
+            const bday = loadBusinessDayState();
             return {
                 isOpen: true,
+                businessDate: bday.businessDate,
                 openedAt: new Date().toISOString(),
                 closedAt: null,
                 openingCash: Number(openingAmount) || 0,
@@ -1844,12 +2416,13 @@
             renderCart();
             updateOrderMetaUI();
             updateRecallButtonBadge();
+            updateBusinessDayBadge();
             syncBranchToFirebase('shift', loadShiftData());
             showToast(`Switched to ${formatBranchLabel(currentBranch)}`);
         }
 
         function openFirebaseModal() {
-            document.getElementById('firebase-db-url-input').value = firebaseDbUrl || '';
+            document.getElementById('firebase-db-url-input').value = firebaseDbUrl || DEFAULT_FIREBASE_URL;
             document.getElementById('firebase-modal').classList.add('active');
         }
 
@@ -1925,8 +2498,12 @@
           ? `<img src="${savedImages[item.id]}" style="width:65px; height:65px; object-fit:cover; border-radius:10px; margin:0 auto 6px; display:block;">`
           : `<div class="menu-icon">${item.icon}</div>`;
 
+        const camBtnHtml = isOwner()
+          ? `<button type="button" onclick="event.stopPropagation(); uploadItemImage(${item.id})" title="ছবি পরিবর্তন করুন" style="position:absolute; top:6px; right:6px; background:rgba(0,0,0,0.65); color:#fff; border:none; border-radius:6px; padding:3px 6px; font-size:12px; cursor:pointer; z-index:5;">📷</button>`
+          : '';
+
         card.innerHTML = `
-          <button type="button" onclick="event.stopPropagation(); uploadItemImage(${item.id})" title="ছবি পরিবর্তন করুন" style="position:absolute; top:6px; right:6px; background:rgba(0,0,0,0.65); color:#fff; border:none; border-radius:6px; padding:3px 6px; font-size:12px; cursor:pointer; z-index:5;">📷</button>
+          ${camBtnHtml}
           <div>
             ${imgHtml}
             <div class="menu-title-en">${escapeHtml(item.nameEn)}</div>
@@ -1942,6 +2519,10 @@
     }
 
     function uploadItemImage(itemId) {
+      if (!isOwner()) {
+        showToast('Owner login required');
+        return;
+      }
       const input = document.createElement('input');
       input.type = 'file';
       input.accept = 'image/*';
@@ -2154,7 +2735,7 @@
                         </div>
                         <div style="display:flex; gap:6px;">
                             <button type="button" class="mini-print-btn" style="background:var(--success);" onclick="recallOrder(${index})">Recall</button>
-                            <button type="button" class="mini-print-btn" style="background:var(--danger);" onclick="deleteHeldOrder(${index})">Delete</button>
+                            ${isOwner() ? `<button type="button" class="mini-print-btn" style="background:var(--danger);" onclick="deleteHeldOrder(${index})">Delete</button>` : ''}
                         </div>
                     </div>
                 `).join('');
@@ -2189,6 +2770,10 @@
         }
 
         function deleteHeldOrder(index) {
+            if (!isOwner()) {
+                showToast('Only Owner can delete held orders');
+                return;
+            }
             const held = loadHeldOrders();
             held.splice(index, 1);
             saveHeldOrders(held);
@@ -2312,7 +2897,9 @@
             closeModal('table-modal');
         }
 
-        // Payment Modal (VISA always selected by default)
+        // ==========================================
+        // 3. PAYMENT MODAL (VISA, CASH, & SPLIT CASH+VISA)
+        // ==========================================
         function openPaymentModal() {
             if (!cart.length) {
                 showToast('Please select at least one item!');
@@ -2323,7 +2910,11 @@
             document.getElementById('modal-total-amount').textContent = formatSAR(totals.netPayable);
             selectPaymentMethod('VISA');
             document.getElementById('cash-received-input').value = totals.netPayable.toFixed(2);
+            const half = Number((totals.netPayable / 2).toFixed(2));
+            document.getElementById('split-cash-input').value = half.toFixed(2);
+            document.getElementById('split-visa-input').value = (totals.netPayable - half).toFixed(2);
             calculateCashChange();
+            recalcSplitFromCash();
             document.getElementById('payment-modal').classList.add('active');
         }
 
@@ -2332,11 +2923,14 @@
         }
 
         function selectPaymentMethod(method) {
-            selectedPaymentMethod = method === 'Cash' ? 'Cash' : 'VISA';
+            selectedPaymentMethod = method === 'Cash' ? 'Cash' : (method === 'Split' ? 'Split' : 'VISA');
             document.getElementById('opt-visa').classList.toggle('selected', selectedPaymentMethod === 'VISA');
             document.getElementById('opt-cash').classList.toggle('selected', selectedPaymentMethod === 'Cash');
+            document.getElementById('opt-split').classList.toggle('selected', selectedPaymentMethod === 'Split');
             document.getElementById('cash-tendered-box').style.display = selectedPaymentMethod === 'Cash' ? 'block' : 'none';
-            calculateCashChange();
+            document.getElementById('split-payment-box').style.display = selectedPaymentMethod === 'Split' ? 'block' : 'none';
+            if (selectedPaymentMethod === 'Cash') calculateCashChange();
+            if (selectedPaymentMethod === 'Split') recalcSplitFromCash();
         }
 
         function calculateCashChange() {
@@ -2346,11 +2940,52 @@
             document.getElementById('cash-change-display').textContent = formatSAR(change);
         }
 
+        function recalcSplitFromCash() {
+            const total = calculateTotals().netPayable;
+            let cashVal = Math.max(0, Math.min(total, parseFloat(document.getElementById('split-cash-input').value) || 0));
+            let visaVal = Number((total - cashVal).toFixed(2));
+            document.getElementById('split-visa-input').value = visaVal.toFixed(2);
+            updateSplitStatusMsg(cashVal, visaVal, total);
+        }
+
+        function recalcSplitFromVisa() {
+            const total = calculateTotals().netPayable;
+            let visaVal = Math.max(0, Math.min(total, parseFloat(document.getElementById('split-visa-input').value) || 0));
+            let cashVal = Number((total - visaVal).toFixed(2));
+            document.getElementById('split-cash-input').value = cashVal.toFixed(2);
+            updateSplitStatusMsg(cashVal, visaVal, total);
+        }
+
+        function updateSplitStatusMsg(cashVal, visaVal, total) {
+            const msgEl = document.getElementById('split-validation-msg');
+            if (!msgEl) return;
+            msgEl.textContent = `Cash: ${formatSAR(cashVal)} + VISA: ${formatSAR(visaVal)} = Total: ${formatSAR(total)}`;
+        }
+
         function completePayment(shouldPrint) {
             syncOrderMetaFromCart();
             const totals = calculateTotals();
+            let cashPaid = 0;
+            let visaPaid = 0;
+
+            if (selectedPaymentMethod === 'VISA') {
+                visaPaid = Number(totals.netPayable.toFixed(2));
+            } else if (selectedPaymentMethod === 'Cash') {
+                cashPaid = Number(totals.netPayable.toFixed(2));
+            } else if (selectedPaymentMethod === 'Split') {
+                cashPaid = Math.max(0, parseFloat(document.getElementById('split-cash-input').value) || 0);
+                visaPaid = Math.max(0, parseFloat(document.getElementById('split-visa-input').value) || 0);
+                if (Math.abs((cashPaid + visaPaid) - totals.netPayable) > 0.05) {
+                    showToast('Split Cash + VISA must equal Total Payable!');
+                    return;
+                }
+            }
+
             const now = new Date();
-            const dateStr = now.toISOString().split('T')[0];
+            const bday = loadBusinessDayState();
+            const activeBusinessDate = bday.businessDate || getLocalTodayYMD();
+            const foodicsOrderNo = getNextFoodicsOrderNumber();
+
             const shift = loadShiftData();
             if (!shift.isOpen) {
                 const reopened = createDefaultShift(shift.closingCashActual || 0);
@@ -2358,14 +2993,14 @@
             }
 
             const orderRecord = {
-                invoiceNo: 'HZ-' + now.getFullYear().toString().slice(-2) +
-                    String(now.getMonth() + 1).padStart(2, '0') +
-                    String(now.getDate()).padStart(2, '0') + '-' +
-                    String(Math.floor(1000 + Math.random() * 9000)),
+                orderNumber: foodicsOrderNo,
+                invoiceNo: 'HZ-' + activeBusinessDate.replace(/-/g, '').slice(2) + '-' + foodicsOrderNo,
                 branch: currentBranch,
-                date: dateStr,
+                date: activeBusinessDate,
+                businessDate: activeBusinessDate,
                 timestamp: now.toISOString(),
                 shiftOpenedAt: loadShiftData().openedAt,
+                cashierName: currentUser ? currentUser.name : 'Cashier',
                 customerName: orderMeta.customerName || 'Walk-in Customer',
                 customerPhone: orderMeta.customerPhone || '',
                 customerAddress: orderMeta.customerAddress || '',
@@ -2373,7 +3008,13 @@
                 orderType: orderMeta.orderType || 'Dine-In',
                 note: orderMeta.note || '',
                 paymentMethod: selectedPaymentMethod,
+                cashAmount: cashPaid,
+                visaAmount: visaPaid,
                 status: 'PAID',
+                returnedAmount: 0,
+                returnedCash: 0,
+                returnedVisa: 0,
+                returnRecords: [],
                 items: JSON.parse(JSON.stringify(cart)),
                 grossTotal: totals.grossTotal,
                 discount: totals.discount,
@@ -2388,16 +3029,19 @@
 
             closePaymentModal();
             clearCart();
-            showToast(`Paid via ${orderRecord.paymentMethod} (${formatSAR(orderRecord.total)}) - ${formatBranchLabel(currentBranch)}`);
+            showToast(`Order #${foodicsOrderNo} Paid via ${orderRecord.paymentMethod} (${formatSAR(orderRecord.total)})`);
 
             if (shouldPrint) {
                 printOrderReceipt80mm(orderRecord);
             }
         }
 
-        // Shift & Cash Drawer Calculations + 80mm Shift Report Print
+        // ==========================================
+        // 4. SHIFT, CASH DRAWER & BUSINESS DAY EOD
+        // ==========================================
         function computeShiftStats() {
             const shift = loadShiftData();
+            const bday = loadBusinessDayState();
             const orders = loadBranchOrders();
             const shiftStartMs = shift.openedAt ? new Date(shift.openedAt).getTime() : 0;
 
@@ -2412,16 +3056,19 @@
             let cashReturns = 0;
 
             shiftOrders.forEach(o => {
-                const amt = Number(o.total) || 0;
-                const isReturn = o.status === 'RETURN' || o.isReturn === true || amt < 0;
-                const absAmt = Math.abs(amt);
-                if (o.paymentMethod === 'Cash') {
-                    if (isReturn) cashReturns += absAmt;
-                    else cashPayments += absAmt;
+                // Handle Split, VISA, and Cash sales accurately
+                if (o.paymentMethod === 'Split') {
+                    visaPayments += Number(o.visaAmount) || 0;
+                    cashPayments += Number(o.cashAmount) || 0;
+                } else if (o.paymentMethod === 'Cash') {
+                    cashPayments += Number(o.cashAmount !== undefined ? o.cashAmount : o.total) || 0;
                 } else {
-                    if (isReturn) visaReturns += absAmt;
-                    else visaPayments += absAmt;
+                    visaPayments += Number(o.visaAmount !== undefined ? o.visaAmount : o.total) || 0;
                 }
+
+                // Subtract returns recorded against this order
+                visaReturns += Number(o.returnedVisa) || 0;
+                cashReturns += Number(o.returnedCash) || 0;
             });
 
             const visaNet = visaPayments - visaReturns;
@@ -2440,11 +3087,11 @@
             const closingCashActual = shift.closingCashActual !== null && shift.closingCashActual !== undefined
                 ? Number(shift.closingCashActual)
                 : estimatedCashInRegister;
-            // Shortage > 0 when actual cash is less than estimated cash
             const cashShortage = estimatedCashInRegister - closingCashActual;
 
             return {
                 shift,
+                bday,
                 shiftOrdersCount: shiftOrders.length,
                 visaPayments,
                 visaReturns,
@@ -2469,7 +3116,7 @@
 
         function renderShiftModalBody() {
             const stats = computeShiftStats();
-            const { shift } = stats;
+            const { shift, bday } = stats;
             const openedStr = shift.openedAt ? new Date(shift.openedAt).toLocaleString() : 'N/A';
             const closedStr = shift.closedAt ? new Date(shift.closedAt).toLocaleString() : (shift.isOpen ? 'Still Open' : 'Closed');
 
@@ -2497,16 +3144,16 @@
             document.getElementById('shift-modal-body').innerHTML = `
                 <div class="report-summary-cards">
                     <div class="report-card">
+                        <div class="report-card-label">Active Business Day</div>
+                        <div class="report-card-value" style="color:#b45309;">${escapeHtml(bday.businessDate)}</div>
+                    </div>
+                    <div class="report-card">
                         <div class="report-card-label">Shift Status</div>
                         <div class="report-card-value">${shift.isOpen ? '🟢 OPEN' : '🔴 CLOSED'}</div>
                     </div>
                     <div class="report-card">
                         <div class="report-card-label">Shift Open Time</div>
-                        <div class="report-card-value" style="font-size:0.86rem;">${escapeHtml(openedStr)}</div>
-                    </div>
-                    <div class="report-card">
-                        <div class="report-card-label">Shift Close Time</div>
-                        <div class="report-card-value" style="font-size:0.86rem;">${escapeHtml(closedStr)}</div>
+                        <div class="report-card-value" style="font-size:0.82rem;">${escapeHtml(openedStr)}</div>
                     </div>
                     <div class="report-card">
                         <div class="report-card-label">Net Total Sales</div>
@@ -2516,12 +3163,12 @@
 
                 <div class="shift-grid-2">
                     <div class="shift-box">
-                        <h4>💳 VISA & 💵 Cash Breakdown</h4>
+                        <h4>💳 VISA & 💵 Cash Breakdown (Incl. Split)</h4>
                         <div class="drawer-line"><span>VISA Total Payments:</span><strong>${formatSAR(stats.visaPayments)}</strong></div>
-                        <div class="drawer-line"><span>VISA Total Returns:</span><strong>${formatSAR(stats.visaReturns)}</strong></div>
+                        <div class="drawer-line"><span>VISA Total Returns:</span><strong style="color:var(--danger);">-${formatSAR(stats.visaReturns)}</strong></div>
                         <div class="drawer-line"><span>VISA Net Payments:</span><strong>${formatSAR(stats.visaNet)}</strong></div>
                         <div class="drawer-line" style="margin-top:6px;"><span>Cash Total Payments:</span><strong>${formatSAR(stats.cashPayments)}</strong></div>
-                        <div class="drawer-line"><span>Cash Total Returns:</span><strong>${formatSAR(stats.cashReturns)}</strong></div>
+                        <div class="drawer-line"><span>Cash Total Returns:</span><strong style="color:var(--danger);">-${formatSAR(stats.cashReturns)}</strong></div>
                         <div class="drawer-line highlight"><span>Cash Net Payments:</span><span>${formatSAR(stats.cashNet)}</span></div>
                     </div>
 
@@ -2551,7 +3198,7 @@
                 <div class="actual-cash-row">
                     <div>
                         <strong>Closing Amount (Counted Cash in Drawer):</strong>
-                        <div style="font-size:0.78rem; color:#6d5443;">Estimated Cash: ${formatSAR(stats.estimatedCashInRegister)}</div>
+                        <div style="font-size:0.78rem; color:#6d5443;">Estimated Cash: ${formatSAR(stats.estimatedCashInRegister)} | Closed: ${escapeHtml(closedStr)}</div>
                     </div>
                     <input type="number" id="closing-cash-input" value="${stats.closingCashActual.toFixed(2)}" min="0" step="0.5" oninput="liveRecalcShortage()">
                 </div>
@@ -2563,11 +3210,12 @@
                 </div>
 
                 <div class="action-buttons" style="flex-wrap:wrap;">
-                    <button type="button" class="btn" style="background:var(--info);" onclick="printShiftCashReport80mm()">🖨️ Print 80mm Shift & Cash Report</button>
+                    <button type="button" class="btn" style="background:var(--info);" onclick="printShiftCashReport80mm()">🖨️ Print 80mm Shift Report</button>
                     ${shift.isOpen
-                        ? `<button type="button" class="btn btn-clear" onclick="closeCurrentShift()">🔒 Close Shift</button>`
+                        ? `<button type="button" class="btn" style="background:#d97706;" onclick="closeCurrentShift()">🔒 Close Shift</button>`
                         : `<button type="button" class="btn btn-print" onclick="openNewShift()">🔓 Open New Shift</button>`
                     }
+                    <button type="button" class="btn btn-clear" onclick="closeBusinessDayEOD()">🌙 End of Day (Close Business Day)</button>
                 </div>
             `;
         }
@@ -2633,6 +3281,48 @@
             showToast('New shift opened');
         }
 
+        function closeBusinessDayEOD() {
+            const currentBday = loadBusinessDayState();
+            const todayLocal = getLocalTodayYMD();
+            // Advance business date: if still same calendar date, move to next calendar date; if past midnight, move to todayLocal
+            let nextDateStr = todayLocal;
+            if (currentBday.businessDate >= todayLocal) {
+                const parts = currentBday.businessDate.split('-').map(Number);
+                const dt = new Date(parts[0], parts[1] - 1, parts[2] + 1);
+                nextDateStr = `${dt.getFullYear()}-${String(dt.getMonth() + 1).padStart(2, '0')}-${String(dt.getDate()).padStart(2, '0')}`;
+            }
+
+            if (!confirm(`End Business Day (${currentBday.businessDate}) and start new Business Day (${nextDateStr})?`)) {
+                return;
+            }
+
+            // Print final shift report before closing Business Day
+            printShiftCashReport80mm();
+
+            const closingInput = document.getElementById('closing-cash-input');
+            const closingVal = closingInput ? parseFloat(closingInput.value) : 0;
+            const shift = loadShiftData();
+            shift.isOpen = false;
+            shift.closedAt = new Date().toISOString();
+            shift.closingCashActual = isNaN(closingVal) ? 0 : Math.max(0, closingVal);
+            saveShiftData(shift);
+
+            const newBday = {
+                businessDate: nextDateStr,
+                openedAt: new Date().toISOString(),
+                orderSeq: 0,
+                isClosed: false
+            };
+            saveBusinessDayState(newBday);
+
+            // Start fresh shift for new Business Day carrying closing cash as opening cash
+            const freshShift = createDefaultShift(shift.closingCashActual);
+            saveShiftData(freshShift);
+
+            renderShiftModalBody();
+            showToast(`End of Day completed! New Business Day: ${nextDateStr}`);
+        }
+
         function printShiftCashReport80mm() {
             const closingInput = document.getElementById('closing-cash-input');
             if (closingInput) {
@@ -2654,12 +3344,13 @@
                     <h2>HAZZAT CHAPATI</h2>
                     <p>هزة شباتي | SHIFT & CASH REPORT</p>
                     <p>Branch: <strong>${formatBranchLabel(currentBranch)}</strong></p>
-                    <div class="paid-stamp">SHIFT REPORT</div>
+                    <p>Business Day: <strong>${escapeHtml(stats.bday.businessDate)}</strong></p>
+                    <div class="paid-stamp">SHIFT / EOD REPORT</div>
                 </div>
                 <div class="receipt-info">
-                    <p><strong>Shift Open:</strong> ${escapeHtml(openedStr)}</p>
-                    <p><strong>Shift Close:</strong> ${escapeHtml(closedStr)}</p>
-                    <p><strong>Printed At:</strong> ${new Date().toLocaleString()}</p>
+                    <p><span><strong>Shift Open:</strong></span><span>${escapeHtml(openedStr)}</span></p>
+                    <p><span><strong>Shift Close:</strong></span><span>${escapeHtml(closedStr)}</span></p>
+                    <p><span><strong>Printed By:</strong></span><span>${escapeHtml(currentUser ? currentUser.name : 'Staff')}</span></p>
                 </div>
                 <table class="receipt-table">
                     <thead>
@@ -2670,10 +3361,10 @@
                     </thead>
                     <tbody>
                         <tr><td>VISA Total Payments</td><td class="right">${formatSAR(stats.visaPayments)}</td></tr>
-                        <tr><td>VISA Total Returns</td><td class="right">${formatSAR(stats.visaReturns)}</td></tr>
+                        <tr><td>VISA Total Returns</td><td class="right">-${formatSAR(stats.visaReturns)}</td></tr>
                         <tr><td><strong>VISA Net Payments</strong></td><td class="right"><strong>${formatSAR(stats.visaNet)}</strong></td></tr>
                         <tr><td>Cash Total Payments</td><td class="right">${formatSAR(stats.cashPayments)}</td></tr>
-                        <tr><td>Cash Total Returns</td><td class="right">${formatSAR(stats.cashReturns)}</td></tr>
+                        <tr><td>Cash Total Returns</td><td class="right">-${formatSAR(stats.cashReturns)}</td></tr>
                         <tr><td><strong>Cash Net Payments</strong></td><td class="right"><strong>${formatSAR(stats.cashNet)}</strong></td></tr>
                     </tbody>
                 </table>
@@ -2692,10 +3383,13 @@
             window.print();
         }
 
-        // History & Item-Wise Sales Summary
+        // ==========================================
+        // 5. HISTORY, RETURN ORDER & ALL ORDERS FILTER
+        // ==========================================
         function openHistoryModal() {
             document.getElementById('history-modal-branch').textContent = formatBranchLabel(currentBranch);
-            document.getElementById('history-date-filter').value = new Date().toISOString().split('T')[0];
+            const bday = loadBusinessDayState();
+            document.getElementById('history-date-filter').value = bday.businessDate || getLocalTodayYMD();
             switchHistoryTab(historyActiveTab);
             document.getElementById('history-modal').classList.add('active');
         }
@@ -2716,22 +3410,24 @@
         function getFilteredOrders() {
             const selectedDate = document.getElementById('history-date-filter').value;
             const allOrders = loadBranchOrders();
-            return selectedDate ? allOrders.filter(o => o.date === selectedDate) : allOrders;
+            return selectedDate ? allOrders.filter(o => (o.businessDate || o.date) === selectedDate) : allOrders;
         }
 
         function computeItemWiseSummary(orders) {
             const map = new Map();
             orders.forEach(order => {
-                if (order.status === 'VOID') return;
+                if (order.status === 'VOID' || order.status === 'RETURNED') return;
                 const items = order.items || [];
                 const gross = Number(order.grossTotal) || items.reduce((s, it) => s + (Number(it.price) || 0) * (Number(it.qty) || 0), 0);
-                const net = Number(order.total) || 0;
+                const net = Math.max(0, (Number(order.total) || 0) - (Number(order.returnedAmount) || 0));
                 const ratio = gross > 0 ? (net / gross) : 1;
 
                 items.forEach(item => {
                     const key = item.nameEn || 'Item';
-                    const qty = Number(item.qty) || 0;
-                    const rawLineTotal = (Number(item.price) || 0) * qty;
+                    const returnedQty = Number(item.returnedQty) || 0;
+                    const effectiveQty = Math.max(0, (Number(item.qty) || 0) - returnedQty);
+                    if (effectiveQty <= 0) return;
+                    const rawLineTotal = (Number(item.price) || 0) * effectiveQty;
                     const adjustedTotal = rawLineTotal * ratio;
                     if (!map.has(key)) {
                         map.set(key, {
@@ -2742,7 +3438,7 @@
                         });
                     }
                     const entry = map.get(key);
-                    entry.totalQty += qty;
+                    entry.totalQty += effectiveQty;
                     entry.totalAmount += adjustedTotal;
                 });
             });
@@ -2754,16 +3450,27 @@
             const cardsEl = document.getElementById('history-summary-cards');
             const contentEl = document.getElementById('history-content-container');
 
-            let totalRevenue = 0;
-            let visaTotal = 0;
-            let cashTotal = 0;
+            let totalNetRevenue = 0;
+            let visaNetTotal = 0;
+            let cashNetTotal = 0;
+            let totalReturns = 0;
 
             filtered.forEach(o => {
                 if (o.status === 'VOID') return;
-                const amt = Number(o.total) || 0;
-                totalRevenue += amt;
-                if (o.paymentMethod === 'Cash') cashTotal += amt;
-                else visaTotal += amt;
+                const retAmt = Number(o.returnedAmount) || 0;
+                const retVisa = Number(o.returnedVisa) || 0;
+                const retCash = Number(o.returnedCash) || 0;
+                totalReturns += retAmt;
+
+                if (o.paymentMethod === 'Split') {
+                    visaNetTotal += (Number(o.visaAmount) || 0) - retVisa;
+                    cashNetTotal += (Number(o.cashAmount) || 0) - retCash;
+                } else if (o.paymentMethod === 'Cash') {
+                    cashNetTotal += (Number(o.total) || 0) - retCash;
+                } else {
+                    visaNetTotal += (Number(o.total) || 0) - retVisa;
+                }
+                totalNetRevenue += (Number(o.total) || 0) - retAmt;
             });
 
             cardsEl.innerHTML = `
@@ -2772,16 +3479,20 @@
                     <div class="report-card-value">${filtered.length}</div>
                 </div>
                 <div class="report-card">
-                    <div class="report-card-label">VISA Sales</div>
-                    <div class="report-card-value">${formatSAR(visaTotal)}</div>
+                    <div class="report-card-label">Net VISA Sales</div>
+                    <div class="report-card-value">${formatSAR(visaNetTotal)}</div>
                 </div>
                 <div class="report-card">
-                    <div class="report-card-label">Cash Sales</div>
-                    <div class="report-card-value">${formatSAR(cashTotal)}</div>
+                    <div class="report-card-label">Net Cash Sales</div>
+                    <div class="report-card-value">${formatSAR(cashNetTotal)}</div>
                 </div>
                 <div class="report-card">
-                    <div class="report-card-label">Total Sales</div>
-                    <div class="report-card-value">${formatSAR(totalRevenue)}</div>
+                    <div class="report-card-label">Total Returns</div>
+                    <div class="report-card-value" style="color:var(--danger);">${formatSAR(totalReturns)}</div>
+                </div>
+                <div class="report-card">
+                    <div class="report-card-label">Net Total Sales</div>
+                    <div class="report-card-value">${formatSAR(totalNetRevenue)}</div>
                 </div>
             `;
 
@@ -2833,32 +3544,228 @@
                 <table class="history-table">
                     <thead>
                         <tr>
-                            <th>Invoice</th>
-                            <th>Time</th>
-                            <th>Customer</th>
+                            <th>Order # / Inv</th>
+                            <th>B-Day / Time</th>
+                            <th>Cashier</th>
                             <th>Method</th>
-                            <th>Total</th>
-                            <th>Action</th>
+                            <th>Total / Net</th>
+                            <th>Status</th>
+                            <th>Actions</th>
                         </tr>
                     </thead>
                     <tbody>
                         ${filtered.map(o => {
                             const timeStr = new Date(o.timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-                            const encoded = encodeURIComponent(JSON.stringify(o));
+                            const retAmt = Number(o.returnedAmount) || 0;
+                            const netAmt = Math.max(0, (Number(o.total) || 0) - retAmt);
+                            let methodLabel = o.paymentMethod || 'VISA';
+                            if (o.paymentMethod === 'Split') {
+                                methodLabel = `Split (C:${Number(o.cashAmount||0).toFixed(0)} + V:${Number(o.visaAmount||0).toFixed(0)})`;
+                            }
+                            let statusBadge = `<span class="badge-paid">PAID</span>`;
+                            if (o.status === 'RETURNED' || (retAmt > 0 && netAmt <= 0.01)) {
+                                statusBadge = `<span class="badge-return">RETURNED</span>`;
+                            } else if (retAmt > 0) {
+                                statusBadge = `<span class="badge-partial">PARTIAL RET (-${retAmt.toFixed(2)})</span>`;
+                            }
+
+                            const returnBtnHtml = (isOwner() && o.status !== 'RETURNED' && netAmt > 0.01)
+                                ? `<button type="button" class="mini-print-btn" style="background:#d97706;" onclick="openReturnOrderModal('${escapeHtml(o.invoiceNo)}')">↩️ Return</button>`
+                                : '';
+                            const deleteBtnHtml = isOwner()
+                                ? `<button type="button" class="mini-print-btn" style="background:var(--danger);" onclick="deleteOrderRecord('${escapeHtml(o.invoiceNo)}')">🗑️</button>`
+                                : '';
+
                             return `
                                 <tr>
-                                    <td><strong>${escapeHtml(o.invoiceNo)}</strong></td>
-                                    <td>${escapeHtml(timeStr)}</td>
-                                    <td>${escapeHtml(o.customerName || 'Walk-in Customer')}</td>
-                                    <td><span class="badge-paid">${escapeHtml(o.paymentMethod || 'VISA')}</span></td>
-                                    <td><strong>${formatSAR(o.total)}</strong></td>
-                                    <td><button type="button" class="mini-print-btn" onclick="reprintOrderFromHistory('${encoded}')">🖨️ Print</button></td>
+                                    <td><strong>#${escapeHtml(o.orderNumber || '--')}</strong><br><small style="color:#666;">${escapeHtml(o.invoiceNo)}</small></td>
+                                    <td>${escapeHtml(o.businessDate || o.date)}<br><small style="color:#666;">${escapeHtml(timeStr)}</small></td>
+                                    <td>${escapeHtml(o.cashierName || 'Staff')}</td>
+                                    <td><span class="badge-paid">${escapeHtml(methodLabel)}</span></td>
+                                    <td><strong>${formatSAR(netAmt)}</strong>${retAmt > 0 ? `<br><small style="color:var(--danger);">Orig: ${formatSAR(o.total)}</small>` : ''}</td>
+                                    <td>${statusBadge}</td>
+                                    <td style="white-space:nowrap;">
+                                        <button type="button" class="mini-print-btn" onclick="reprintByInvoiceNo('${escapeHtml(o.invoiceNo)}')">🖨️</button>
+                                        ${returnBtnHtml}
+                                        ${deleteBtnHtml}
+                                    </td>
                                 </tr>
                             `;
                         }).join('')}
                     </tbody>
                 </table>
             `;
+        }
+
+        function deleteOrderRecord(invoiceNo) {
+            if (!isOwner()) {
+                showToast('Only Owner can delete records!');
+                return;
+            }
+            if (!confirm(`Delete order ${invoiceNo} permanently?`)) return;
+            const orders = loadBranchOrders().filter(o => o.invoiceNo !== invoiceNo);
+            saveBranchOrders(orders);
+            renderHistoryView();
+            showToast('Order deleted');
+        }
+
+        function openReturnOrderModal(invoiceNo) {
+            if (!isOwner()) {
+                showToast('Only Owner can process returns!');
+                return;
+            }
+            const orders = loadBranchOrders();
+            const order = orders.find(o => o.invoiceNo === invoiceNo);
+            if (!order) return;
+
+            const remainingTotal = Math.max(0, (Number(order.total) || 0) - (Number(order.returnedAmount) || 0));
+            const itemRows = (order.items || []).map((it, idx) => {
+                const alreadyRet = Number(it.returnedQty) || 0;
+                const maxRet = Math.max(0, (Number(it.qty) || 0) - alreadyRet);
+                return `
+                    <tr>
+                        <td>${escapeHtml(it.nameEn)}</td>
+                        <td>${it.qty} (Ret: ${alreadyRet})</td>
+                        <td>${formatSAR(it.price)}</td>
+                        <td>
+                            <input type="number" class="ret-qty-input" data-idx="${idx}" data-price="${it.price}" min="0" max="${maxRet}" value="0" style="width:65px; padding:4px; border:1px solid var(--border); border-radius:4px; text-align:center;" oninput="recalcReturnModalTotal('${escapeHtml(invoiceNo)}')">
+                        </td>
+                    </tr>
+                `;
+            }).join('');
+
+            document.getElementById('return-modal-body').innerHTML = `
+                <div style="margin-bottom:10px; font-size:0.88rem;">
+                    <strong>Invoice:</strong> ${escapeHtml(order.invoiceNo)} (Order #${escapeHtml(order.orderNumber || '--')})<br>
+                    <strong>Original Payment:</strong> ${escapeHtml(order.paymentMethod)} | <strong>Remaining Refundable:</strong> ${formatSAR(remainingTotal)}
+                </div>
+                <table class="history-table" style="margin-bottom:12px;">
+                    <thead>
+                        <tr>
+                            <th>Item</th>
+                            <th>Sold Qty</th>
+                            <th>Price</th>
+                            <th>Return Qty</th>
+                        </tr>
+                    </thead>
+                    <tbody>${itemRows}</tbody>
+                </table>
+                <div class="field-group">
+                    <label for="return-refund-method">Refund Payment Channel</label>
+                    <select id="return-refund-method">
+                        <option value="AUTO">Auto Match Original (${escapeHtml(order.paymentMethod)})</option>
+                        <option value="Cash">Cash Return (نقدي)</option>
+                        <option value="VISA">VISA Return (فيزا)</option>
+                    </select>
+                </div>
+                <div class="field-group">
+                    <label for="return-custom-amount">Total Refund Amount (SAR)</label>
+                    <input type="number" id="return-custom-amount" min="0" max="${remainingTotal.toFixed(2)}" step="0.5" value="0.00">
+                </div>
+                <div class="action-buttons">
+                    <button type="button" class="btn" style="background:#d97706;" onclick="fillFullReturn('${escapeHtml(invoiceNo)}')">Full Return (${formatSAR(remainingTotal)})</button>
+                    <button type="button" class="btn btn-clear" onclick="submitOrderReturn('${escapeHtml(invoiceNo)}')">Confirm Return</button>
+                </div>
+            `;
+            document.getElementById('return-modal').classList.add('active');
+        }
+
+        function recalcReturnModalTotal(invoiceNo) {
+            const orders = loadBranchOrders();
+            const order = orders.find(o => o.invoiceNo === invoiceNo);
+            if (!order) return;
+            const remainingTotal = Math.max(0, (Number(order.total) || 0) - (Number(order.returnedAmount) || 0));
+            let sum = 0;
+            document.querySelectorAll('.ret-qty-input').forEach(inp => {
+                const q = Math.max(0, Math.min(Number(inp.max) || 0, Number(inp.value) || 0));
+                inp.value = q;
+                sum += q * (Number(inp.dataset.price) || 0);
+            });
+            document.getElementById('return-custom-amount').value = Math.min(remainingTotal, sum).toFixed(2);
+        }
+
+        function fillFullReturn(invoiceNo) {
+            const orders = loadBranchOrders();
+            const order = orders.find(o => o.invoiceNo === invoiceNo);
+            if (!order) return;
+            const remainingTotal = Math.max(0, (Number(order.total) || 0) - (Number(order.returnedAmount) || 0));
+            document.querySelectorAll('.ret-qty-input').forEach(inp => {
+                inp.value = inp.max;
+            });
+            document.getElementById('return-custom-amount').value = remainingTotal.toFixed(2);
+        }
+
+        function submitOrderReturn(invoiceNo) {
+            if (!isOwner()) {
+                showToast('Only Owner can process returns!');
+                return;
+            }
+            const orders = loadBranchOrders();
+            const order = orders.find(o => o.invoiceNo === invoiceNo);
+            if (!order) return;
+
+            const remainingTotal = Math.max(0, (Number(order.total) || 0) - (Number(order.returnedAmount) || 0));
+            const refundAmt = Math.max(0, Math.min(remainingTotal, parseFloat(document.getElementById('return-custom-amount').value) || 0));
+            if (refundAmt <= 0) {
+                showToast('Enter a valid return quantity or refund amount');
+                return;
+            }
+
+            // Update item returned quantities
+            document.querySelectorAll('.ret-qty-input').forEach(inp => {
+                const idx = Number(inp.dataset.idx);
+                const q = Math.max(0, Math.min(Number(inp.max) || 0, Number(inp.value) || 0));
+                if (order.items[idx]) {
+                    order.items[idx].returnedQty = (Number(order.items[idx].returnedQty) || 0) + q;
+                }
+            });
+
+            const channel = document.getElementById('return-refund-method').value;
+            let retCash = 0;
+            let retVisa = 0;
+
+            if (channel === 'Cash') {
+                retCash = refundAmt;
+            } else if (channel === 'VISA') {
+                retVisa = refundAmt;
+            } else {
+                // AUTO match original payment split
+                if (order.paymentMethod === 'Cash') {
+                    retCash = refundAmt;
+                } else if (order.paymentMethod === 'VISA') {
+                    retVisa = refundAmt;
+                } else if (order.paymentMethod === 'Split') {
+                    const origTotal = Number(order.total) || 1;
+                    const cashRatio = (Number(order.cashAmount) || 0) / origTotal;
+                    retCash = Number((refundAmt * cashRatio).toFixed(2));
+                    retVisa = Number((refundAmt - retCash).toFixed(2));
+                } else {
+                    retVisa = refundAmt;
+                }
+            }
+
+            order.returnedAmount = Number(((Number(order.returnedAmount) || 0) + refundAmt).toFixed(2));
+            order.returnedCash = Number(((Number(order.returnedCash) || 0) + retCash).toFixed(2));
+            order.returnedVisa = Number(((Number(order.returnedVisa) || 0) + retVisa).toFixed(2));
+            order.returnRecords = order.returnRecords || [];
+            order.returnRecords.push({
+                returnedAt: new Date().toISOString(),
+                amount: refundAmt,
+                cash: retCash,
+                visa: retVisa,
+                by: currentUser ? currentUser.name : 'Owner'
+            });
+
+            if (order.returnedAmount >= (Number(order.total) || 0) - 0.01) {
+                order.status = 'RETURNED';
+            } else {
+                order.status = 'PARTIAL_RETURN';
+            }
+
+            saveBranchOrders(orders);
+            closeModal('return-modal');
+            renderHistoryView();
+            showToast(`Return of ${formatSAR(refundAmt)} processed & deducted from Shift Returns`);
         }
 
         function printItemWiseSummary80mm() {
@@ -2906,45 +3813,103 @@
             window.print();
         }
 
-        function reprintOrderFromHistory(encodedOrder) {
-            try {
-                const order = JSON.parse(decodeURIComponent(encodedOrder));
-                printOrderReceipt80mm(order);
-            } catch {
-                showToast('Could not reprint receipt');
+        function reprintByInvoiceNo(invoiceNo) {
+            const order = loadBranchOrders().find(o => o.invoiceNo === invoiceNo);
+            if (!order) {
+                showToast('Order not found');
+                return;
             }
+            printOrderReceipt80mm(order);
+        }
+
+        // ==========================================
+        // 6. FOODICS STYLE RECEIPT & REAL ZATCA TLV BASE64 QR CODE
+        // ==========================================
+        function encodeZatcaTLVBase64(sellerName, vatNumber, timestampIso, totalWithVat, vatTotal) {
+            const encoder = new TextEncoder();
+            function tlvField(tag, valueStr) {
+                const valBytes = encoder.encode(String(valueStr));
+                const out = new Uint8Array(2 + valBytes.length);
+                out[0] = tag;
+                out[1] = valBytes.length;
+                out.set(valBytes, 2);
+                return out;
+            }
+            const f1 = tlvField(1, sellerName);
+            const f2 = tlvField(2, vatNumber);
+            const f3 = tlvField(3, timestampIso);
+            const f4 = tlvField(4, Number(totalWithVat || 0).toFixed(2));
+            const f5 = tlvField(5, Number(vatTotal || 0).toFixed(2));
+
+            const combined = new Uint8Array(f1.length + f2.length + f3.length + f4.length + f5.length);
+            let offset = 0;
+            [f1, f2, f3, f4, f5].forEach(arr => {
+                combined.set(arr, offset);
+                offset += arr.length;
+            });
+
+            let binary = '';
+            for (let i = 0; i < combined.length; i++) {
+                binary += String.fromCharCode(combined[i]);
+            }
+            return btoa(binary);
         }
 
         function printOrderReceipt80mm(order) {
             const dt = new Date(order.timestamp || Date.now());
-            const qrPayload = `HAZZAT|${order.branch || currentBranch}|${order.invoiceNo}|${dt.toISOString()}|${Number(order.total || 0).toFixed(2)}|${Number(order.vatAmount || 0).toFixed(2)}`;
+            const isoStr = dt.toISOString();
+            const zatcaBase64 = encodeZatcaTLVBase64(
+                SELLER_NAME,
+                SELLER_VAT_NUMBER,
+                isoStr,
+                order.total,
+                order.vatAmount
+            );
+            const qrImageUrl = `https://api.qrserver.com/v1/create-qr-code/?size=160x160&ecc=M&data=${encodeURIComponent(zatcaBase64)}`;
+
             const itemsHtml = (order.items || []).map(it => `
                 <tr>
-                    <td>${escapeHtml(it.nameEn)} x${it.qty}</td>
+                    <td>${it.qty}x ${escapeHtml(it.nameEn)}<br><small style="color:#444;">${escapeHtml(it.nameAr || '')}</small></td>
                     <td class="right">${formatSAR((Number(it.price) || 0) * (Number(it.qty) || 0))}</td>
                 </tr>
             `).join('');
+
+            let paymentDetailsHtml = `<div class="receipt-total-line"><span>Payment Method:</span><span><strong>${escapeHtml(order.paymentMethod || 'VISA')}</strong></span></div>`;
+            if (order.paymentMethod === 'Split') {
+                paymentDetailsHtml += `
+                    <div class="receipt-total-line"><span>- Cash Paid:</span><span>${formatSAR(order.cashAmount)}</span></div>
+                    <div class="receipt-total-line"><span>- VISA Paid:</span><span>${formatSAR(order.visaAmount)}</span></div>
+                `;
+            }
 
             const receiptEl = document.getElementById('printable-receipt');
             receiptEl.innerHTML = `
                 <div class="receipt-header">
                     <h2>HAZZAT CHAPATI</h2>
-                    <p>هزة شباتي | TAX INVOICE</p>
+                    <p>هزة شباتي</p>
+                    <p><strong>Simplified Tax Invoice | فاتورة ضريبية مبسطة</strong></p>
+                    <p>VAT No: <strong>${SELLER_VAT_NUMBER}</strong></p>
                     <p>Branch: <strong>${formatBranchLabel(order.branch || currentBranch)}</strong></p>
+                    <div class="foodics-order-box">
+                        <div class="ord-lbl">ORDER # / رقم الطلب</div>
+                        <div class="ord-num">${escapeHtml(order.orderNumber || order.invoiceNo.slice(-3))}</div>
+                    </div>
                     <div class="paid-stamp">PAID - ${escapeHtml(order.paymentMethod || 'VISA')}</div>
                 </div>
                 <div class="receipt-info">
-                    <p><strong>Invoice:</strong> ${escapeHtml(order.invoiceNo)}</p>
-                    <p><strong>Date:</strong> ${dt.toLocaleString()}</p>
-                    <p><strong>Customer:</strong> ${escapeHtml(order.customerName || 'Walk-in Customer')}</p>
-                    <p><strong>Type:</strong> ${escapeHtml(order.orderType || 'Dine-In')}${order.tableNumber ? ` (${escapeHtml(order.tableNumber)})` : ''}</p>
-                    ${order.note ? `<p><strong>Note:</strong> ${escapeHtml(order.note)}</p>` : ''}
+                    <p><span><strong>Invoice:</strong></span><span>${escapeHtml(order.invoiceNo)}</span></p>
+                    <p><span><strong>Business Day:</strong></span><span>${escapeHtml(order.businessDate || order.date)}</span></p>
+                    <p><span><strong>Date & Time:</strong></span><span>${dt.toLocaleString()}</span></p>
+                    <p><span><strong>Cashier:</strong></span><span>${escapeHtml(order.cashierName || 'Cashier')}</span></p>
+                    <p><span><strong>Order Type:</strong></span><span>${escapeHtml(order.orderType || 'Dine-In')}${order.tableNumber ? ` (${escapeHtml(order.tableNumber)})` : ''}</span></p>
+                    <p><span><strong>Customer:</strong></span><span>${escapeHtml(order.customerName || 'Walk-in Customer')}</span></p>
+                    ${order.note ? `<p><span><strong>Note:</strong></span><span>${escapeHtml(order.note)}</span></p>` : ''}
                 </div>
                 <table class="receipt-table">
                     <thead>
                         <tr>
-                            <th>Item</th>
-                            <th class="right">Amount</th>
+                            <th>Qty & Item</th>
+                            <th class="right">Total</th>
                         </tr>
                     </thead>
                     <tbody>${itemsHtml}</tbody>
@@ -2953,18 +3918,33 @@
                     <div class="receipt-total-line"><span>Subtotal (Excl. VAT):</span><span>${formatSAR(order.subtotalExclVat)}</span></div>
                     <div class="receipt-total-line"><span>VAT (15%):</span><span>${formatSAR(order.vatAmount)}</span></div>
                     ${order.discount > 0 ? `<div class="receipt-total-line"><span>Discount:</span><span>-${formatSAR(order.discount)}</span></div>` : ''}
-                    <div class="receipt-total-line grand"><span>Total:</span><span>${formatSAR(order.total)}</span></div>
-                    <div class="receipt-total-line"><span>Payment Method:</span><span>${escapeHtml(order.paymentMethod || 'VISA')}</span></div>
+                    <div class="receipt-total-line grand"><span>Total (Incl. VAT):</span><span>${formatSAR(order.total)}</span></div>
+                    ${paymentDetailsHtml}
                 </div>
                 <div class="zatca-qr-box">
-                    <div style="font-size:10px; font-weight:bold;">ZATCA E-INVOICE DATA</div>
-                    <div class="qr-code-visual">${escapeHtml(qrPayload)}</div>
+                    <div style="font-size:10px; font-weight:bold;">ZATCA E-INVOICE QR</div>
+                    <img id="zatca-qr-img" src="${qrImageUrl}" alt="ZATCA QR Code">
                 </div>
                 <div class="receipt-footer">
                     <p>شكراً لزيارتكم • Thank You</p>
+                    <p style="font-size:9px; margin-top:2px;">Powered by HAZZAT POS</p>
                 </div>
             `;
-            window.print();
+
+            const qrImg = document.getElementById('zatca-qr-img');
+            if (qrImg && !qrImg.complete) {
+                let printed = false;
+                const triggerPrint = () => {
+                    if (printed) return;
+                    printed = true;
+                    window.print();
+                };
+                qrImg.onload = triggerPrint;
+                qrImg.onerror = triggerPrint;
+                setTimeout(triggerPrint, 900);
+            } else {
+                window.print();
+            }
         }
 
         function escapeHtml(str) {
@@ -2988,6 +3968,18 @@
 
         // Initialization
         document.getElementById('branch-selector').value = currentBranch;
+        populateCashierDropdown();
+        try {
+            const savedSession = JSON.parse(sessionStorage.getItem('hazzat_session_user') || 'null');
+            if (savedSession && savedSession.role) {
+                currentUser = savedSession;
+                document.getElementById('auth-lock-screen').classList.add('hidden');
+                applyRolePermissionsUI();
+            }
+        } catch {}
+
+        loadBusinessDayState();
+        updateBusinessDayBadge();
         loadShiftData();
         renderCategories();
         renderMenu();
